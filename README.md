@@ -7,9 +7,9 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Projektstatus
 
-**Fase:** Redaktionelt system og samarbejdsflow
+**Fase:** Indholdsstyring i Sanity med to udgivelsesveje
 **Senest opdateret:** 18. august 2026
-**Aktuel retning:** Gør projektdata lette at redigere i VS Code og sikre, at Patrick, Claude og Codex arbejder i samme GitHub-repository.
+**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Næste skridt er at gøre farver og skrifttyper redigerbare, før projekt-detaljesiderne bygges.
 
 ### Færdigt
 
@@ -27,14 +27,18 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - `AGENTS.md` og `CLAUDE.md` sikrer, at nye Codex- og Claude-sessioner starter med projektets aktuelle README.
 - ✓ **Prøveændring gennemkørt:** Portfolio 68 % → 70 % gennem Front Matter → GitHub commit → lokal preview verificeret. Arbejdsgangen fungerer uden screenshots eller lange forklaringer.
 - ✓ **Sanity genstartet fra nul (18. august 2026):** Den halvfærdige embedded Sanity-installation fra Phase 2 er slettet fuldstændigt, og et rent, selvstændigt studio er bygget i `studio/` efter Sanitys officielle vejledning til AI-kodeagenter. Studioet er udgivet, indholdet importeret, og sitet henter live fra Sanity med fallback.
-
-- Oprettet `det-skal-vi-da-proeve/` som isoleret forsøgsbank for visuelle retninger. Første idé er “PatrickOS som et levende OS”; intet herfra er aktiveret i produktionen.
+- ✓ **Al forsidetekst er redigerbar:** 28 tekstfelter × 2 sprog flyttet fra hardkodet `copy` ind i `pageContent`-dokumentet. Hero, nøgletal, sektionsoverskrifter, procestrin, vision, menu og footer kan nu rettes i Studio — også ved at klikke direkte i siden.
+- ✓ **Visuel redigering virker:** next-sanity med server-komponenter, `<SanityLive />`, draft mode og Presentation. Verificeret kompatibel med vinext på Cloudflare Workers.
+- ✓ **Sitet udgives til egen Cloudflare-konto:** `npm run deploy` bygger og udgiver i én kommando. `SANITY_API_READ_TOKEN` ligger som Cloudflare-secret, hvilket låser visuel redigering op mod produktionen.
+- ✓ **Udgivelsesgåden løst:** Git-commits udgiver ikke — de spejler kun koden. Live-siden opdateres gennem ChatGPT Sites-grænsefladen. Begge adresser viser nu 70 %.
+- Oprettet `det-skal-vi-da-proeve/` som isoleret forsøgsbank for visuelle retninger. Første idé er "PatrickOS som et levende OS"; intet herfra er aktiveret i produktionen.
 
 ### I gang
 
-- Løsning af ChatGPT Sites-genudgivelsen og verificering af live-domænet. Den offentlige live-side viser stadig 68 %, så produktionen er ikke endeligt bekræftet.
+- **To redigeringsveje til samme data.** Sanity og Front Matter (`content/projects.json`) synkroniserer ikke. Sanity vinder på det kørende site; JSON-filen er fallback og bliver forældet, hvis den ikke vedligeholdes. Beslutningen om, hvilken der skal være den primære, er ikke truffet.
+- **To adresser, der udgives hver for sig.** Cloudflare opdateres med `npm run deploy`, chatgpt.site kun manuelt. Kodeændringer rammer kun det, der udgives; indholdsændringer i Sanity slår igennem begge steder med det samme.
+- **Draft-mode-rettelsen mangler på chatgpt.site.** Cloudflare har den; chatgpt.site skal udgives manuelt igen for at få den med.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
-- **Sanity er live:** Studioet er udgivet på <https://patrick-project-journey.sanity.studio/>, og sitet henter projektdata derfra ved indlæsning. Front Matter og `content/projects.json` fungerer stadig som fallback — beslutningen om, hvilken af de to der skal være den primære redigeringsvej fremover, er ikke truffet.
 
 ### Sanity Studio
 
@@ -121,50 +125,32 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Udgiv gennem ChatGPT Sites — der er intet manglende led**
+**Punkt 2: designtokens — gør farver og skrifttyper redigerbare**
 
-Tidligere sessioner ledte efter en fejl i udgivelseskæden. Der er ingen fejl. Undersøgt 18. august 2026:
+Aftalt rækkefølge er tekst → design → detaljesider. Punkt 1 er færdigt.
 
-- Repoet har **ingen** `.github/workflows`, **ingen** `wrangler.toml` og **ingen** deploy-kommando.
-- `build/sites-vite-plugin.ts` pakker kun artefaktet; `scripts/validate-artifact.sh` validerer det. Ingen af dem udgiver.
-- Codex CLI har ingen publish-kommando.
-- `docs/REDIGER-SIDEN.md` siger det allerede direkte: *"Selve live-siden opdateres fortsat gennem den eksisterende Sites-udgivelse."*
+### Udgangspunktet
 
-**Git-commits udgiver ikke.** De spejler koden til GitHub. Live-siden opdateres kun, når projektet udgives gennem ChatGPT Sites-grænsefladen, hvor sitet blev oprettet (`.openai/hosting.json` → `appgprj_6a83885d21d4819184f107018f46a8b2`).
+`app/globals.css` er 23 KB med **76 hardkodede hex-farver** og kun **9 CSS-variabler**. Designet er altså ikke systematiseret — farverne står spredt direkte i reglerne. Det skal ordnes, før noget kan styres fra Sanity.
 
-Det forklarer 68 % mod 70 %: koden har været korrekt hele tiden, men er aldrig blevet udgivet.
+### Krav
+- **Saml farverne.** De 76 hex-værdier reduceres til et tokensystem på 15-20 variabler for farver, afstande og typografi.
+- **Bundne valg, ikke fri leg.** Patrick skal vælge mellem en håndfuld gennemtænkte paletter og skriftpar — ikke have en fri farvevælger. Målet er, at sitet ikke kan ødelægges visuelt fra editoren.
+- **Bevar dark mode.** `data-theme`-reglen og den gemte brugerpræference må ikke brydes.
+- **Bevar animationerne.** 10 keyframes, 21 transforms, hjernens 3D-dybde og parallaksen er sitets egentlige værdi.
 
-### Løst: sitet udgives nu til Cloudflare
+### Derefter — punkt 3: projekt-detaljesider med blokbygger
 
-Build-outputtet er en helt almindelig Cloudflare Worker, så sitet udgives nu direkte til Patricks egen konto ved siden af ChatGPT Sites. `wrangler.jsonc` styrer det, og de to veje deler kun build-output — `.openai/hosting.json` og Sites-udgivelsen er urørt.
+Hver projektside sammensættes af blokke (hero, tekst, galleri, nøgletal, tidslinje, citat), der kan omarrangeres og redigeres live i Presentation. Hver blok styles i Patricks eksisterende udtryk, så siderne kan komponeres frit uden at kunne blive grimme.
 
-```bash
-npm run deploy     # bygger og udgiver til Cloudflare
-```
+**Punkt 2 skal ligge før punkt 3.** Bygges blokkene først, hardkodes farverne ind i dem og skal laves om bagefter.
 
-Deploy-konfigurationen hedder bevidst `wrangler.deploy.jsonc` og ikke `wrangler.jsonc`. Cloudflare-plugin'et i `vite.config.ts` finder automatisk en fil med standardnavnet og sætter så `nodejs_compat` to gange, hvilket får dev-serverens runtime til at nægte at starte. `npm run deploy` peger derfor eksplicit på filen med `-c`.
+### Vigtigt at vide, før der bygges
 
-Verificeret på det udgivne site:
-
-- Forsiden serverer **70 %** hentet fra Sanity ✓
-- `api/draft-mode/enable` svarer 401 uden gyldig secret ✓
-- Statiske assets og billeder svarer 200 ✓
-- Svartid ~0,5 s ✓
-
-**`SANITY_API_READ_TOKEN` er sat som Cloudflare-secret**, så visuel redigering nu også virker mod produktionen — det var netop det, ChatGPT Sites ikke tillod. Presentation peger som standard på Cloudflare-sitet; til lokalt arbejde bruges `SANITY_STUDIO_PREVIEW_URL=http://localhost:5173 npx sanity dev`.
-
-### Begge adresser er nu opdateret
-
-`patrick-project-journey.patrickbennett.chatgpt.site` blev udgivet manuelt gennem ChatGPT Sites-grænsefladen og viser nu 70 %. Verificeret: sidestørrelsen voksede fra 15.624 til 24.366 bytes, og teksten hentes fra Sanity.
-
-Bemærk forskellen mellem de to: Cloudflare-sitet har `SANITY_API_READ_TOKEN` som secret, chatgpt.site har ikke. Derfor virker visuel redigering og kladdevisning kun mod Cloudflare-adressen. `api/draft-mode/enable` svarer 401 på Cloudflare og 501 med en forklarende besked på chatgpt.site.
-
-Husk: de to udgives hver for sig. `npm run deploy` rammer kun Cloudflare — chatgpt.site skal udgives manuelt, ellers driver de fra hinanden.
-
-### Derefter — aftalt rækkefølge for redigerbarhed
-1. ~~**Al sidetekst ind i Sanity.**~~ ✓ Gennemført. 28 felter × 2 sprog ligger nu i `pageContent`.
-2. **Designtokens.** 76 hardkodede hex-farver samles til et system, så palet og skriftpar kan vælges fra Sanity — med bundne valg, så sitet ikke kan ødelægges visuelt.
-3. **Projekt-detaljesider med blokbygger.** Hver projektside sammensættes af blokke (hero, galleri, nøgletal, tidslinje, citat), der kan omarrangeres og redigeres live i Presentation. Punkt 2 skal ligge før punkt 3, ellers hardkodes farverne ind i blokkene.
+- **To systemer pusher til samme repo.** ChatGPT/Codex pusher direkte til GitHub. Kør altid `git fetch` og `git pull --rebase` før arbejdet, ellers afvises dit push.
+- **`det-skal-vi-da-proeve/` er en forsøgsbank.** Intet derfra må aktiveres i produktionen uden Patricks godkendelse.
+- **Organisationen tåler kun ét Sanity-projekt.** Opret aldrig et ekstra; begge bliver deaktiveret med `402 Project Disabled`.
+- **`wrangler.deploy.jsonc` må ikke omdøbes til `wrangler.jsonc`.** Cloudflare-plugin'et i `vite.config.ts` finder standardnavnet automatisk og sætter `nodejs_compat` to gange, hvorefter dev-serveren nægter at starte.
 
 ## Redigér projektoversigten
 
@@ -191,7 +177,15 @@ Front Matter læser felterne gennem `frontmatter.json`. En mere detaljeret vejle
 Brug denne korte starttekst i en ny session:
 
 ```text
-Læs README.md og docs/REDIGER-SIDEN.md først. Bevar hjemmesidens eksisterende visuelle retning. Projektoversigten styres af content/projects.json og Front Matter-konfigurationen i frontmatter.json. Fortæl mig kort, hvor projektet står, og foreslå kun den næste naturlige bevægelse. Ændr ikke filer, før jeg har godkendt den konkrete ændring. Når sessionen afsluttes, skal README-sektionerne “Projektstatus”, “I gang” og “Næste session” opdateres, så næste agent kan fortsætte uden at rekonstruere forløbet.
+Læs README.md og docs/REDIGER-SIDEN.md helt igennem først, og kør git fetch + git pull --rebase, før du rører noget — ChatGPT/Codex pusher også til dette repo.
+
+Indholdet styres nu af Sanity (studio/), ikke længere kun af content/projects.json. Bevar hjemmesidens eksisterende visuelle retning, dansk/engelsk, dark mode, tilgængelighed og de tre datalag med fallback.
+
+Fortæl mig kort på dansk, hvor projektet står, hvad der er uafklaret, og foreslå kun den næste naturlige bevægelse. Ændr ikke filer, før jeg har godkendt den konkrete ændring.
+
+Efter kodeændringer: kør npm run deploy og verificér, at ændringen er ude. Mind mig om, at chatgpt.site skal udgives manuelt.
+
+Når sessionen afsluttes, opdateres README-sektionerne "Projektstatus", "Færdigt", "I gang" og "Næste session".
 ```
 
 ## Arbejdsregel
