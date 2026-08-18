@@ -151,9 +151,13 @@ Verificeret på det udgivne site:
 
 **`SANITY_API_READ_TOKEN` er sat som Cloudflare-secret**, så visuel redigering nu også virker mod produktionen — det var netop det, ChatGPT Sites ikke tillod. Presentation peger som standard på Cloudflare-sitet; til lokalt arbejde bruges `SANITY_STUDIO_PREVIEW_URL=http://localhost:5173 npx sanity dev`.
 
-### ChatGPT Sites-adressen står tilbage
+### Begge adresser er nu opdateret
 
-`patrick-project-journey.patrickbennett.chatgpt.site` viser stadig 68 %, fordi den kun opdateres ved manuel udgivelse gennem ChatGPT Sites-grænsefladen. Den kan opdateres, når det passer — Cloudflare-sitet er upåvirket af det.
+`patrick-project-journey.patrickbennett.chatgpt.site` blev udgivet manuelt gennem ChatGPT Sites-grænsefladen og viser nu 70 %. Verificeret: sidestørrelsen voksede fra 15.624 til 24.366 bytes, og teksten hentes fra Sanity.
+
+Bemærk forskellen mellem de to: Cloudflare-sitet har `SANITY_API_READ_TOKEN` som secret, chatgpt.site har ikke. Derfor virker visuel redigering og kladdevisning kun mod Cloudflare-adressen. `api/draft-mode/enable` svarer 401 på Cloudflare og 501 med en forklarende besked på chatgpt.site.
+
+Husk: de to udgives hver for sig. `npm run deploy` rammer kun Cloudflare — chatgpt.site skal udgives manuelt, ellers driver de fra hinanden.
 
 ### Derefter — aftalt rækkefølge for redigerbarhed
 1. ~~**Al sidetekst ind i Sanity.**~~ ✓ Gennemført. 28 felter × 2 sprog ligger nu i `pageContent`.
