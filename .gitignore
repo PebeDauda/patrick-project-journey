@@ -41,3 +41,6 @@ next-env.d.ts
 /.frontmatter/database/
 /outputs/
 /work/
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo

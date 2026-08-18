@@ -7,21 +7,76 @@ if [[ "${SITES_ENV_READY:-}" != "1" ]]; then
   exec "${script_dir}/sites-env.sh" -- "$0" "$@"
 fi
 
-command -v flock || {
-  echo "install-ci.sh requires Linux flock." >&2
-  exit 69
-}
-command -v timeout || {
-  echo "install-ci.sh requires GNU timeout." >&2
-  exit 69
-}
 command -v curl || {
   echo "install-ci.sh requires curl for the locked-tarball preflight." >&2
   exit 69
 }
-command -v sha256sum || {
-  echo "install-ci.sh requires sha256sum for cache and install verification." >&2
-  exit 69
+
+sha256_file() {
+  local target="$1"
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "${target}" | awk '{print $1}'
+    return 0
+  fi
+  if command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "${target}" | awk '{print $1}'
+    return 0
+  fi
+  echo "install-ci.sh requires sha256sum or shasum for cache and install verification." >&2
+  return 69
+}
+
+run_with_timeout() {
+  local timeout_value="$1"
+  shift
+
+  if command -v gtimeout >/dev/null 2>&1; then
+    gtimeout --signal=TERM --kill-after="${SITES_INSTALL_KILL_AFTER:-15s}" "${timeout_value}" "$@"
+    return $?
+  fi
+
+  if command -v timeout >/dev/null 2>&1; then
+    timeout --signal=TERM --kill-after="${SITES_INSTALL_KILL_AFTER:-15s}" "${timeout_value}" "$@"
+    return $?
+  fi
+
+  local timeout_seconds
+  timeout_seconds="$(python3 - "$timeout_value" <<'PY'
+import re, sys
+value = sys.argv[1].strip()
+match = re.fullmatch(r'(?i)(\d+)([smhd]?)', value)
+if not match:
+    raise SystemExit(f'Unsupported timeout value: {value}')
+number = int(match.group(1))
+unit = (match.group(2) or 's').lower()
+scale = {'s': 1, 'm': 60, 'h': 3600, 'd': 86400}
+print(number * scale[unit])
+PY
+)"
+
+  python3 - "$timeout_seconds" "$@" <<'PY'
+import subprocess, sys, time
+limit = float(sys.argv[1])
+cmd = sys.argv[2:]
+process = subprocess.Popen(cmd)
+start = time.monotonic()
+try:
+    while True:
+        if process.poll() is not None:
+            raise SystemExit(process.returncode)
+        if time.monotonic() - start >= limit:
+            process.terminate()
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+            raise SystemExit(124)
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    process.terminate()
+    raise
+PY
 }
 
 runtime_root="${SITES_PROJECT_ROOT}/.sites-runtime"
@@ -42,12 +97,12 @@ touch "${HOME}/.sites-write-test" "${expected_cache}/.sites-write-test"
 rm -f "${HOME}/.sites-write-test" "${expected_cache}/.sites-write-test"
 echo "[sites] environment passed: HOME=${HOME}, cache=${expected_cache}"
 
-lock_file="${runtime_root}/install.lock"
-exec 9>"${lock_file}"
-if ! flock -n 9; then
+lock_dir="${runtime_root}/install.lock"
+if ! mkdir "${lock_dir}" 2>/dev/null; then
   echo "Another dependency install is already running for ${SITES_PROJECT_ROOT}." >&2
   exit 75
 fi
+trap 'rmdir "${lock_dir}" 2>/dev/null || true' EXIT
 
 # Catch an installer started outside this helper. Linux exposes both its command
 # line and working directory through /proc, so avoid broad process-name matches.
@@ -63,7 +118,7 @@ for process in /proc/[0-9]*; do
   fi
 done
 
-lockfile_sha256="$(sha256sum "${SITES_PROJECT_ROOT}/package-lock.json" | awk '{print $1}')"
+lockfile_sha256="$(sha256_file "${SITES_PROJECT_ROOT}/package-lock.json")"
 use_seeded_cache=0
 seed_cache="${SITES_NPM_CACHE_SEED:-}"
 if [[ -n "${seed_cache}" && -d "${seed_cache}" ]]; then
@@ -162,11 +217,7 @@ npm_ci_args=(ci --cache "${expected_cache}")
 if [[ "${use_seeded_cache}" == "1" ]]; then
   npm_ci_args+=(--prefer-offline)
 fi
-timeout \
-  --signal=TERM \
-  --kill-after="${SITES_INSTALL_KILL_AFTER:-15s}" \
-  "${SITES_INSTALL_TIMEOUT:-8m}" \
-  npm "${npm_ci_args[@]}"
+run_with_timeout "${SITES_INSTALL_TIMEOUT:-8m}" npm "${npm_ci_args[@]}"
 
 vinext="${SITES_PROJECT_ROOT}/node_modules/.bin/vinext"
 if [[ ! -x "${vinext}" ]]; then

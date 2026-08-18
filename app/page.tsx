@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import projectsContent from "../content/projects.json";
+import { fetchSanityProjects } from "./sanity-projects";
 
 type Locale = "da" | "en";
 type Theme = "light" | "dark";
@@ -37,7 +38,10 @@ const copy = {
 } as const;
 
 export default function Home(){
-  const[open,setOpen]=useState("portfolio");const[locale,setLocale]=useState<Locale>("da");const[theme,setTheme]=useState<Theme>("light");const heroRef=useRef<HTMLElement>(null);const t=copy[locale];const projects=projectData[locale];
+  const[open,setOpen]=useState("portfolio");const[locale,setLocale]=useState<Locale>("da");const[theme,setTheme]=useState<Theme>("light");const heroRef=useRef<HTMLElement>(null);const t=copy[locale];
+  // Sanity er øverste datalag; slår kaldet fejl, bliver vi på det indbyggede indhold.
+  const[liveProjects,setLiveProjects]=useState<Record<Locale,Project[]>|null>(null);const projects=(liveProjects??projectData)[locale];
+  useEffect(()=>{const controller=new AbortController();fetchSanityProjects(controller.signal).then(data=>{if(data)setLiveProjects(data)});return()=>controller.abort()},[]);
   useEffect(()=>{const savedLocale=localStorage.getItem("pos-locale");const savedTheme=localStorage.getItem("pos-theme");if(savedLocale==="da"||savedLocale==="en")setLocale(savedLocale);if(savedTheme==="light"||savedTheme==="dark")setTheme(savedTheme)},[]);
   useEffect(()=>{document.documentElement.dataset.theme=theme;localStorage.setItem("pos-theme",theme)},[theme]);
   useEffect(()=>{document.documentElement.lang=locale;localStorage.setItem("pos-locale",locale)},[locale]);

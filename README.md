@@ -21,15 +21,49 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - Front Matter CMS-konfiguration til den redigerbare projektoversigt.
 - Projektdata flyttet ud af komponenten og ind i `content/projects.json`.
 - VS Code-anbefaling til Front Matter CMS.
-- Produktionsbuild og live-udgivelse verificeret.
+- Produktionsbuild verificeret lokalt via `npm test` (build + HTML-smoke test passerer).
 - Hele kildekoden spejlet til det private GitHub-repository.
 - `AGENTS.md` og `CLAUDE.md` sikrer, at nye Codex- og Claude-sessioner starter med projektets aktuelle README.
 - ✓ **Prøveændring gennemkørt:** Portfolio 68 % → 70 % gennem Front Matter → GitHub commit → lokal preview verificeret. Arbejdsgangen fungerer uden screenshots eller lange forklaringer.
+- ✓ **Sanity genstartet fra nul (18. august 2026):** Den halvfærdige embedded Sanity-installation fra Phase 2 er slettet fuldstændigt, og et rent, selvstændigt studio er bygget i `studio/` efter Sanitys officielle vejledning til AI-kodeagenter.
 
 ### I gang
 
-- Ekstern udgivelse til live-sitet (ChatGPT Sites proxy) — verificering ventende.
+- Løsning af ChatGPT Sites-genudgivelsen og verificering af live-domænet. Den offentlige live-side viser stadig 68 %, så produktionen er ikke endeligt bekræftet.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
+- **Sanity som muligt CMS:** Studio, skema og indhold står klar i `studio/`, men hjemmesiden læser stadig fra `content/projects.json`. Beslutningen om Sanity skal afløse Front Matter er ikke truffet.
+
+### Sanity Studio
+
+Et selvstændigt Sanity Studio ligger i `studio/` — helt adskilt fra vinext/Cloudflare-appen.
+
+```bash
+cd studio && npm run dev     # http://localhost:3333
+```
+
+- **Projekt:** `Patrick's Project Journey` (`z53cymkz`), dataset `production`.
+- **Skema:** `studio/schemaTypes/project.ts` modellerer projektkortene 1:1 med `content/projects.json` (`id` → `projectId`, `accent` → `accentColor`, `editorLabel` udgået til fordel for Studios preview).
+- **Struktur:** `studio/structure.ts` deler indholdet i "Projekter · Dansk" og "Projekter · English".
+- **Indhold:** Alle 8 dokumenter (4 projekter × 2 sprog) er importeret og verificeret via GROQ.
+- **Sprogmodel:** Ét dokument pr. sprog, bundet sammen af `projectId` — samme opdeling som Front Matter bruger i dag.
+
+#### Sitet henter live fra Sanity
+
+`app/sanity-projects.ts` henter projektdata fra Sanitys offentlige CDN ved sideindlæsning — uden nye afhængigheder, det er et rent `fetch`. `app/page.tsx` har nu tre datalag, hvor det øverste tilgængelige vinder:
+
+1. **Sanity** (live, ændringer slår igennem på sekunder uden rebuild)
+2. `content/projects.json` (indbygget ved build)
+3. Hardkodet `fallbackProjectData` i `page.tsx`
+
+Fejler Sanity-kaldet — projekt deaktiveret, netværk nede, ufuldstændige data — falder sitet lydløst tilbage på lag 2. Sitet kan altså ikke gå i sort, fordi Sanity er utilgængelig.
+
+#### ⚠ Blokade: begge Sanity-projekter er deaktiveret
+
+Både `z53cymkz` og `4hyvqkz5` svarer **402 "Project Disabled"** på CDN, live-API og CLI. Manage-API'et viser `isDisabledByUser: true` på begge, mens `isDisabled` og `isBlocked` er `false`. Det indtraf, efter det andet projekt blev oprettet — sandsynligvis gratisplanens grænse på ét projekt pr. organisation.
+
+**Skal løses manuelt på [sanity.io/manage](https://www.sanity.io/manage):** slet `4hyvqkz5` (den forladte rest uden indhold) og bekræft, at `z53cymkz` er aktiv igen. Indholdet er ikke tabt.
+
+Indtil da er to ting blokeret: `sanity deploy` (studioet bygger fint, men kan ikke uploade skemaet) og sitets live-hentning. `studioHost` er sat til `patrick-project-journey`, så deploy kan køres, så snart projektet er aktivt.
 
 ### Skal vurderes senere
 
@@ -40,28 +74,30 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Næste session
 
-**Phase 2: Projekt-detaljesider og udvidet CMS**
+**Løs Sites-genudgivelsen før Phase 2**
 
-Arbejdsgangen virker. Næste fokus er at give hver projekt sin egen detaljeside med visuelle eksempler og mere information.
+Arbejdsgangen i GitHub og lokal builds er verificeret. Den tilbageværende blokade er live-produktionens udgivelsesled: den offentlige site viser stadig 68 %, så den nyeste 70 %-status er ikke bekræftet som publiceret.
 
 ### Krav
-- **Detail pages:** Klik "Læs mere" på kort → egen side for projektet med fuldt indhold
-- **Udvidet data:** `content/projects.json` får nye felter (visuelle eksempler, case studies, metrics, timeline osv.)
-- **Front Matter:** CMS-formularer skal kunne redigere alle nye felter
-- **Routing:** `/project/[id]` eller lignende for at nå detaljesiderne
+- **Live-verifikation:** Public URL skal vise den korrekte aktive status, før projektet kan siges at være opdateret i produktion.
+- **Sites-udgivelse:** Find det manglende led mellem GitHub-commit og ChatGPT Sites-proxy, og få den live-side til at opdatere sig.
+- **Front Matter:** Auto-commit skal stadig vurderes separat, men må ikke bruges som erstatning for den endelige live-verifikation.
+- **Phase 2:** Først når produktionen er valid, kan detaljesider og udvidet CMS påbegyndes uden at bygge videre på et uverificeret deploy.
+- **Sanity-beslutning:** Afgør, om projektdata fremover skal komme fra Sanity (`studio/`) eller blive i `content/projects.json` med Front Matter. Sitet er endnu ikke koblet til Sanity, så valget er stadig frit.
 
 ### Arbejdsgang
-1. Få Claude/Codex til at foreslå datastruktur-udvidelse
-2. Design Front Matter-formularerne for nye felter
-3. Plan komponent- og routing-arkitektur
-4. Få godkendelse før bygning
+1. Bekræft, om den live side stadig viser 68 % eller 70 %
+2. Reproducer det manglende publish-led i ChatGPT Sites-flowet
+3. Få en verificeret live-udgivelse på plads
+4. Først derefter fortsætte med datastruktur til detaljesider
 
 ### Milepæle
-1. Datastruktur fastlagt
-2. Front Matter-konfiguration udvidet
-3. Detail-page-komponenter bygget
-4. Navigation og routing virker
-5. Én test-projekt-detaljeside live
+1. Sites-genudgivelsen kortlagt
+2. Det manglende publish-led løst
+3. Live-siden verificeret på den aktuelle status
+4. Datastruktur fastlagt for detaljesider
+5. Front Matter-konfiguration udvidet
+6. Detail-page-komponenter bygget
 
 ## Redigér projektoversigten
 

@@ -14,7 +14,7 @@
       "disableCreation": true
     }
   ],
-  "frontMatter.git.enabled": true,
+  "frontMatter.git.enabled": false,
   "frontMatter.git.commitMessage": "Opdater projektoversigt",
   "frontMatter.data.files": [
     {
@@ -27,24 +27,97 @@
       "schema": {
         "title": "Projekt",
         "type": "object",
-        "required": ["editorLabel", "locale", "id", "index", "title", "category", "status", "progress", "accent", "summary", "now", "next", "destination", "milestones"],
+        "required": [
+          "editorLabel",
+          "locale",
+          "id",
+          "index",
+          "title",
+          "category",
+          "status",
+          "progress",
+          "accent",
+          "summary",
+          "now",
+          "next",
+          "destination",
+          "milestones"
+        ],
         "properties": {
-          "editorLabel": {"title": "Fast navn i editoren", "type": "string", "readOnly": true},
-          "locale": {"title": "Sprog", "type": "string", "enum": ["da", "en"]},
-          "id": {"title": "Teknisk ID", "type": "string"},
-          "index": {"title": "Nummer", "type": "string"},
-          "title": {"title": "Projektnavn", "type": "string"},
-          "category": {"title": "Kategori og prioritet", "type": "string"},
-          "status": {"title": "Kort status", "type": "string"},
-          "progress": {"title": "Fremdrift i procent", "type": "number", "minimum": 0, "maximum": 100},
-          "accent": {"title": "Accentfarve", "type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
-          "summary": {"title": "Kort beskrivelse", "type": "string", "multiline": true},
-          "now": {"title": "Hvor står projektet nu?", "type": "string", "multiline": true},
-          "next": {"title": "Næste bevægelse", "type": "string", "multiline": true},
-          "destination": {"title": "Målet på sigt", "type": "string", "multiline": true},
-          "milestones": {"title": "Milepæle", "type": "array", "items": {"type": "string"}}
+          "editorLabel": {
+            "title": "Fast navn i editoren",
+            "type": "string",
+            "readOnly": true
+          },
+          "locale": {
+            "title": "Sprog",
+            "type": "string",
+            "enum": [
+              "da",
+              "en"
+            ]
+          },
+          "id": {
+            "title": "Teknisk ID",
+            "type": "string"
+          },
+          "index": {
+            "title": "Nummer",
+            "type": "string"
+          },
+          "title": {
+            "title": "Projektnavn",
+            "type": "string"
+          },
+          "category": {
+            "title": "Kategori og prioritet",
+            "type": "string"
+          },
+          "status": {
+            "title": "Kort status",
+            "type": "string"
+          },
+          "progress": {
+            "title": "Fremdrift i procent",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "accent": {
+            "title": "Accentfarve",
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "summary": {
+            "title": "Kort beskrivelse",
+            "type": "string",
+            "multiline": true
+          },
+          "now": {
+            "title": "Hvor står projektet nu?",
+            "type": "string",
+            "multiline": true
+          },
+          "next": {
+            "title": "Næste bevægelse",
+            "type": "string",
+            "multiline": true
+          },
+          "destination": {
+            "title": "Målet på sigt",
+            "type": "string",
+            "multiline": true
+          },
+          "milestones": {
+            "title": "Milepæle",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     }
-  ]
+  ],
+  "frontMatter.panel.openOnSupportedFile": true
 }
