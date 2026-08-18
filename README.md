@@ -54,13 +54,33 @@ cd studio && npx sanity deploy   # udgiv ændret skema/struktur til det hostede 
 
 #### Sitet henter live fra Sanity
 
-`app/sanity-projects.ts` henter projektdata fra Sanitys offentlige CDN ved sideindlæsning — uden nye afhængigheder, det er et rent `fetch`. `app/page.tsx` har nu tre datalag, hvor det øverste tilgængelige vinder:
+Datalaget bygger på **next-sanity**. `app/page.tsx` er en server-komponent, der henter med `sanityFetch`, mens al interaktivitet (sprog, tema, udfoldning) ligger i klient-komponenten `app/project-journey.tsx`.
 
-1. **Sanity** (live, ændringer slår igennem på sekunder uden rebuild)
+| Fil | Rolle |
+| --- | --- |
+| `app/sanity/client.ts` | Sanity-klient med stega, så Presentation kan pege fra element til felt |
+| `app/sanity/queries.ts` | GROQ-forespørgslen, oversætter feltnavne til sitets form |
+| `app/sanity/live.ts` | `sanityFetch` og `<SanityLive />` via `defineLive` |
+| `app/api/draft-mode/*` | Slår kladdevisning til og fra; `enable` afviser kald uden gyldig secret |
+
+Tre datalag, hvor det øverste tilgængelige vinder:
+
+1. **Sanity** (server-renderet, live opdatering uden genindlæsning)
 2. `content/projects.json` (indbygget ved build)
-3. Hardkodet `fallbackProjectData` i `page.tsx`
+3. Hardkodet `fallbackProjectData` i `app/project-journey.tsx`
 
-Fejler Sanity-kaldet — projekt deaktiveret, netværk nede, ufuldstændige data — falder sitet lydløst tilbage på lag 2. Sitet kan altså ikke gå i sort, fordi Sanity er utilgængelig.
+Fejler Sanity-kaldet, falder sitet lydløst tilbage på lag 2, så det ikke kan gå i sort.
+
+#### Visuel redigering
+
+Åbn **Presentation** i Studio: siden vises side om side med editoren, og du kan klikke direkte på et element for at redigere feltet bag det. Draft mode viser upublicerede kladder.
+
+Forudsætninger:
+
+- `SANITY_API_READ_TOKEN` i `.env.local` (viewer-rettigheder, kun læseadgang). **Hemmelig — `.env*` er gitignoreret.**
+- `SANITY_STUDIO_PREVIEW_URL` styrer, hvilken side Presentation viser. Uden den bruges `http://localhost:5173`.
+
+⚠ **Endnu ikke sat op i produktion.** Tokenet findes kun lokalt. For at visuel redigering virker mod det udgivne site, skal `SANITY_API_READ_TOKEN` lægges ind som secret i Cloudflare-miljøet, og `SANITY_STUDIO_PREVIEW_URL` sættes til produktions-URL'en før næste `sanity deploy`.
 
 #### Vigtigt: kun ét Sanity-projekt ad gangen
 
