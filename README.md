@@ -40,12 +40,28 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Næste session
 
-Arbejdsgangen virker. Næste fokus:
+**Phase 2: Projekt-detaljesider og udvidet CMS**
 
-1. **Verificer ekstern udgivelse:** Bekræft at `patrick-project-journey.patrickbennett.chatgpt.site` også viser 70 % (kan tage tid på proxy).
-2. **Juster Front Matter auto-commit:** Sikr at Git-synkronisering er deaktiveret, så du altid committer manuelt ved godkendelse.
-3. **Test en ny redigering:** Lav en anden lille ændring (f.eks. et nyt milepæl eller status-ord) for at bekræfte mønsteret virker konsistent.
-4. **Dokumenter arbejdsgangen:** Evt. tilføj en kort vejledning i `docs/REDIGER-SIDEN.md` om hvornår man committer og pusher.
+Arbejdsgangen virker. Næste fokus er at give hver projekt sin egen detaljeside med visuelle eksempler og mere information.
+
+### Krav
+- **Detail pages:** Klik "Læs mere" på kort → egen side for projektet med fuldt indhold
+- **Udvidet data:** `content/projects.json` får nye felter (visuelle eksempler, case studies, metrics, timeline osv.)
+- **Front Matter:** CMS-formularer skal kunne redigere alle nye felter
+- **Routing:** `/project/[id]` eller lignende for at nå detaljesiderne
+
+### Arbejdsgang
+1. Få Claude/Codex til at foreslå datastruktur-udvidelse
+2. Design Front Matter-formularerne for nye felter
+3. Plan komponent- og routing-arkitektur
+4. Få godkendelse før bygning
+
+### Milepæle
+1. Datastruktur fastlagt
+2. Front Matter-konfiguration udvidet
+3. Detail-page-komponenter bygget
+4. Navigation og routing virker
+5. Én test-projekt-detaljeside live
 
 ## Redigér projektoversigten
 
