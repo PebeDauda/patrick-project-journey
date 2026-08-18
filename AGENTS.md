@@ -26,4 +26,29 @@ At the end of every working session, update these README sections:
 - **I gang**
 - **Næste session**
 
-Do not claim the live site is updated until the production deployment has been verified.
+## Udgivelse: sitet har TO adresser
+
+De udgives hver for sig og driver fra hinanden, hvis kun den ene opdateres.
+
+| Adresse | Hvordan den udgives | Har SANITY_API_READ_TOKEN |
+| --- | --- | --- |
+| `patrick-project-journey.ppbb94.workers.dev` | `npm run deploy` | ja |
+| `patrick-project-journey.patrickbennett.chatgpt.site` | manuelt i ChatGPT Sites | nej |
+
+**Efter enhver kodeændring, der skal ud til brugerne, skal du køre:**
+
+```bash
+npm run deploy
+```
+
+Den bygger og udgiver til Cloudflare i én kommando. Kør den uopfordret som
+afslutning på arbejdet — det er ikke en handling, Patrick skal bede om hver
+gang. Mind derefter Patrick om, at chatgpt.site skal udgives manuelt, hvis den
+også skal opdateres.
+
+Kun kodeændringer kræver udgivelse. Indholdsændringer i Sanity slår igennem på
+begge sites med det samme uden build.
+
+Verificér altid efter udgivelse ved at hente siden og bekræfte, at ændringen er
+der. Do not claim the live site is updated until the production deployment has
+been verified.
