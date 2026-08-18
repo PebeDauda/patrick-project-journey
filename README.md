@@ -22,10 +22,11 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - Projektdata flyttet ud af komponenten og ind i `content/projects.json`.
 - VS Code-anbefaling til Front Matter CMS.
 - Produktionsbuild og live-udgivelse verificeret.
+- Hele kildekoden spejlet til det private GitHub-repository.
+- `AGENTS.md` og `CLAUDE.md` sikrer, at nye Codex- og Claude-sessioner starter med projektets aktuelle README.
 
 ### I gang
 
-- Spejling af den eksisterende Sites-kode til dette private GitHub-repository.
 - Første praktiske test af Front Matter i Patricks lokale VS Code.
 - Fast arbejdsgang fra redigering → GitHub → live hjemmeside.
 
