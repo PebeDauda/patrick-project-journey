@@ -25,7 +25,7 @@ export type SanityProject = {
 
 // Projekt-ID og dataset er offentlige værdier — de står i enhver klient-forespørgsel
 // mod Sanitys CDN og er hverken hemmeligheder eller miljøafhængige her.
-const PROJECT_ID = "z53cymkz";
+const PROJECT_ID = "niua6aq5";
 const DATASET = "production";
 const API_VERSION = "2026-08-18";
 

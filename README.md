@@ -25,23 +25,28 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - Hele kildekoden spejlet til det private GitHub-repository.
 - `AGENTS.md` og `CLAUDE.md` sikrer, at nye Codex- og Claude-sessioner starter med projektets aktuelle README.
 - ✓ **Prøveændring gennemkørt:** Portfolio 68 % → 70 % gennem Front Matter → GitHub commit → lokal preview verificeret. Arbejdsgangen fungerer uden screenshots eller lange forklaringer.
-- ✓ **Sanity genstartet fra nul (18. august 2026):** Den halvfærdige embedded Sanity-installation fra Phase 2 er slettet fuldstændigt, og et rent, selvstændigt studio er bygget i `studio/` efter Sanitys officielle vejledning til AI-kodeagenter.
+- ✓ **Sanity genstartet fra nul (18. august 2026):** Den halvfærdige embedded Sanity-installation fra Phase 2 er slettet fuldstændigt, og et rent, selvstændigt studio er bygget i `studio/` efter Sanitys officielle vejledning til AI-kodeagenter. Studioet er udgivet, indholdet importeret, og sitet henter live fra Sanity med fallback.
 
 ### I gang
 
 - Løsning af ChatGPT Sites-genudgivelsen og verificering af live-domænet. Den offentlige live-side viser stadig 68 %, så produktionen er ikke endeligt bekræftet.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
-- **Sanity som muligt CMS:** Studio, skema og indhold står klar i `studio/`, men hjemmesiden læser stadig fra `content/projects.json`. Beslutningen om Sanity skal afløse Front Matter er ikke truffet.
+- **Sanity er live:** Studioet er udgivet på <https://patrick-project-journey.sanity.studio/>, og sitet henter projektdata derfra ved indlæsning. Front Matter og `content/projects.json` fungerer stadig som fallback — beslutningen om, hvilken af de to der skal være den primære redigeringsvej fremover, er ikke truffet.
 
 ### Sanity Studio
 
-Et selvstændigt Sanity Studio ligger i `studio/` — helt adskilt fra vinext/Cloudflare-appen.
+**Rediger indholdet her:** <https://patrick-project-journey.sanity.studio/>
+
+Studioet er udgivet og virker fra enhver browser og mobil — log ind med din Sanity-konto. Ændringer slår igennem på hjemmesiden inden for få sekunder, uden nyt build og uden en GitHub-commit.
+
+Kildekoden ligger i `studio/`, helt adskilt fra vinext/Cloudflare-appen. Lokal udgave:
 
 ```bash
 cd studio && npm run dev     # http://localhost:3333
+cd studio && npx sanity deploy   # udgiv ændret skema/struktur til det hostede studio
 ```
 
-- **Projekt:** `Patrick's Project Journey` (`z53cymkz`), dataset `production`.
+- **Projekt:** `Patricks Project Journey` (`niua6aq5`), dataset `production`, organisation `PatrickOS`.
 - **Skema:** `studio/schemaTypes/project.ts` modellerer projektkortene 1:1 med `content/projects.json` (`id` → `projectId`, `accent` → `accentColor`, `editorLabel` udgået til fordel for Studios preview).
 - **Struktur:** `studio/structure.ts` deler indholdet i "Projekter · Dansk" og "Projekter · English".
 - **Indhold:** Alle 8 dokumenter (4 projekter × 2 sprog) er importeret og verificeret via GROQ.
@@ -57,13 +62,19 @@ cd studio && npm run dev     # http://localhost:3333
 
 Fejler Sanity-kaldet — projekt deaktiveret, netværk nede, ufuldstændige data — falder sitet lydløst tilbage på lag 2. Sitet kan altså ikke gå i sort, fordi Sanity er utilgængelig.
 
-#### ⚠ Blokade: begge Sanity-projekter er deaktiveret
+#### Vigtigt: kun ét Sanity-projekt ad gangen
 
-Både `z53cymkz` og `4hyvqkz5` svarer **402 "Project Disabled"** på CDN, live-API og CLI. Manage-API'et viser `isDisabledByUser: true` på begge, mens `isDisabled` og `isBlocked` er `false`. Det indtraf, efter det andet projekt blev oprettet — sandsynligvis gratisplanens grænse på ét projekt pr. organisation.
+Organisationen `PatrickOS` kan kun have **ét aktivt Sanity-projekt**. Da der kortvarigt lå to, blev begge sat i tilstanden `402 Project Disabled`, indtil det ene blev fjernet. Opret derfor ikke et ekstra projekt uden at rydde det gamle væk først.
 
-**Skal løses manuelt på [sanity.io/manage](https://www.sanity.io/manage):** slet `4hyvqkz5` (den forladte rest uden indhold) og bekræft, at `z53cymkz` er aktiv igen. Indholdet er ikke tabt.
+Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/projects.json`, og skemaet ligger i `studio/schemaTypes/project.ts`. Sanity indeholder ingen data, der ikke også findes i repoet — importen er `sanity dataset import` af en NDJSON genereret fra JSON-filen.
 
-Indtil da er to ting blokeret: `sanity deploy` (studioet bygger fint, men kan ikke uploade skemaet) og sitets live-hentning. `studioHost` er sat til `patrick-project-journey`, så deploy kan køres, så snart projektet er aktivt.
+#### Hvis projekt-ID'et skifter
+
+`niua6aq5` står tre steder, og alle tre skal opdateres samtidigt:
+
+- `studio/sanity.cli.ts`
+- `studio/sanity.config.ts`
+- `app/sanity-projects.ts`
 
 ### Skal vurderes senere
 
@@ -83,7 +94,7 @@ Arbejdsgangen i GitHub og lokal builds er verificeret. Den tilbageværende bloka
 - **Sites-udgivelse:** Find det manglende led mellem GitHub-commit og ChatGPT Sites-proxy, og få den live-side til at opdatere sig.
 - **Front Matter:** Auto-commit skal stadig vurderes separat, men må ikke bruges som erstatning for den endelige live-verifikation.
 - **Phase 2:** Først når produktionen er valid, kan detaljesider og udvidet CMS påbegyndes uden at bygge videre på et uverificeret deploy.
-- **Sanity-beslutning:** Afgør, om projektdata fremover skal komme fra Sanity (`studio/`) eller blive i `content/projects.json` med Front Matter. Sitet er endnu ikke koblet til Sanity, så valget er stadig frit.
+- **Sanity-beslutning:** Afgør, om Sanity eller Front Matter skal være den primære redigeringsvej. Begge virker nu; Sanity slår igennem uden build, Front Matter kræver commit og rebuild.
 
 ### Arbejdsgang
 1. Bekræft, om den live side stadig viser 68 % eller 70 %
