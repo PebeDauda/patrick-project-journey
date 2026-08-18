@@ -28,6 +28,8 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - ✓ **Prøveændring gennemkørt:** Portfolio 68 % → 70 % gennem Front Matter → GitHub commit → lokal preview verificeret. Arbejdsgangen fungerer uden screenshots eller lange forklaringer.
 - ✓ **Sanity genstartet fra nul (18. august 2026):** Den halvfærdige embedded Sanity-installation fra Phase 2 er slettet fuldstændigt, og et rent, selvstændigt studio er bygget i `studio/` efter Sanitys officielle vejledning til AI-kodeagenter. Studioet er udgivet, indholdet importeret, og sitet henter live fra Sanity med fallback.
 
+- Oprettet `det-skal-vi-da-proeve/` som isoleret forsøgsbank for visuelle retninger. Første idé er “PatrickOS som et levende OS”; intet herfra er aktiveret i produktionen.
+
 ### I gang
 
 - Løsning af ChatGPT Sites-genudgivelsen og verificering af live-domænet. Den offentlige live-side viser stadig 68 %, så produktionen er ikke endeligt bekræftet.
