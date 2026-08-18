@@ -6,8 +6,8 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Projektstatus
 
-**Fase:** Redaktionelt system og samarbejdsflow  
-**Senest opdateret:** 18. august 2026  
+**Fase:** Redaktionelt system og samarbejdsflow
+**Senest opdateret:** 18. august 2026
 **Aktuel retning:** Gør projektdata lette at redigere i VS Code og sikre, at Patrick, Claude og Codex arbejder i samme GitHub-repository.
 
 ### Færdigt
@@ -24,11 +24,12 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - Produktionsbuild og live-udgivelse verificeret.
 - Hele kildekoden spejlet til det private GitHub-repository.
 - `AGENTS.md` og `CLAUDE.md` sikrer, at nye Codex- og Claude-sessioner starter med projektets aktuelle README.
+- ✓ **Prøveændring gennemkørt:** Portfolio 68 % → 70 % gennem Front Matter → GitHub commit → lokal preview verificeret. Arbejdsgangen fungerer uden screenshots eller lange forklaringer.
 
 ### I gang
 
-- Første praktiske test af Front Matter i Patricks lokale VS Code.
-- Fast arbejdsgang fra redigering → GitHub → live hjemmeside.
+- Ekstern udgivelse til live-sitet (ChatGPT Sites proxy) — verificering ventende.
+- Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
 
 ### Skal vurderes senere
 
@@ -39,15 +40,12 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Næste session
 
-Start med én lille prøveændring i Front Matter:
+Arbejdsgangen virker. Næste fokus:
 
-1. Klon og åbn repository-mappen i VS Code.
-2. Åbn **Front Matter → Data → Projektoversigt · Dansk og engelsk**.
-3. Ret midlertidigt status eller fremdriftsprocent på ét projekt.
-4. Bekræft ændringen i det lokale preview.
-5. Gem ændringen i GitHub og afprøv udgivelsesflowet til live-siden.
-
-Sessionen er vellykket, når én redigering kan bevæge sig hele vejen fra Front Matter til den offentlige hjemmeside uden screenshots eller lange forklaringer.
+1. **Verificer ekstern udgivelse:** Bekræft at `patrick-project-journey.patrickbennett.chatgpt.site` også viser 70 % (kan tage tid på proxy).
+2. **Juster Front Matter auto-commit:** Sikr at Git-synkronisering er deaktiveret, så du altid committer manuelt ved godkendelse.
+3. **Test en ny redigering:** Lav en anden lille ændring (f.eks. et nyt milepæl eller status-ord) for at bekræfte mønsteret virker konsistent.
+4. **Dokumenter arbejdsgangen:** Evt. tilføj en kort vejledning i `docs/REDIGER-SIDEN.md` om hvornår man committer og pusher.
 
 ## Redigér projektoversigten
 
