@@ -1,7 +1,12 @@
 import projectsContent from "../content/projects.json";
-import ProjectJourney, {type Locale, type Project} from "./project-journey";
+import ProjectJourney, {
+  fallbackCopy,
+  type Copy,
+  type Locale,
+  type Project,
+} from "./project-journey";
 import {sanityFetch} from "./sanity/live";
-import {projectsQuery} from "./sanity/queries";
+import {pageContentQuery, projectsQuery} from "./sanity/queries";
 
 const byLocale = (projects: Project[]): Record<Locale, Project[]> => ({
   da: projects.filter((project) => project.locale === "da"),
@@ -27,8 +32,64 @@ async function loadProjects(): Promise<Record<Locale, Project[]>> {
   return byLocale(projectsContent as Project[]);
 }
 
-export default async function Home() {
-  const projects = await loadProjects();
+type SanityPageContent = Omit<Copy, "signals" | "steps"> & {
+  locale: Locale;
+  signals: {number: string; label: string}[] | null;
+  steps: {title: string; description: string}[] | null;
+};
 
-  return <ProjectJourney projects={projects} />;
+/**
+ * Sanity gemmer nøgletal og procestrin som navngivne objekter, fordi det er
+ * tydeligere at redigere. Siden bruger par, så de foldes ud her.
+ *
+ * Flettes felt for felt hen over fallbacken, så ét manglende felt i Sanity
+ * ikke efterlader et tomt hul på siden.
+ */
+function mergeCopy(entry: SanityPageContent, fallback: Copy): Copy {
+  const defined = Object.fromEntries(
+    Object.entries(entry).filter(([, value]) => value !== null && value !== undefined),
+  );
+
+  return {
+    ...fallback,
+    ...defined,
+    signals: entry.signals?.length
+      ? (entry.signals.map(({number, label}) => [number, label]) as [string, string][])
+      : fallback.signals,
+    steps: entry.steps?.length
+      ? (entry.steps.map(({title, description}) => [title, description]) as [
+          string,
+          string,
+        ][])
+      : fallback.steps,
+  };
+}
+
+async function loadCopy(): Promise<Record<Locale, Copy>> {
+  try {
+    const {data} = await sanityFetch({query: pageContentQuery});
+    if (Array.isArray(data)) {
+      const entries = data as SanityPageContent[];
+      return {
+        da: mergeCopy(
+          entries.find((entry) => entry.locale === "da") ?? ({} as SanityPageContent),
+          fallbackCopy.da,
+        ),
+        en: mergeCopy(
+          entries.find((entry) => entry.locale === "en") ?? ({} as SanityPageContent),
+          fallbackCopy.en,
+        ),
+      };
+    }
+  } catch {
+    // Sanity utilgængelig — siden bruger den indbyggede tekst.
+  }
+
+  return fallbackCopy;
+}
+
+export default async function Home() {
+  const [projects, copy] = await Promise.all([loadProjects(), loadCopy()]);
+
+  return <ProjectJourney projects={projects} copy={copy} />;
 }

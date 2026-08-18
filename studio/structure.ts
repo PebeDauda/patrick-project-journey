@@ -1,14 +1,36 @@
 import type {StructureResolver} from 'sanity/structure'
+import {DocumentTextIcon} from '@sanity/icons/DocumentText'
 import {RocketIcon} from '@sanity/icons/Rocket'
 
 /**
- * Projekterne grupperes efter sprog, så dansk og engelsk indhold
- * redigeres hver for sig — samme opdeling som i Front Matter.
+ * Indholdet grupperes efter sprog, så dansk og engelsk redigeres hver for sig.
+ *
+ * Sideindholdet er ét fast dokument pr. sprog med kendt id, så det åbnes
+ * direkte i stedet for gennem en liste med ét element.
  */
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Indhold')
     .items([
+      S.listItem()
+        .title('Sideindhold · Dansk')
+        .icon(DocumentTextIcon)
+        .child(
+          S.document()
+            .schemaType('pageContent')
+            .documentId('pageContent-da')
+            .title('Sideindhold · Dansk'),
+        ),
+      S.listItem()
+        .title('Sideindhold · English')
+        .icon(DocumentTextIcon)
+        .child(
+          S.document()
+            .schemaType('pageContent')
+            .documentId('pageContent-en')
+            .title('Sideindhold · English'),
+        ),
+      S.divider(),
       S.listItem()
         .title('Projekter · Dansk')
         .icon(RocketIcon)

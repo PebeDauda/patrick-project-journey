@@ -48,9 +48,10 @@ cd studio && npx sanity deploy   # udgiv ændret skema/struktur til det hostede 
 ```
 
 - **Projekt:** `Patricks Project Journey` (`niua6aq5`), dataset `production`, organisation `PatrickOS`.
-- **Skema:** `studio/schemaTypes/project.ts` modellerer projektkortene 1:1 med `content/projects.json` (`id` → `projectId`, `accent` → `accentColor`, `editorLabel` udgået til fordel for Studios preview).
+- **Skema:** `studio/schemaTypes/project.ts` modellerer projektkortene 1:1 med `content/projects.json` (`id` → `projectId`, `accent` → `accentColor`, `editorLabel` udgået til fordel for Studios preview). `studio/schemaTypes/pageContent.ts` dækker al øvrig tekst på forsiden — ét fast dokument pr. sprog med faner for Hero, Nøgletal, Projekter, Proces, Vision samt Menu og footer.
 - **Struktur:** `studio/structure.ts` deler indholdet i "Projekter · Dansk" og "Projekter · English".
-- **Indhold:** Alle 8 dokumenter (4 projekter × 2 sprog) er importeret og verificeret via GROQ.
+- **Indhold:** Alle 8 projektdokumenter (4 × 2 sprog) plus 2 sideindholdsdokumenter er importeret og verificeret via GROQ.
+- **Al forsidetekst er redigerbar.** 28 tekstfelter × 2 sprog — hero, nøgletal, sektionsoverskrifter, procestrin, vision og footer — flyttet fra hardkodet `copy` i `app/project-journey.tsx` ind i Sanity. Den hardkodede udgave er bevaret som `fallbackCopy` og flettes felt for felt, så ét manglende felt i Sanity ikke efterlader et hul på siden.
 - **Sprogmodel:** Ét dokument pr. sprog, bundet sammen af `projectId` — samme opdeling som Front Matter bruger i dag.
 
 #### Sitet henter live fra Sanity
@@ -139,6 +140,8 @@ Build-outputtet er en helt almindelig Cloudflare Worker, så sitet udgives nu di
 npm run deploy     # bygger og udgiver til Cloudflare
 ```
 
+Deploy-konfigurationen hedder bevidst `wrangler.deploy.jsonc` og ikke `wrangler.jsonc`. Cloudflare-plugin'et i `vite.config.ts` finder automatisk en fil med standardnavnet og sætter så `nodejs_compat` to gange, hvilket får dev-serverens runtime til at nægte at starte. `npm run deploy` peger derfor eksplicit på filen med `-c`.
+
 Verificeret på det udgivne site:
 
 - Forsiden serverer **70 %** hentet fra Sanity ✓
@@ -153,7 +156,7 @@ Verificeret på det udgivne site:
 `patrick-project-journey.patrickbennett.chatgpt.site` viser stadig 68 %, fordi den kun opdateres ved manuel udgivelse gennem ChatGPT Sites-grænsefladen. Den kan opdateres, når det passer — Cloudflare-sitet er upåvirket af det.
 
 ### Derefter — aftalt rækkefølge for redigerbarhed
-1. **Al sidetekst ind i Sanity.** Cirka 30 tekststykker × 2 sprog i et "Sideindhold"-dokument. I dag er kun projektkortene redigerbare; hero, proces, vision og footer er hardkodet i `app/project-journey.tsx`.
+1. ~~**Al sidetekst ind i Sanity.**~~ ✓ Gennemført. 28 felter × 2 sprog ligger nu i `pageContent`.
 2. **Designtokens.** 76 hardkodede hex-farver samles til et system, så palet og skriftpar kan vælges fra Sanity — med bundne valg, så sitet ikke kan ødelægges visuelt.
 3. **Projekt-detaljesider med blokbygger.** Hver projektside sammensættes af blokke (hero, galleri, nøgletal, tidslinje, citat), der kan omarrangeres og redigeres live i Presentation. Punkt 2 skal ligge før punkt 3, ellers hardkodes farverne ind i blokkene.
 

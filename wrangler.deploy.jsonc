@@ -6,6 +6,11 @@
   //
   //   npm run build      → bygger dist/
   //   npm run deploy     → udgiver dist/ til Cloudflare
+  //
+  // Filen hedder bevidst IKKE wrangler.jsonc. Cloudflare-plugin'et i
+  // vite.config.ts finder automatisk en fil med standardnavnet og sætter så
+  // nodejs_compat to gange, hvilket får dev-serverens runtime til at nægte at
+  // starte. Deploy peger derfor eksplicit på denne fil med -c.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "patrick-project-journey",
   "main": "dist/server/index.js",

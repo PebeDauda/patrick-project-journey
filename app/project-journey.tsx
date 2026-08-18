@@ -21,13 +21,24 @@ const fallbackProjectData: Record<Locale, Project[]> = {
   ]
 };
 
-const copy = {
+export type Copy = {
+  nav: string[]; updated: string; control: string; heroA: string; heroB: string;
+  heroEm: string; intro: string; signals: [string, string][]; focus: string;
+  map: string; building: string; choose: string; now: string; next: string;
+  destination: string; estimate: string; method: string; process: string;
+  steps: [string, string][]; long: string; door: string; motor: string;
+  vision: string; visionLine: string[]; footer: string; see: string;
+  sections: string; theme: string;
+};
+
+// Sidste udvej, hvis Sanity ikke svarer. Redigeres normalt i Sanity.
+export const fallbackCopy: Record<Locale, Copy> = {
   da:{nav:["Projekter","Proces","Destination"],updated:"Opdateret 18.08.26",control:"PROJEKTKONTROL / 2026",heroA:"Fra løse idéer",heroB:"til et",heroEm:"system.",intro:"Et levende overblik over de vigtigste projekter, rejsen hertil og det, de tilsammen er ved at blive til.",signals:[["04","Strategiske spor"],["02","Aktive prioriteter"],["01","Fælles retning"]],focus:"Fokus er ikke at gøre alt på én gang. Fokus er at lade det vigtigste trække resten frem.",map:"01 / PROJEKTKORT",building:"Det vi bygger",choose:"Vælg et spor og se, hvor det står nu, hvad næste bevægelse er, og hvor det ender.",now:"Nu",next:"Næste bevægelse",destination:"Destination",estimate:"Fremdriftstallene er retningsgivende statusestimater — ikke falsk præcision.",method:"02 / METODEN",process:"Processen er produktet",steps:[["Opdag","Vi finder det reelle problem, styrken eller muligheden bag den første idé."],["Form","Vi gør retningen konkret gennem struktur, design og tydelige beslutninger."],["Byg","Vi omsætter det til cases, systemer og værktøjer, som virker i praksis."],["Bevis","Vi tester det på virkelige mål: jobsøgning, kreativt output og gentagelig værdi."],["Skalér","Det personlige workflow bliver til noget, andre mennesker kan bruge."]],long:"03 / LANGSIGTET RETNING",door:"Porteføljen åbner døren.",motor:"PatrickOS bygger motoren.",vision:"På sigt mødes de i én platform, der kan forstå et menneske, organisere dets ambitioner og hjælpe med at føre dem ud i verden.",visionLine:["PERSONLIGT BEVIS","GENBRUGELIGT SYSTEM","VIRKELIG EFFEKT"],footer:"Bygget af arbejdet undervejs.",see:"Se projekterne",sections:"Sidens sektioner",theme:"Skift farvetema"},
   en:{nav:["Projects","Process","Destination"],updated:"Updated 18.08.26",control:"PROJECT CONTROL / 2026",heroA:"From loose ideas",heroB:"to a",heroEm:"system.",intro:"A living overview of the most important projects, the journey so far and what they are becoming together.",signals:[["04","Strategic tracks"],["02","Active priorities"],["01","Shared direction"]],focus:"The goal is not to do everything at once. The goal is to let the most important work pull the rest forward.",map:"01 / PROJECT MAP",building:"What we are building",choose:"Choose a track to see where it stands, what comes next and where it is heading.",now:"Now",next:"Next move",destination:"Destination",estimate:"Progress figures are directional status estimates — not false precision.",method:"02 / THE METHOD",process:"The process is the product",steps:[["Discover","We find the real problem, strength or opportunity behind the first idea."],["Shape","We make the direction concrete through structure, design and clear decisions."],["Build","We turn it into cases, systems and tools that work in practice."],["Prove","We test it against real goals: applications, creative output and repeatable value."],["Scale","The personal workflow becomes something other people can use."]],long:"03 / LONG-TERM DIRECTION",door:"The portfolio opens the door.",motor:"PatrickOS builds the engine.",vision:"Over time, they meet in one platform that can understand a person, organise their ambitions and help bring them into the world.",visionLine:["PERSONAL PROOF","REUSABLE SYSTEM","REAL-WORLD IMPACT"],footer:"Built from the work in progress.",see:"See the projects",sections:"Page sections",theme:"Switch colour theme"}
-} as const;
+};
 
-export default function ProjectJourney({projects:serverProjects}:{projects:Record<Locale,Project[]>}){
-  const[open,setOpen]=useState("portfolio");const[locale,setLocale]=useState<Locale>("da");const[theme,setTheme]=useState<Theme>("light");const heroRef=useRef<HTMLElement>(null);const t=copy[locale];
+export default function ProjectJourney({projects:serverProjects,copy:serverCopy}:{projects:Record<Locale,Project[]>;copy:Record<Locale,Copy>}){
+  const[open,setOpen]=useState("portfolio");const[locale,setLocale]=useState<Locale>("da");const[theme,setTheme]=useState<Theme>("light");const heroRef=useRef<HTMLElement>(null);const t=serverCopy[locale];
   // Serveren har allerede valgt datakilde; her er den hardkodede kopi sidste udvej.
   const projects=(serverProjects[locale]?.length?serverProjects:fallbackProjectData)[locale];
   useEffect(()=>{const savedLocale=localStorage.getItem("pos-locale");const savedTheme=localStorage.getItem("pos-theme");if(savedLocale==="da"||savedLocale==="en")setLocale(savedLocale);if(savedTheme==="light"||savedTheme==="dark")setTheme(savedTheme)},[]);
