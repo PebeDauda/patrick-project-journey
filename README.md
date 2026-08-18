@@ -117,30 +117,36 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Løs Sites-genudgivelsen før Phase 2**
+**Udgiv gennem ChatGPT Sites — der er intet manglende led**
 
-Arbejdsgangen i GitHub og lokal builds er verificeret. Den tilbageværende blokade er live-produktionens udgivelsesled: den offentlige site viser stadig 68 %, så den nyeste 70 %-status er ikke bekræftet som publiceret.
+Tidligere sessioner ledte efter en fejl i udgivelseskæden. Der er ingen fejl. Undersøgt 18. august 2026:
+
+- Repoet har **ingen** `.github/workflows`, **ingen** `wrangler.toml` og **ingen** deploy-kommando.
+- `build/sites-vite-plugin.ts` pakker kun artefaktet; `scripts/validate-artifact.sh` validerer det. Ingen af dem udgiver.
+- Codex CLI har ingen publish-kommando.
+- `docs/REDIGER-SIDEN.md` siger det allerede direkte: *"Selve live-siden opdateres fortsat gennem den eksisterende Sites-udgivelse."*
+
+**Git-commits udgiver ikke.** De spejler koden til GitHub. Live-siden opdateres kun, når projektet udgives gennem ChatGPT Sites-grænsefladen, hvor sitet blev oprettet (`.openai/hosting.json` → `appgprj_6a83885d21d4819184f107018f46a8b2`).
+
+Det forklarer 68 % mod 70 %: koden har været korrekt hele tiden, men er aldrig blevet udgivet.
+
+### Produktionsartefaktet er verificeret klar
+
+Testet lokalt med `npm run build` + `npm start`, altså præcis den ESM-worker Sites kører:
+
+- Serverer 70 % hentet fra Sanity ✓
+- `api/draft-mode/enable` svarer 401 uden gyldig secret ✓
+- Ingen fejl i produktionsloggen ✓
 
 ### Krav
-- **Live-verifikation:** Public URL skal vise den korrekte aktive status, før projektet kan siges at være opdateret i produktion.
-- **Sites-udgivelse:** Find det manglende led mellem GitHub-commit og ChatGPT Sites-proxy, og få den live-side til at opdatere sig.
-- **Front Matter:** Auto-commit skal stadig vurderes separat, men må ikke bruges som erstatning for den endelige live-verifikation.
-- **Phase 2:** Først når produktionen er valid, kan detaljesider og udvidet CMS påbegyndes uden at bygge videre på et uverificeret deploy.
-- **Sanity-beslutning:** Afgør, om Sanity eller Front Matter skal være den primære redigeringsvej. Begge virker nu; Sanity slår igennem uden build, Front Matter kræver commit og rebuild.
+- **Udgivelse:** Sitet skal udgives fra ChatGPT Sites. Det kan ikke gøres fra dette repo eller fra en assistent i terminalen.
+- **Verifikation:** Bekræft bagefter, at den offentlige URL viser 70 % og ikke 68 %.
+- **Token i produktion:** `SANITY_API_READ_TOKEN` mangler stadig i produktionsmiljøet. Uden den virker udgivet indhold fint; kun kladdevisning og Presentation mod produktionen kræver den.
 
-### Arbejdsgang
-1. Bekræft, om den live side stadig viser 68 % eller 70 %
-2. Reproducer det manglende publish-led i ChatGPT Sites-flowet
-3. Få en verificeret live-udgivelse på plads
-4. Først derefter fortsætte med datastruktur til detaljesider
-
-### Milepæle
-1. Sites-genudgivelsen kortlagt
-2. Det manglende publish-led løst
-3. Live-siden verificeret på den aktuelle status
-4. Datastruktur fastlagt for detaljesider
-5. Front Matter-konfiguration udvidet
-6. Detail-page-komponenter bygget
+### Derefter — aftalt rækkefølge for redigerbarhed
+1. **Al sidetekst ind i Sanity.** Cirka 30 tekststykker × 2 sprog i et "Sideindhold"-dokument. I dag er kun projektkortene redigerbare; hero, proces, vision og footer er hardkodet i `app/project-journey.tsx`.
+2. **Designtokens.** 76 hardkodede hex-farver samles til et system, så palet og skriftpar kan vælges fra Sanity — med bundne valg, så sitet ikke kan ødelægges visuelt.
+3. **Projekt-detaljesider med blokbygger.** Hver projektside sammensættes af blokke (hero, galleri, nøgletal, tidslinje, citat), der kan omarrangeres og redigeres live i Presentation. Punkt 2 skal ligge før punkt 3, ellers hardkodes farverne ind i blokkene.
 
 ## Redigér projektoversigten
 
