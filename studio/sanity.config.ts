@@ -15,12 +15,13 @@ export default defineConfig({
   plugins: [
     presentationTool({
       previewUrl: {
-        // Standarden peger på det lokale dev-site, fordi det er det eneste sted,
-        // draft mode-ruterne findes i dag. Produktionen kører stadig ældre kode,
-        // så Presentation ville fejle der. Skift først, når Sites-udgivelsen er
-        // verificeret:
-        //   SANITY_STUDIO_PREVIEW_URL=https://patrick-project-journey.patrickbennett.chatgpt.site npx sanity deploy
-        origin: process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:5173',
+        // Standarden er det udgivne Cloudflare-site, så Presentation virker
+        // fra det hostede Studio uden noget kørende lokalt.
+        // Til lokalt arbejde:
+        //   SANITY_STUDIO_PREVIEW_URL=http://localhost:5173 npx sanity dev
+        origin:
+          process.env.SANITY_STUDIO_PREVIEW_URL ||
+          'https://patrick-project-journey.ppbb94.workers.dev',
         previewMode: {
           enable: '/api/draft-mode/enable',
           disable: '/api/draft-mode/disable',

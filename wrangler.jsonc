@@ -1,0 +1,30 @@
+{
+  // Selvstændig udgivelse til Patricks egen Cloudflare-konto.
+  //
+  // Dette rører IKKE ChatGPT Sites. `.openai/hosting.json` og Sites-udgivelsen
+  // fungerer uændret ved siden af — de to udgivelsesveje deler kun build-output.
+  //
+  //   npm run build      → bygger dist/
+  //   npm run deploy     → udgiver dist/ til Cloudflare
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "patrick-project-journey",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-08-18",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Statiske filer serveres af Cloudflare og eksponeres til workeren som
+  // env.ASSETS, som worker/index.ts bruger til billedoptimering.
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  },
+
+  // Bruges kun af /_vinext/image-ruten.
+  "images": {
+    "binding": "IMAGES"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

@@ -2,7 +2,8 @@
 
 Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næste bevægelse er, og hvad de på sigt skal blive til.
 
-**Live hjemmeside:** https://patrick-project-journey.patrickbennett.chatgpt.site
+**Live hjemmeside (Cloudflare, fuld funktionalitet):** <https://patrick-project-journey.ppbb94.workers.dev>
+**ChatGPT Sites (udgives manuelt):** <https://patrick-project-journey.patrickbennett.chatgpt.site>
 
 ## Projektstatus
 
@@ -130,18 +131,26 @@ Tidligere sessioner ledte efter en fejl i udgivelseskæden. Der er ingen fejl. U
 
 Det forklarer 68 % mod 70 %: koden har været korrekt hele tiden, men er aldrig blevet udgivet.
 
-### Produktionsartefaktet er verificeret klar
+### Løst: sitet udgives nu til Cloudflare
 
-Testet lokalt med `npm run build` + `npm start`, altså præcis den ESM-worker Sites kører:
+Build-outputtet er en helt almindelig Cloudflare Worker, så sitet udgives nu direkte til Patricks egen konto ved siden af ChatGPT Sites. `wrangler.jsonc` styrer det, og de to veje deler kun build-output — `.openai/hosting.json` og Sites-udgivelsen er urørt.
 
-- Serverer 70 % hentet fra Sanity ✓
+```bash
+npm run deploy     # bygger og udgiver til Cloudflare
+```
+
+Verificeret på det udgivne site:
+
+- Forsiden serverer **70 %** hentet fra Sanity ✓
 - `api/draft-mode/enable` svarer 401 uden gyldig secret ✓
-- Ingen fejl i produktionsloggen ✓
+- Statiske assets og billeder svarer 200 ✓
+- Svartid ~0,5 s ✓
 
-### Krav
-- **Udgivelse:** Sitet skal udgives fra ChatGPT Sites. Det kan ikke gøres fra dette repo eller fra en assistent i terminalen.
-- **Verifikation:** Bekræft bagefter, at den offentlige URL viser 70 % og ikke 68 %.
-- **Token i produktion:** `SANITY_API_READ_TOKEN` mangler stadig i produktionsmiljøet. Uden den virker udgivet indhold fint; kun kladdevisning og Presentation mod produktionen kræver den.
+**`SANITY_API_READ_TOKEN` er sat som Cloudflare-secret**, så visuel redigering nu også virker mod produktionen — det var netop det, ChatGPT Sites ikke tillod. Presentation peger som standard på Cloudflare-sitet; til lokalt arbejde bruges `SANITY_STUDIO_PREVIEW_URL=http://localhost:5173 npx sanity dev`.
+
+### ChatGPT Sites-adressen står tilbage
+
+`patrick-project-journey.patrickbennett.chatgpt.site` viser stadig 68 %, fordi den kun opdateres ved manuel udgivelse gennem ChatGPT Sites-grænsefladen. Den kan opdateres, når det passer — Cloudflare-sitet er upåvirket af det.
 
 ### Derefter — aftalt rækkefølge for redigerbarhed
 1. **Al sidetekst ind i Sanity.** Cirka 30 tekststykker × 2 sprog i et "Sideindhold"-dokument. I dag er kun projektkortene redigerbare; hero, proces, vision og footer er hardkodet i `app/project-journey.tsx`.
