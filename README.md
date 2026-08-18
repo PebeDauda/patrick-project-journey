@@ -94,7 +94,7 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 - `studio/sanity.cli.ts`
 - `studio/sanity.config.ts`
-- `app/sanity-projects.ts`
+- `app/sanity/client.ts`
 
 ### Skal vurderes senere
 
