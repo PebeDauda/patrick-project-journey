@@ -1,11 +1,19 @@
 {
   "$schema": "https://frontmatter.codes/config/config.schema.json",
-  "frontMatter.dashboard.openOnStart": true,
+  "frontMatter.dashboard.openOnStart": false,
   "frontMatter.framework.id": "next",
   "frontMatter.framework.startCommand": "npm run dev",
   "frontMatter.preview.host": "http://localhost:5173",
   "frontMatter.website.host": "https://patrick-project-journey.patrickbennett.chatgpt.site",
   "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Vejledninger",
+      "path": "[[workspace]]/docs",
+      "filePrefix": "",
+      "disableCreation": true
+    }
+  ],
   "frontMatter.git.enabled": true,
   "frontMatter.git.commitMessage": "Opdater projektoversigt",
   "frontMatter.data.files": [
@@ -13,14 +21,15 @@
       "id": "project-overview",
       "title": "Projektoversigt · Dansk og engelsk",
       "file": "[[workspace]]/content/projects.json",
-      "labelField": "title",
+      "labelField": "editorLabel",
       "fileType": "json",
       "singleEntry": false,
       "schema": {
         "title": "Projekt",
         "type": "object",
-        "required": ["locale", "id", "index", "title", "category", "status", "progress", "accent", "summary", "now", "next", "destination", "milestones"],
+        "required": ["editorLabel", "locale", "id", "index", "title", "category", "status", "progress", "accent", "summary", "now", "next", "destination", "milestones"],
         "properties": {
+          "editorLabel": {"title": "Fast navn i editoren", "type": "string", "readOnly": true},
           "locale": {"title": "Sprog", "type": "string", "enum": ["da", "en"]},
           "id": {"title": "Teknisk ID", "type": "string"},
           "index": {"title": "Nummer", "type": "string"},
