@@ -75,12 +75,24 @@ Fejler Sanity-kaldet, falder sitet lydløst tilbage på lag 2, så det ikke kan 
 
 Åbn **Presentation** i Studio: siden vises side om side med editoren, og du kan klikke direkte på et element for at redigere feltet bag det. Draft mode viser upublicerede kladder.
 
-Forudsætninger:
+Forudsætninger lokalt:
 
-- `SANITY_API_READ_TOKEN` i `.env.local` (viewer-rettigheder, kun læseadgang). **Hemmelig — `.env*` er gitignoreret.**
-- `SANITY_STUDIO_PREVIEW_URL` styrer, hvilken side Presentation viser. Uden den bruges `http://localhost:5173`.
+1. Kopiér `.env.example` til `.env.local` og indsæt et Sanity-token med rollen **viewer** (kan læse kladder, kan ikke skrive). Opret det på [projektets API-side](https://www.sanity.io/manage/project/niua6aq5/api).
+2. Kør `npm run dev`, og åbn Presentation i Studio.
 
-⚠ **Endnu ikke sat op i produktion.** Tokenet findes kun lokalt. For at visuel redigering virker mod det udgivne site, skal `SANITY_API_READ_TOKEN` lægges ind som secret i Cloudflare-miljøet, og `SANITY_STUDIO_PREVIEW_URL` sættes til produktions-URL'en før næste `sanity deploy`.
+Det hostede Studio peger på `http://localhost:5173`. Det er ikke en fejl: draft mode-ruterne findes kun i den kode, der kører lokalt, og browseren opløser `localhost` på din egen maskine. Opsætningen virker derfor i dag — men kun mod dit lokale site.
+
+⚠ **Visuel redigering virker ikke mod produktionen endnu**, og det er blokeret af to ting, som ingen af dem kan løses herfra:
+
+- **Produktionen kører ældre kode.** `app/api/draft-mode/*` er aldrig blevet udgivet, fordi Sites-udgivelsen er uafklaret. Presentation ville ramme ruter, der ikke findes.
+- **`SANITY_API_READ_TOKEN` kan ikke sættes i produktion herfra.** Sitet hostes af ChatGPT Sites (`.openai/hosting.json`), ikke af en worker i dette repo — der er ingen `wrangler.toml` og ingen secret-mekanisme i kildekoden. Tokenet skal lægges ind gennem Sites' eget udgivelsesflow.
+
+Når Sites-udgivelsen er verificeret, skiftes Presentation til produktionen med:
+
+```bash
+cd studio
+SANITY_STUDIO_PREVIEW_URL=https://patrick-project-journey.patrickbennett.chatgpt.site npx sanity deploy
+```
 
 #### Vigtigt: kun ét Sanity-projekt ad gangen
 
