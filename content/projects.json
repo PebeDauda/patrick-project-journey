@@ -1,5 +1,6 @@
 [
   {
+    "editorLabel": "DK · Portfolio",
     "locale": "da",
     "id": "portfolio",
     "index": "01",
@@ -15,6 +16,7 @@
     "milestones": ["Positionering fastlagt", "Visuelt system etableret", "Cases og medier samlet", "Casefortælling", "Endelig QA og lancering"]
   },
   {
+    "editorLabel": "DK · PatrickOS",
     "locale": "da",
     "id": "patrickos",
     "index": "02",
@@ -30,6 +32,7 @@
     "milestones": ["Kernearkitektur", "Agenter og workflows", "Sikkerhedsgates", "Hooks og modulære skills", "Genbrugeligt produkt"]
   },
   {
+    "editorLabel": "DK · Career Suite",
     "locale": "da",
     "id": "career",
     "index": "03",
@@ -45,6 +48,7 @@
     "milestones": ["Problem identificeret", "Workflow-koncept", "Personlig test", "Produktprototype", "B2B-validering"]
   },
   {
+    "editorLabel": "DK · Creative Studio",
     "locale": "da",
     "id": "creative",
     "index": "04",
@@ -60,6 +64,7 @@
     "milestones": ["Eksperimenter", "Promptmønstre", "Kvalitetskriterier", "Pakket workflow", "Kreativ service"]
   },
   {
+    "editorLabel": "EN · Portfolio",
     "locale": "en",
     "id": "portfolio",
     "index": "01",
@@ -75,6 +80,7 @@
     "milestones": ["Positioning defined", "Visual system established", "Cases and media collected", "Case storytelling", "Final QA and launch"]
   },
   {
+    "editorLabel": "EN · PatrickOS",
     "locale": "en",
     "id": "patrickos",
     "index": "02",
@@ -90,6 +96,7 @@
     "milestones": ["Core architecture", "Agents and workflows", "Safety gates", "Hooks and modular skills", "Reusable product"]
   },
   {
+    "editorLabel": "EN · Career Suite",
     "locale": "en",
     "id": "career",
     "index": "03",
@@ -105,6 +112,7 @@
     "milestones": ["Problem identified", "Workflow concept", "Personal test", "Product prototype", "B2B validation"]
   },
   {
+    "editorLabel": "EN · Creative Studio",
     "locale": "en",
     "id": "creative",
     "index": "04",
