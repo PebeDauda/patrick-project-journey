@@ -89,4 +89,43 @@ Notion/Dropbox-værktøjer er uden relevans for denne kodebase.
 **Agent-typer værd at kende:** `Explore` (bred kodebase-research), `Plan`
 (design af implementeringsplaner), `Reality Checker` (skeptisk
 efterprøvning af påstande som "pixel-identisk" før noget skal ud til
-brugerne).
+brugerne), `Workflow Architect` (relevant når "blokbyggeren" til
+projekt-detaljesider — README punkt 3 — skal kortlægges: happy path,
+kant-tilfælde, fejltilstande).
+
+**Efterprøvet 2026-08-18 (anden, grundigere gennemgang):**
+
+- `mattpocock-skills:resolving-merge-conflicts` — direkte relevant, fordi
+  README/AGENTS.md allerede advarer om, at to systemer (denne Claude-agent
+  og et andet værktøj) pusher til samme repo. Brug den, hvis en `git pull`
+  eller rebase støder på konflikter.
+- `codex:codex-rescue` — testet og bekræftet klar til brug (Codex CLI er
+  installeret, logget ind som `m6bc24mncg@privaterelay.appleid.com`). Reel
+  fallback til en anden model/agent, hvis en fejl eller et svært bug er
+  svær at diagnosticere alene.
+- `security-review` — værd at køre én gang, når Sanity-integrationen
+  (API-tokens, `SANITY_API_READ_TOKEN`) og det nye designSettings-skema er
+  på plads, siden sitet er offentligt tilgængeligt.
+- `cloudflare:web-perf` — relevant til en periodisk Core Web
+  Vitals-kontrol, givet sitets tunge CSS-animationer (hjerne-gløden,
+  gradient-lag).
+- `simplify` — værd at køre efter større refaktoreringer som
+  designtoken-migreringen, som en ekstra oprydningskontrol.
+
+**Om at spare på usage:** Undersøgt eksplicit — der findes ingen skill,
+agent eller integration i det tilgængelige katalog, hvis formål er at
+reducere token-forbrug for et projekt som dette. `Workflow`-værktøjet er
+tværtimod dyrere (spawner mange agenter) og bruges kun, hvis Patrick
+eksplicit beder om det. De reelle håndtag er arbejdsvaner, ikke
+værktøjer: uddelegér tung research/udforskning til baggrunds-agenter
+frem for at læse store filer direkte i hovedtråden (allerede praktiseret,
+fx globals.css- og Sanity-skema-undersøgelserne), og brug et billigere
+subagent-effort-niveau til mekanisk arbejde.
+
+**Tilladelser (fewer-permission-prompts, kørt 2026-08-18):** Scannede
+transkripter for de seneste 50 sessioner på tværs af projekter. Fandt intet
+solidt grundlag for nye allowlist-regler — de hyppigste kommandoer
+(`git status`, `find`, `grep`, `cat`) er allerede auto-tilladt af Claude
+Code selv, og resten (curl, git add/commit) er enten for sjældne (<3
+gange) eller ikke sikre at helliste blindt. Ingen ændringer foretaget i
+`.claude/settings.json`.
