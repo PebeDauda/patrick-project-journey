@@ -1,4 +1,5 @@
 import type {StructureResolver} from 'sanity/structure'
+import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
 import {DocumentTextIcon} from '@sanity/icons/DocumentText'
 import {RocketIcon} from '@sanity/icons/Rocket'
 
@@ -29,6 +30,16 @@ export const structure: StructureResolver = (S) =>
             .schemaType('pageContent')
             .documentId('pageContent-en')
             .title('Sideindhold · English'),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Designindstillinger')
+        .icon(ColorWheelIcon)
+        .child(
+          S.document()
+            .schemaType('designSettings')
+            .documentId('designSettings')
+            .title('Designindstillinger'),
         ),
       S.divider(),
       S.listItem()

@@ -28,6 +28,14 @@
   --font-serif: Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
+html[data-font="contemporary"] {
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-serif: "Times New Roman", Georgia, serif;
+}
+html[data-font="structured"] {
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 * {
   box-sizing: border-box;
 }
@@ -664,31 +672,46 @@ footer p:last-child {
 .hero {
   background: radial-gradient(
     circle at calc(72% + var(--mx) * 4%) calc(44% + var(--my) * 4%),
-    #ffd6cf 0,
-    #fff7e5 36%,
-    #f8e8dc 100%
+    color-mix(in srgb, var(--acid) 32%, var(--paper)) 0,
+    var(--paper) 36%,
+    color-mix(in srgb, var(--paper) 95%, var(--ink) 5%) 100%
   );
 }
 .signal-strip {
-  background: linear-gradient(100deg, #f28ea2, #ffc4bc 58%, #fff0d4);
+  background: linear-gradient(
+    100deg,
+    var(--acid),
+    color-mix(in srgb, var(--acid) 55%, var(--paper)) 58%,
+    color-mix(in srgb, var(--paper) 85%, var(--acid) 15%)
+  );
 }
 .process {
-  background: linear-gradient(145deg, #210b29, #3d103d 58%, #6d285a);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--ink) 80%, black),
+    color-mix(in srgb, var(--ink) 75%, var(--accent-3)) 58%,
+    var(--accent-3)
+  );
 }
 .vision {
-  background: linear-gradient(135deg, #f3a0aa, #cf5d86 48%, #6d285a);
-  color: #fff7e5;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--acid) 87%, var(--paper)),
+    color-mix(in srgb, var(--acid) 62%, var(--accent-3)) 48%,
+    var(--accent-3)
+  );
+  color: var(--paper);
 }
 .vision-line i {
-  background: #fff7e577;
+  background: color-mix(in srgb, var(--paper) 47%, transparent);
 }
 .vision-orb {
   background: radial-gradient(
     circle at 34% 28%,
-    #fff7e5 0,
-    #f28ea2 12%,
-    #c94779 39%,
-    #2c0d32 78%
+    var(--paper) 0,
+    var(--acid) 12%,
+    var(--accent-2) 39%,
+    var(--ink) 78%
   );
 }
 .brain-stack {
@@ -732,7 +755,7 @@ footer p:last-child {
   border-color: var(--accent-2);
 }
 .halo-c {
-  border-color: #f28ea2;
+  border-color: var(--acid);
 }
 .orbit {
   border-color: #8f5c78;
@@ -1324,6 +1347,7 @@ html[data-theme="dark"] .milestones i {
 }
 html[data-theme="dark"] .process {
   background: linear-gradient(145deg, #150a18, #35102f 58%, #64224f);
+  color: var(--ink);
 }
 html[data-theme="dark"] footer {
   background: #140b16;
@@ -1331,6 +1355,82 @@ html[data-theme="dark"] footer {
 html[data-theme="dark"] .circle-link:hover {
   background: #fff7e5;
   color: #2c0d32;
+}
+
+/* Sand & Syre — anden palet, hentet fra en tidligere ubrugt farvevariant i filen. */
+html[data-palette="sand-syre"] {
+  --ink: #11110f;
+  --paper: #f0eee6;
+  --acid: #d8ff4f;
+  --accent-2: #8a7dff;
+  --accent-3: #5a4fc4;
+  --surface-2: #e8e5dc;
+  --line: #b7b4aa;
+  --muted: #79766e;
+  --glow: #d8ff4f;
+}
+html[data-palette="sand-syre"][data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #f0eee6;
+  --paper: #17150e;
+  --acid: #b9e63f;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .nav {
+  background: #17150e;
+  border-color: #f0eee640;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .brand span {
+  color: #f0eee688;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .hero {
+  background: radial-gradient(
+    circle at calc(72% + var(--mx) * 4%) calc(44% + var(--my) * 4%),
+    #2a3d10 0,
+    #1c2210 42%,
+    #100f0a 100%
+  );
+}
+html[data-palette="sand-syre"][data-theme="dark"] .orbit {
+  border-color: #a89dd788;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .signal-strip {
+  background: linear-gradient(100deg, #9fd93f, #4a3f9c 55%, #23200f);
+  color: #f0eee6;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .projects {
+  background: #17150e;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .project {
+  border-color: #f0eee644;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .project:hover {
+  background: #221f18;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .project-title small,
+html[data-palette="sand-syre"][data-theme="dark"] .detail-grid label,
+html[data-palette="sand-syre"][data-theme="dark"] .estimate {
+  color: #f0eee69a;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .project-progress > i {
+  background: #f0eee633;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .milestones:before {
+  background: #f0eee644;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .milestones i {
+  background: #17150e;
+  border-color: #f0eee677;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .process {
+  background: linear-gradient(145deg, #0e0d09, #23200f 58%, #4a3f9c);
+  color: var(--ink);
+}
+html[data-palette="sand-syre"][data-theme="dark"] footer {
+  background: #0c0b07;
+}
+html[data-palette="sand-syre"][data-theme="dark"] .circle-link:hover {
+  background: #f0eee6;
+  color: #11110f;
 }
 
 @media (max-width: 800px) {

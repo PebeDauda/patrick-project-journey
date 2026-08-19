@@ -17,3 +17,7 @@ export const pageContentQuery = defineQuery(`*[_type == "pageContent"]{
   long, door, motor, vision, visionLine,
   nav, updated, footer, see, sections, theme
 }`)
+
+export const designSettingsQuery = defineQuery(
+  `*[_type == "designSettings" && _id == "designSettings"][0]{palette, fontPairing}`,
+)
