@@ -1,4 +1,4 @@
-# Det skal vi da prøve
+# Idebank
 
 En forsøgsbank til visuelle idéer, interaktioner og alternative opsætninger for Patrick’s Project Journey.
 
@@ -25,6 +25,7 @@ Indholdet her er **ikke aktivt på hjemmesiden**. Hver idé skal først afprøve
 | Nr. | Idé | Status |
 | --- | --- | --- |
 | 001 | [PatrickOS som et levende OS](./001-patrickos-som-et-levende-os.md) | Idé |
+| 002 | [Procespunkter som levende 3D-billeder](./002-procespunkter-som-levende-3d-billeder.md) | Idé |
 
 Brug [SKABELON.md](./SKABELON.md), når en ny visuel retning tilføjes.
 
