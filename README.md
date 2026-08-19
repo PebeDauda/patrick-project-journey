@@ -7,9 +7,9 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 ## Projektstatus
 
-**Fase:** Indholdsstyring i Sanity med to udgivelsesveje
-**Senest opdateret:** 18. august 2026
-**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Næste skridt er at gøre farver og skrifttyper redigerbare, før projekt-detaljesiderne bygges.
+**Fase:** Indholdsstyring i Sanity med Cloudflare som primær produktion
+**Senest opdateret:** 19. august 2026
+**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Næste skridt er farvestyring pr. projekt (`projectPalette`), før projekt-detaljesiderne bygges.
 
 ### Færdigt
 
@@ -32,11 +32,15 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - ✓ **Sitet udgives til egen Cloudflare-konto:** `npm run deploy` bygger og udgiver i én kommando. `SANITY_API_READ_TOKEN` ligger som Cloudflare-secret, hvilket låser visuel redigering op mod produktionen.
 - ✓ **Udgivelsesgåden løst:** Git-commits udgiver ikke — de spejler kun koden. Live-siden opdateres gennem ChatGPT Sites-grænsefladen. Begge adresser viser nu 70 %.
 - Oprettet `det-skal-vi-da-proeve/` som isoleret forsøgsbank for visuelle retninger. Første idé er "PatrickOS som et levende OS"; intet herfra er aktiveret i produktionen.
+- ✓ **Designtokens konsolideret (19. august 2026):** `app/globals.css` reduceret fra 76 hardkodede farver til et genbrugeligt tokensystem, pixel-identisk med det oprindelige udseende.
+- ✓ **Sitewide paletvalg indført:** Nyt `designSettings`-dokument i Sanity (`palette` + `fontPairing`), hentet i `app/layout.tsx` med fallback til standardværdier. Sand & Syre er den første ekstra palet ved siden af standardpaletten Plum & Blush.
+- ✓ **Sand & Syre-farvefejl rettet:** Hardkodede Plum & Blush-farver i `.hero`, `.signal-strip`, `.process`, `.vision` m.fl. var ikke palet-styrede i lys tilstand — udtrykt via `color-mix()` på eksisterende tokens, så nye paletter arver dem automatisk (token-first, ingen selektor-specifikke lapper). Procesektionens tekst var samtidig næsten ulæselig i mørk tilstand, fordi farven fulgte en byttet token; låst til `--ink`, som altid er den lyse værdi i mørk tilstand.
+- ✓ **Cloudflare er nu eneste adresse i den normale udgivelsesarbejdsgang:** chatgpt.site er et sekundært/legacy-spejl og indgår ikke længere i den faste rutine efter `npm run deploy` (se afsnittet **Udgivelse: Cloudflare er primær produktion** i `AGENTS.md`).
 
 ### I gang
 
 - **To redigeringsveje til samme data.** Sanity og Front Matter (`content/projects.json`) synkroniserer ikke. Sanity vinder på det kørende site; JSON-filen er fallback og bliver forældet, hvis den ikke vedligeholdes. Beslutningen om, hvilken der skal være den primære, er ikke truffet.
-- **Cloudflare er nu den eneste adresse i den normale udgivelsesarbejdsgang.** `npm run deploy` er standardvejen efter godkendte kodeændringer. chatgpt.site er et sekundært/legacy-spejl, der ikke længere opdateres automatisk eller påmindes om — det udgives kun manuelt, hvis Patrick selv beder om det. Indholdsændringer i Sanity slår stadig igennem begge steder med det samme, uden build.
+- **Farvestyring pr. projekt (`projectPalette`) er endnu ikke bygget.** Arkitekturen er besluttet: `accentColor` forbliver fri hex pr. projekt, og et nyt bundet felt `projectPalette` (kurateret valg, ligesom det sitewide paletvalg) tilføjes på projekt-skemaet. Skal kun gælde den udfoldede projektvisning (`.project-detail`), ikke det kollapsede kort i listen.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
 
 ### Sanity Studio
@@ -124,19 +128,20 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Punkt 2: designtokens — gør farver og skrifttyper redigerbare**
+**Punkt 2b: farvestyring pr. projekt (`projectPalette`)**
 
-Aftalt rækkefølge er tekst → design → detaljesider. Punkt 1 er færdigt.
+Aftalt rækkefølge er tekst → design → detaljesider. Punkt 1 (tekst) og punkt 2a (sitewide designtokens + paletvalg) er færdige.
 
 ### Udgangspunktet
 
-`app/globals.css` er 23 KB med **76 hardkodede hex-farver** og kun **9 CSS-variabler**. Designet er altså ikke systematiseret — farverne står spredt direkte i reglerne. Det skal ordnes, før noget kan styres fra Sanity.
+Sitewide paletvalg virker (`designSettings`-dokumentet, `palette` + `fontPairing`), og Sand & Syre er komplet i både lys og mørk tilstand. Det, der mangler, er at give hvert projekt sin egen identitet uden at kunne blive ulæseligt.
 
 ### Krav
-- **Saml farverne.** De 76 hex-værdier reduceres til et tokensystem på 15-20 variabler for farver, afstande og typografi.
-- **Bundne valg, ikke fri leg.** Patrick skal vælge mellem en håndfuld gennemtænkte paletter og skriftpar — ikke have en fri farvevælger. Målet er, at sitet ikke kan ødelægges visuelt fra editoren.
-- **Bevar dark mode.** `data-theme`-reglen og den gemte brugerpræference må ikke brydes.
-- **Bevar animationerne.** 10 keyframes, 21 transforms, hjernens 3D-dybde og parallaksen er sitets egentlige værdi.
+- **`accentColor` forbliver fri hex** — uændret, individuel projekt-accent, som i dag.
+- **Nyt felt `projectPalette`** på projekt-skemaet: et bundet/kurateret valg (radio-liste, ligesom det sitewide paletvalg), fx "Arv sitets palet" (standard) / "Palet A" / "B" / "C". Præcise navne/farver besluttes under selve implementeringen.
+- **Scoping:** Pr.-projekt-mini-paletten må kun gælde den udfoldede projektvisning (`.project-detail` eller en dedikeret wrapper omkring den) — ikke hele `.project`-elementet. Det kollapsede kort i listen bruger fortsat kun sitewide-paletten + det eksisterende frie `accentColor`.
+- **Token-first.** Undgå at stable unødvendige lag (base → mørk-override → palet-override → palet-mørk-override → projekt-override); brug eksisterende tokens og `color-mix()` hvor det giver mening, som ved Sand & Syre-rettelserne.
+- **Bevar dark mode og animationerne** som hidtil.
 
 ### Derefter — punkt 3: projekt-detaljesider med blokbygger
 
