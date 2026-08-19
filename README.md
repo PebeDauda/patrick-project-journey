@@ -8,8 +8,8 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 ## Projektstatus
 
 **Fase:** Indholdsstyring i Sanity med Cloudflare som primær produktion
-**Senest opdateret:** 19. august 2026
-**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Næste skridt er sub-faner pr. projekt og 3D-/animationseksperimenter (i `det-skal-vi-da-proeve/`); farvestyring pr. projekt (`projectPalette`) er nedprioriteret.
+**Senest opdateret:** 19. august 2026 (session 2)
+**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Sub-faner (Oversigt/Fremdrift) i det udfoldede projektkort er bygget og testet lokalt, men **ikke udgivet/godkendt visuelt endnu** — se "Næste session". Derefter: 3D-/animationseksperimenter (i `idebank/`); farvestyring pr. projekt (`projectPalette`) er nedprioriteret.
 
 ### Færdigt
 
@@ -31,7 +31,7 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - ✓ **Visuel redigering virker:** next-sanity med server-komponenter, `<SanityLive />`, draft mode og Presentation. Verificeret kompatibel med vinext på Cloudflare Workers.
 - ✓ **Sitet udgives til egen Cloudflare-konto:** `npm run deploy` bygger og udgiver i én kommando. `SANITY_API_READ_TOKEN` ligger som Cloudflare-secret, hvilket låser visuel redigering op mod produktionen.
 - ✓ **Udgivelsesgåden løst:** Git-commits udgiver ikke — de spejler kun koden. Live-siden opdateres gennem ChatGPT Sites-grænsefladen. Begge adresser viser nu 70 %.
-- Oprettet `det-skal-vi-da-proeve/` som isoleret forsøgsbank for visuelle retninger. Første idé er "PatrickOS som et levende OS"; intet herfra er aktiveret i produktionen.
+- Oprettet `idebank/` som isoleret forsøgsbank for visuelle retninger. Den oprindelige idé er "PatrickOS som et levende OS"; intet herfra er aktiveret i produktionen.
 - ✓ **Designtokens konsolideret (19. august 2026):** `app/globals.css` reduceret fra 76 hardkodede farver til et genbrugeligt tokensystem, pixel-identisk med det oprindelige udseende.
 - ✓ **Sitewide paletvalg indført:** Nyt `designSettings`-dokument i Sanity (`palette` + `fontPairing`), hentet i `app/layout.tsx` med fallback til standardværdier. Sand & Syre er den første ekstra palet ved siden af standardpaletten Plum & Blush.
 - ✓ **Sand & Syre-farvefejl rettet:** Hardkodede Plum & Blush-farver i `.hero`, `.signal-strip`, `.process`, `.vision` m.fl. var ikke palet-styrede i lys tilstand — udtrykt via `color-mix()` på eksisterende tokens, så nye paletter arver dem automatisk (token-first, ingen selektor-specifikke lapper). Procesektionens tekst var samtidig næsten ulæselig i mørk tilstand, fordi farven fulgte en byttet token; låst til `--ink`, som altid er den lyse værdi i mørk tilstand.
@@ -40,6 +40,7 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 ### I gang
 
 - **To redigeringsveje til samme data.** Sanity og Front Matter (`content/projects.json`) synkroniserer ikke. Sanity vinder på det kørende site; JSON-filen er fallback og bliver forældet, hvis den ikke vedligeholdes. Beslutningen om, hvilken der skal være den primære, er ikke truffet.
+- **Sub-faner (Oversigt/Fremdrift) er kodet og lokalt testet, men ikke udgivet.** Se "Næste session" for detaljer og handoff.
 - **Farvestyring pr. projekt (`projectPalette`) er endnu ikke bygget.** Arkitekturen er besluttet: `accentColor` forbliver fri hex pr. projekt, og et nyt bundet felt `projectPalette` (kurateret valg, ligesom det sitewide paletvalg) tilføjes på projekt-skemaet. Skal kun gælde den udfoldede projektvisning (`.project-detail`), ikke det kollapsede kort i listen.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
 
@@ -128,17 +129,36 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Ny prioritet (besluttet 19. august 2026): sub-faner pr. projekt + 3D-/animationseksperimenter**
+**Handoff (19. august 2026, session 2): sub-faner er bygget, men IKKE udgivet endnu**
+
+### Status på sub-faner — ikke deployet
+
+Sub-faner til projekterne er implementeret som en 2-fane-løsning inde i det udfoldede projektkort (`.project-detail`), præcis som aftalt med Patrick i sessionen:
+
+- **"Oversigt"** viser `summary` + `destination`.
+- **"Fremdrift"** viser `now` + `next` + milepælslinjen.
+- Ingen nye Sanity-felter — ren frontend-prototype med eksisterende data, som aftalt.
+- Fuld tab-semantik (`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`, `aria-controls`) og dansk/engelsk labels.
+- Oveni er der tilføjet en subtil mikrointeraktion på faneknapperne (hover: let løft + `--glow`-farvet tint/ring; klik: kort press-scale; respekterer `prefers-reduced-motion`; kun eksisterende tokens, ingen nye farver).
+- Ændringerne ligger i `app/project-journey.tsx` og `app/globals.css`. `npm run build` + `npm run test` er grønne.
+
+**Vigtigt: dette er IKKE kørt gennem `npm run deploy` endnu.** Patrick nåede ikke at se/godkende det visuelt i selve sitet (kun i en isoleret demo-artifact, se nedenfor) før han loggede af. Næste session bør starte med at vise det i dev-serveren eller på en preview, få Patricks godkendelse, og først derefter deploye.
+
+### Uafklaret: farve-visningsfejl i demo-artifact (ikke i selve sitet)
+
+Til at vise mikrointeraktionens før/efter byggede jeg en isoleret HTML-demo-artifact (samme faneknap-CSS, egne Plum & Blush/Sand & Syre-tokens). Den blev ved med at rendere mørk/inverteret hos Patrick, uanset hvilken palet/tema-knap der var valgt i demoen — selvom den udgivne HTML (verificeret direkte via fetch af den rå kilde) var 100 % korrekt: `body` havde eksplicit `color-scheme: light` + `!important` på baggrund/tekstfarve, ingen mørk-attribut var aktiv. Tre rettelsesforsøg (eksplicit `color-scheme`, adskilte attributnavne fra værtens egen `data-theme`-stempling, og til sidst `!important`) løste det ikke. Mest sandsynlige forklaring: noget i selve Artifact-værtens rendering (ikke i min HTML) tvinger mørk visning — muligvis et filter eller en dynamisk indsprøjtet stylesheet fra `artifact.*.js`-bundlet, som ikke kunne inspiceres via `WebFetch` (den henter kun den statiske kilde-HTML, ikke resultatet af værtens JS). **Dette er ikke et problem med selve hjemmesidens kode eller tokens** — det er isoleret til denne ene demo-artifact. Bør ikke bruges som bekymring for selve sitets fanefarver, men er uafklaret, hvis en fremtidig session vil bruge Artifacts til visuelle før/efter-demoer af dette site igen.
+
+### Sub-faner til projekterne — oprindelig afklaring
+
+Konkret omfang blev afklaret i sessionen: 2 faner (Oversigt/Fremdrift, se ovenfor), inde i `.project-detail`, ikke en ny sidestruktur. Overlap med punkt 3 (projekt-detaljesider med blokbygger, se nedenfor) er ikke udtømt — blokbyggeren kan senere udvide eller erstatte denne simple 2-fane-løsning.
+
+### 3D-/animationseksperimenter — stadig ikke påbegyndt
 
 Patrick vil hellere have nye underfaner til de enkelte projekter og afprøve 3D-effekter/animationer nu. Farvestyring pr. projekt (`projectPalette`) er nedprioriteret — enkeltstående farveønsker kan i mellemtiden klares ad hoc via en prompt, uden det bundne palet-system.
 
-### Sub-faner til projekterne
-
-Konkret omfang er ikke afklaret endnu og skal detaljeres i starten af næste session — bl.a.: hvilke faner (fx Oversigt/Proces/Galleri?), om det er en del af den udfoldede `.project-detail`-visning eller en ny sidestruktur, og om det overlapper med punkt 3 (projekt-detaljesider med blokbygger, se nedenfor).
-
 ### 3D-effekter/animationer
 
-Skal først afprøves isoleret i `det-skal-vi-da-proeve/`-forsøgsbanken — intet herfra må aktiveres i produktionen uden Patricks godkendelse (fast projektregel). `det-skal-vi-da-proeve/kilde-noyzzi.md` er allerede noteret som inspirationskilde til WebGL-/shader-/hover-effekter og kan være et naturligt udgangspunkt.
+Skal først afprøves isoleret i `idebank/`-forsøgsbanken — intet herfra må aktiveres i produktionen uden Patricks godkendelse (fast projektregel). `idebank/kilde-noyzzi.md` er allerede noteret som inspirationskilde til WebGL-/shader-/hover-effekter og kan være et naturligt udgangspunkt.
 
 ### Derefter — punkt 3: projekt-detaljesider med blokbygger
 
@@ -156,7 +176,7 @@ Arkitekturen er stadig besluttet, men rykket ned i rækken:
 ### Vigtigt at vide, før der bygges
 
 - **To systemer pusher til samme repo.** ChatGPT/Codex pusher direkte til GitHub. Kør altid `git fetch` og `git pull --rebase` før arbejdet, ellers afvises dit push.
-- **`det-skal-vi-da-proeve/` er en forsøgsbank.** Intet derfra må aktiveres i produktionen uden Patricks godkendelse.
+- **`idebank/` er en forsøgsbank.** Intet derfra må aktiveres i produktionen uden Patricks godkendelse.
 - **Organisationen tåler kun ét Sanity-projekt.** Opret aldrig et ekstra; begge bliver deaktiveret med `402 Project Disabled`.
 - **`wrangler.deploy.jsonc` må ikke omdøbes til `wrangler.jsonc`.** Cloudflare-plugin'et i `vite.config.ts` finder standardnavnet automatisk og sætter `nodejs_compat` to gange, hvorefter dev-serveren nægter at starte.
 

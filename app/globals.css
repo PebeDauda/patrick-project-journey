@@ -314,6 +314,70 @@ a {
   grid-template-columns: repeat(3, 1fr);
   gap: 35px;
 }
+.detail-grid--one {
+  grid-template-columns: 1fr;
+}
+.detail-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+.detail-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.detail-tabs button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease-out;
+}
+.detail-tabs button.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .detail-tabs button:not(.active):hover {
+    border-color: color-mix(in srgb, var(--ink) 55%, var(--line));
+    background: color-mix(in srgb, var(--glow) 12%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow) 22%, transparent);
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+.detail-tabs button:active {
+  transform: scale(0.96);
+  transition: transform 0.08s ease-out;
+}
+.detail-tabs button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .detail-tabs button {
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+  .detail-tabs button:not(.active):hover,
+  .detail-tabs button:active {
+    transform: none;
+  }
+}
 .detail-grid label {
   font-size: 10px;
   font-family: var(--font-mono);
