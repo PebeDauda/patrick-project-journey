@@ -58,6 +58,11 @@ Verificér altid efter udgivelse ved at hente siden og bekræfte, at ændringen 
 der. Do not claim the live site is updated until the production deployment has
 been verified.
 
+## Codebase discovery
+
+Brug Sema's `search_code`, `repo_map`, `get_code`, `find_usages` og
+`impact_analysis` til codebase-discovery før brede grep/file reads.
+
 ## Anbefalede Claude-værktøjer til dette projekt
 
 Gennemgået 2026-08-18. Reglen er: brug kun værktøjer der matcher projektets

@@ -46,3 +46,8 @@ next-env.d.ts
 
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo
+.sema/
+
+# Sema MCP: machine-specific absolute paths (command + --project root)
+.codex/config.toml
+.continue/mcpServers/sema.yaml
