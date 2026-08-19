@@ -9,7 +9,7 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 
 **Fase:** Indholdsstyring i Sanity med Cloudflare som primær produktion
 **Senest opdateret:** 19. august 2026
-**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Næste skridt er farvestyring pr. projekt (`projectPalette`), før projekt-detaljesiderne bygges.
+**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Næste skridt er sub-faner pr. projekt og 3D-/animationseksperimenter (i `det-skal-vi-da-proeve/`); farvestyring pr. projekt (`projectPalette`) er nedprioriteret.
 
 ### Færdigt
 
@@ -128,26 +128,30 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Punkt 2b: farvestyring pr. projekt (`projectPalette`)**
+**Ny prioritet (besluttet 19. august 2026): sub-faner pr. projekt + 3D-/animationseksperimenter**
 
-Aftalt rækkefølge er tekst → design → detaljesider. Punkt 1 (tekst) og punkt 2a (sitewide designtokens + paletvalg) er færdige.
+Patrick vil hellere have nye underfaner til de enkelte projekter og afprøve 3D-effekter/animationer nu. Farvestyring pr. projekt (`projectPalette`) er nedprioriteret — enkeltstående farveønsker kan i mellemtiden klares ad hoc via en prompt, uden det bundne palet-system.
 
-### Udgangspunktet
+### Sub-faner til projekterne
 
-Sitewide paletvalg virker (`designSettings`-dokumentet, `palette` + `fontPairing`), og Sand & Syre er komplet i både lys og mørk tilstand. Det, der mangler, er at give hvert projekt sin egen identitet uden at kunne blive ulæseligt.
+Konkret omfang er ikke afklaret endnu og skal detaljeres i starten af næste session — bl.a.: hvilke faner (fx Oversigt/Proces/Galleri?), om det er en del af den udfoldede `.project-detail`-visning eller en ny sidestruktur, og om det overlapper med punkt 3 (projekt-detaljesider med blokbygger, se nedenfor).
 
-### Krav
-- **`accentColor` forbliver fri hex** — uændret, individuel projekt-accent, som i dag.
-- **Nyt felt `projectPalette`** på projekt-skemaet: et bundet/kurateret valg (radio-liste, ligesom det sitewide paletvalg), fx "Arv sitets palet" (standard) / "Palet A" / "B" / "C". Præcise navne/farver besluttes under selve implementeringen.
-- **Scoping:** Pr.-projekt-mini-paletten må kun gælde den udfoldede projektvisning (`.project-detail` eller en dedikeret wrapper omkring den) — ikke hele `.project`-elementet. Det kollapsede kort i listen bruger fortsat kun sitewide-paletten + det eksisterende frie `accentColor`.
-- **Token-first.** Undgå at stable unødvendige lag (base → mørk-override → palet-override → palet-mørk-override → projekt-override); brug eksisterende tokens og `color-mix()` hvor det giver mening, som ved Sand & Syre-rettelserne.
-- **Bevar dark mode og animationerne** som hidtil.
+### 3D-effekter/animationer
+
+Skal først afprøves isoleret i `det-skal-vi-da-proeve/`-forsøgsbanken — intet herfra må aktiveres i produktionen uden Patricks godkendelse (fast projektregel). `det-skal-vi-da-proeve/kilde-noyzzi.md` er allerede noteret som inspirationskilde til WebGL-/shader-/hover-effekter og kan være et naturligt udgangspunkt.
 
 ### Derefter — punkt 3: projekt-detaljesider med blokbygger
 
 Hver projektside sammensættes af blokke (hero, tekst, galleri, nøgletal, tidslinje, citat), der kan omarrangeres og redigeres live i Presentation. Hver blok styles i Patricks eksisterende udtryk, så siderne kan komponeres frit uden at kunne blive grimme.
 
-**Punkt 2 skal ligge før punkt 3.** Bygges blokkene først, hardkodes farverne ind i dem og skal laves om bagefter.
+### Nedprioriteret — farvestyring pr. projekt (`projectPalette`)
+
+Arkitekturen er stadig besluttet, men rykket ned i rækken:
+
+- **`accentColor` forbliver fri hex** — uændret, individuel projekt-accent, som i dag.
+- **Nyt felt `projectPalette`** på projekt-skemaet: et bundet/kurateret valg (radio-liste, ligesom det sitewide paletvalg), fx "Arv sitets palet" (standard) / "Palet A" / "B" / "C".
+- **Scoping:** Pr.-projekt-mini-paletten må kun gælde den udfoldede projektvisning (`.project-detail`), ikke hele `.project`-elementet. Det kollapsede kort i listen bruger fortsat kun sitewide-paletten + det eksisterende frie `accentColor`.
+- **Token-first** hvis/når den bygges — genbrug eksisterende tokens og `color-mix()`, som ved Sand & Syre-rettelserne.
 
 ### Vigtigt at vide, før der bygges
 
