@@ -26,14 +26,18 @@ At the end of every working session, update these README sections:
 - **I gang**
 - **Næste session**
 
-## Udgivelse: sitet har TO adresser
+## Udgivelse: Cloudflare er primær produktion
 
-De udgives hver for sig og driver fra hinanden, hvis kun den ene opdateres.
+`patrick-project-journey.ppbb94.workers.dev` er den ene, normale
+produktionsadresse. `patrick-project-journey.patrickbennett.chatgpt.site`
+findes stadig som et sekundært/legacy-spejl, men er ikke en del af den
+normale arbejdsgang og udgives kun manuelt af Patrick, hvis han selv
+beslutter det.
 
-| Adresse | Hvordan den udgives | Har SANITY_API_READ_TOKEN |
-| --- | --- | --- |
-| `patrick-project-journey.ppbb94.workers.dev` | `npm run deploy` | ja |
-| `patrick-project-journey.patrickbennett.chatgpt.site` | manuelt i ChatGPT Sites | nej |
+| Adresse | Rolle | Hvordan den udgives | Har SANITY_API_READ_TOKEN |
+| --- | --- | --- | --- |
+| `patrick-project-journey.ppbb94.workers.dev` | Primær produktion | `npm run deploy` | ja |
+| `patrick-project-journey.patrickbennett.chatgpt.site` | Sekundært/legacy-spejl | manuelt i ChatGPT Sites, kun ved behov | nej |
 
 **Efter enhver kodeændring, der skal ud til brugerne, skal du køre:**
 
@@ -43,8 +47,9 @@ npm run deploy
 
 Den bygger og udgiver til Cloudflare i én kommando. Kør den uopfordret som
 afslutning på arbejdet — det er ikke en handling, Patrick skal bede om hver
-gang. Mind derefter Patrick om, at chatgpt.site skal udgives manuelt, hvis den
-også skal opdateres.
+gang. Nævn ikke chatgpt.site og mind ikke om manuel udgivelse dertil,
+medmindre Patrick selv spørger — det indgår ikke i den normale
+udgivelsesarbejdsgang.
 
 Kun kodeændringer kræver udgivelse. Indholdsændringer i Sanity slår igennem på
 begge sites med det samme uden build.

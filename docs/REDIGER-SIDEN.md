@@ -15,4 +15,4 @@ Bed assistenten om at ændre den relevante post i `content/projects.json`. Ændr
 
 ## Udgivelse
 
-Front Matter kan gemme og lave Git-commits. Selve live-siden opdateres fortsat gennem den eksisterende Sites-udgivelse, indtil en separat automatisk GitHub-udgivelse bliver valgt.
+Front Matter kan gemme og lave Git-commits. Selve live-siden (Cloudflare, primær produktion) opdateres gennem `npm run deploy`. ChatGPT Sites er et sekundært/legacy-spejl og indgår ikke i den normale udgivelse.

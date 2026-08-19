@@ -18,8 +18,8 @@ Before ending a working session, update the relevant status in `README.md`, espe
 
 ## Udgivelse
 
-Sitet har to adresser, som udgives hver for sig — se afsnittet **Udgivelse** i `AGENTS.md` for detaljerne.
+Cloudflare er den primære produktionsadresse — se afsnittet **Udgivelse: Cloudflare er primær produktion** i `AGENTS.md` for detaljerne.
 
-Efter enhver kodeændring, der skal ud til brugerne, køres `npm run deploy` uopfordret. Den bygger og udgiver til Cloudflare. Mind derefter Patrick om, at chatgpt.site skal udgives manuelt.
+Efter enhver kodeændring, der skal ud til brugerne, køres `npm run deploy` uopfordret. Den bygger og udgiver til Cloudflare. chatgpt.site er et sekundært/legacy-spejl uden for den normale arbejdsgang — nævn det ikke og mind ikke om manuel udgivelse dertil, medmindre Patrick selv spørger.
 
 Never report that production is updated until the deployment has been verified.

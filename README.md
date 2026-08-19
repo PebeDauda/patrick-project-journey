@@ -2,8 +2,8 @@
 
 Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næste bevægelse er, og hvad de på sigt skal blive til.
 
-**Live hjemmeside (Cloudflare, fuld funktionalitet):** <https://patrick-project-journey.ppbb94.workers.dev>
-**ChatGPT Sites (udgives manuelt):** <https://patrick-project-journey.patrickbennett.chatgpt.site>
+**Live hjemmeside (Cloudflare, primær produktion):** <https://patrick-project-journey.ppbb94.workers.dev>
+**ChatGPT Sites (sekundært/legacy spejl, udgives manuelt ved behov):** <https://patrick-project-journey.patrickbennett.chatgpt.site>
 
 ## Projektstatus
 
@@ -36,8 +36,7 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 ### I gang
 
 - **To redigeringsveje til samme data.** Sanity og Front Matter (`content/projects.json`) synkroniserer ikke. Sanity vinder på det kørende site; JSON-filen er fallback og bliver forældet, hvis den ikke vedligeholdes. Beslutningen om, hvilken der skal være den primære, er ikke truffet.
-- **To adresser, der udgives hver for sig.** Cloudflare opdateres med `npm run deploy`, chatgpt.site kun manuelt. Kodeændringer rammer kun det, der udgives; indholdsændringer i Sanity slår igennem begge steder med det samme.
-- **Draft-mode-rettelsen mangler på chatgpt.site.** Cloudflare har den; chatgpt.site skal udgives manuelt igen for at få den med.
+- **Cloudflare er nu den eneste adresse i den normale udgivelsesarbejdsgang.** `npm run deploy` er standardvejen efter godkendte kodeændringer. chatgpt.site er et sekundært/legacy-spejl, der ikke længere opdateres automatisk eller påmindes om — det udgives kun manuelt, hvis Patrick selv beder om det. Indholdsændringer i Sanity slår stadig igennem begge steder med det samme, uden build.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
 
 ### Sanity Studio
@@ -183,7 +182,7 @@ Indholdet styres nu af Sanity (studio/), ikke længere kun af content/projects.j
 
 Fortæl mig kort på dansk, hvor projektet står, hvad der er uafklaret, og foreslå kun den næste naturlige bevægelse. Ændr ikke filer, før jeg har godkendt den konkrete ændring.
 
-Efter kodeændringer: kør npm run deploy og verificér, at ændringen er ude. Mind mig om, at chatgpt.site skal udgives manuelt.
+Efter kodeændringer: kør npm run deploy og verificér, at ændringen er ude på Cloudflare (primær produktion). chatgpt.site er et sekundært spejl og indgår ikke i den normale arbejdsgang — nævn det ikke medmindre Patrick selv spørger.
 
 Når sessionen afsluttes, opdateres README-sektionerne "Projektstatus", "Færdigt", "I gang" og "Næste session".
 ```
