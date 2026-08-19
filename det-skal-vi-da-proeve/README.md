@@ -27,3 +27,11 @@ Indholdet her er **ikke aktivt på hjemmesiden**. Hver idé skal først afprøve
 | 001 | [PatrickOS som et levende OS](./001-patrickos-som-et-levende-os.md) | Idé |
 
 Brug [SKABELON.md](./SKABELON.md), når en ny visuel retning tilføjes.
+
+## Inspirationskilder
+
+Eksterne hjemmesider, der løbende bruges som opslagsværk for visuelle idéer, interaktioner og effekter — uden at være konkrete forsøg i sig selv.
+
+| Kilde | Beskrivelse |
+| --- | --- |
+| [Noyzzi](./kilde-noyzzi.md) | WebGL-, shader- og billed-hover-effekter ([noyzzi.com](https://noyzzi.com/)). |
