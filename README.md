@@ -8,8 +8,8 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 ## Projektstatus
 
 **Fase:** Indholdsstyring i Sanity med Cloudflare som primær produktion
-**Senest opdateret:** 19. august 2026 (session 2)
-**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er indført og virker i lys og mørk tilstand. Sub-faner (Oversigt/Fremdrift) i det udfoldede projektkort er bygget og testet lokalt, men **ikke udgivet/godkendt visuelt endnu** — se "Næste session". Derefter: 3D-/animationseksperimenter (i `idebank/`); farvestyring pr. projekt (`projectPalette`) er nedprioriteret.
+**Senest opdateret:** 21. august 2026
+**Aktuel retning:** Al tekst på forsiden redigeres i Sanity Studio og slår igennem uden build. Sitewide paletvalg (designtokens) er udgivet og virker i lys og mørk tilstand. Sub-faner (Oversigt/Fremdrift) er godkendt og udgivet. Procespunkterne har nu en genbrugelig Three.js/WebGL-motor (`app/process-visual.tsx`) med fem konfigurationer — committet og pushet, men **ikke udgivet til Cloudflare endnu**, se "Næste session". Farvestyring pr. projekt (`projectPalette`) er nedprioriteret.
 
 ### Færdigt
 
@@ -36,11 +36,14 @@ Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næs
 - ✓ **Sitewide paletvalg indført:** Nyt `designSettings`-dokument i Sanity (`palette` + `fontPairing`), hentet i `app/layout.tsx` med fallback til standardværdier. Sand & Syre er den første ekstra palet ved siden af standardpaletten Plum & Blush.
 - ✓ **Sand & Syre-farvefejl rettet:** Hardkodede Plum & Blush-farver i `.hero`, `.signal-strip`, `.process`, `.vision` m.fl. var ikke palet-styrede i lys tilstand — udtrykt via `color-mix()` på eksisterende tokens, så nye paletter arver dem automatisk (token-first, ingen selektor-specifikke lapper). Procesektionens tekst var samtidig næsten ulæselig i mørk tilstand, fordi farven fulgte en byttet token; låst til `--ink`, som altid er den lyse værdi i mørk tilstand.
 - ✓ **Cloudflare er nu eneste adresse i den normale udgivelsesarbejdsgang:** chatgpt.site er et sekundært/legacy-spejl og indgår ikke længere i den faste rutine efter `npm run deploy` (se afsnittet **Udgivelse: Cloudflare er primær produktion** i `AGENTS.md`).
+- ✓ **Sub-faner (Oversigt/Fremdrift) godkendt og udgivet til Cloudflare.**
+- ✓ **Ubrugte Sema code-navigation-filer fjernet** fra `.agents/`/`.claude/` (ingen aktive referencer i projektet).
 
 ### I gang
 
 - **To redigeringsveje til samme data.** Sanity og Front Matter (`content/projects.json`) synkroniserer ikke. Sanity vinder på det kørende site; JSON-filen er fallback og bliver forældet, hvis den ikke vedligeholdes. Beslutningen om, hvilken der skal være den primære, er ikke truffet.
-- **Sub-faner (Oversigt/Fremdrift) er kodet og lokalt testet, men ikke udgivet.** Se "Næste session" for detaljer og handoff.
+- **Three.js-procesobjekter er kodet og pushet, men ikke udgivet.** Se "Næste session" for detaljer og handoff.
+- **`.gitignore`/`AGENTS.md`/`CLAUDE.md` har uncommittede ændringer**, der fjerner tekst-referencer til Sema (efter selve skill-filerne allerede er slettet og committet separat). Afventer Patricks beslutning om, hvorvidt de skal committes.
 - **Farvestyring pr. projekt (`projectPalette`) er endnu ikke bygget.** Arkitekturen er besluttet: `accentColor` forbliver fri hex pr. projekt, og et nyt bundet felt `projectPalette` (kurateret valg, ligesom det sitewide paletvalg) tilføjes på projekt-skemaet. Skal kun gælde den udfoldede projektvisning (`.project-detail`), ikke det kollapsede kort i listen.
 - Indstilling af Front Matter auto-commit (skal være deaktiveret for eksplicit arbejdsgangskontrol).
 
@@ -129,36 +132,29 @@ Genskabelse er billig, hvis det skulle ske igen: indholdet stammer fra `content/
 
 ## Næste session
 
-**Handoff (19. august 2026, session 2): sub-faner er bygget, men IKKE udgivet endnu**
+**Handoff (21. august 2026): Three.js-procesobjekter er committet og pushet, men IKKE deployet**
 
-### Status på sub-faner — ikke deployet
+### Status på 3D-procesobjekterne — klar til visuel godkendelse, ikke udgivet
 
-Sub-faner til projekterne er implementeret som en 2-fane-løsning inde i det udfoldede projektkort (`.project-detail`), præcis som aftalt med Patrick i sessionen:
+Sub-fanerne (Oversigt/Fremdrift) er godkendt og udgivet til Cloudflare siden sidst. 3D-/animationssporet er nu i gang:
 
-- **"Oversigt"** viser `summary` + `destination`.
-- **"Fremdrift"** viser `now` + `next` + milepælslinjen.
-- Ingen nye Sanity-felter — ren frontend-prototype med eksisterende data, som aftalt.
-- Fuld tab-semantik (`role="tablist"`/`"tab"`/`"tabpanel"`, `aria-selected`, `aria-controls`) og dansk/engelsk labels.
-- Oveni er der tilføjet en subtil mikrointeraktion på faneknapperne (hover: let løft + `--glow`-farvet tint/ring; klik: kort press-scale; respekterer `prefers-reduced-motion`; kun eksisterende tokens, ingen nye farver).
-- Ændringerne ligger i `app/project-journey.tsx` og `app/globals.css`. `npm run build` + `npm run test` er grønne.
+- Procespunkternes hover-visualisering er bygget om fra flade WebP-billeder til rigtig **Three.js/WebGL-geometri**.
+- Én genbrugelig motor: **`app/process-visual.tsx`** — én komponent, fem konfigurationer (`opdag`/`form`/`byg`/`bevis`/`skaler`), ikke fem kopierede React-komponenter. Dette mønster skal fortsætte fremover.
+- Hvert objekt har ægte 3D-geometri (icosahedron-kerne, torus-orbitter, noder/forbindelser, partikler, lys) i sitets egen plum/pink/acid-farvepalet.
+- Vises fortsat kun ved hover eller tastaturfokus, i den eksisterende `.process-step`/`.process-visual`-struktur i `app/globals.css`. Orbit-ringen er justeret til at være centreret om objektet og gjort smallere efter Patricks tilbagemelding undervejs.
+- `prefers-reduced-motion` er bevaret. `three` + `@types/three` tilføjet som dependencies.
+- `npm run build` + `npm run test` er grønne. Committet (`f28f60a`) og pushet til `main` — **ikke kørt gennem `npm run deploy` endnu**. Skal godkendes visuelt i dev-serveren først.
+- Fem tidligere genererede WebP-billeder (`public/assets/idebank-pf-*.webp`) er nu ubrugte og ligger stadig kun untracked lokalt — ikke committet. Spørg Patrick, om de skal gemmes i idébanken eller ryddes væk.
 
-**Vigtigt: dette er IKKE kørt gennem `npm run deploy` endnu.** Patrick nåede ikke at se/godkende det visuelt i selve sitet (kun i en isoleret demo-artifact, se nedenfor) før han loggede af. Næste session bør starte med at vise det i dev-serveren eller på en preview, få Patricks godkendelse, og først derefter deploye.
+### Herfra: flere 3D-forsøg, samme motor-mønster
 
-### Uafklaret: farve-visningsfejl i demo-artifact (ikke i selve sitet)
+Patrick vil fortsætte med flere 3D-/animationsforsøg oven på dette fundament:
 
-Til at vise mikrointeraktionens før/efter byggede jeg en isoleret HTML-demo-artifact (samme faneknap-CSS, egne Plum & Blush/Sand & Syre-tokens). Den blev ved med at rendere mørk/inverteret hos Patrick, uanset hvilken palet/tema-knap der var valgt i demoen — selvom den udgivne HTML (verificeret direkte via fetch af den rå kilde) var 100 % korrekt: `body` havde eksplicit `color-scheme: light` + `!important` på baggrund/tekstfarve, ingen mørk-attribut var aktiv. Tre rettelsesforsøg (eksplicit `color-scheme`, adskilte attributnavne fra værtens egen `data-theme`-stempling, og til sidst `!important`) løste det ikke. Mest sandsynlige forklaring: noget i selve Artifact-værtens rendering (ikke i min HTML) tvinger mørk visning — muligvis et filter eller en dynamisk indsprøjtet stylesheet fra `artifact.*.js`-bundlet, som ikke kunne inspiceres via `WebFetch` (den henter kun den statiske kilde-HTML, ikke resultatet af værtens JS). **Dette er ikke et problem med selve hjemmesidens kode eller tokens** — det er isoleret til denne ene demo-artifact. Bør ikke bruges som bekymring for selve sitets fanefarver, men er uafklaret, hvis en fremtidig session vil bruge Artifacts til visuelle før/efter-demoer af dette site igen.
-
-### Sub-faner til projekterne — oprindelig afklaring
-
-Konkret omfang blev afklaret i sessionen: 2 faner (Oversigt/Fremdrift, se ovenfor), inde i `.project-detail`, ikke en ny sidestruktur. Overlap med punkt 3 (projekt-detaljesider med blokbygger, se nedenfor) er ikke udtømt — blokbyggeren kan senere udvide eller erstatte denne simple 2-fane-løsning.
-
-### 3D-/animationseksperimenter — stadig ikke påbegyndt
-
-Patrick vil hellere have nye underfaner til de enkelte projekter og afprøve 3D-effekter/animationer nu. Farvestyring pr. projekt (`projectPalette`) er nedprioriteret — enkeltstående farveønsker kan i mellemtiden klares ad hoc via en prompt, uden det bundne palet-system.
-
-### 3D-effekter/animationer
-
-Skal først afprøves isoleret i `idebank/`-forsøgsbanken — intet herfra må aktiveres i produktionen uden Patricks godkendelse (fast projektregel). `idebank/kilde-noyzzi.md` er allerede noteret som inspirationskilde til WebGL-/shader-/hover-effekter og kan være et naturligt udgangspunkt.
+- Forbedre de fem WebGL-objekters individuelle karakter/personlighed yderligere.
+- Flere selektive 3D- og animationsforsøg.
+- Implementere udvalgte WebGL-, shader-, image-hover- og interaktionseffekter fra idébankens inspirationsmateriale — særligt fra den eksterne inspirationskilde i `idebank/kilde-noyzzi.md`.
+- **Fasthold arkitekturen:** ént genbrugelig WebGL-motor med udskiftelige geometriske former/shaders/konfigurationer (som `process-visual.tsx` allerede gør) — byg ikke separate, duplikerede komponenter pr. effekt.
+- Ingen af de nye idébank-effekter må aktiveres i produktionen uden Patricks visuelle godkendelse (fast projektregel).
 
 ### Derefter — punkt 3: projekt-detaljesider med blokbygger
 
