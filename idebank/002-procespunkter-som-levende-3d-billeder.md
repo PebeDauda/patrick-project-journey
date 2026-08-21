@@ -27,6 +27,10 @@ Hvert punkt i processektionen får et tilhørende billede eller en 3D-visualiser
 
 Idéen skal først afprøves isoleret i denne forsøgsbank. Ingen 3D- eller WebGL-effekt aktiveres i produktionssiden, før den er vurderet og godkendt.
 
+## Første lokale retning
+
+Den rigtige retning er nu koblet til den eksisterende processektion: hvert punkt beholder sin tekst, og det tilhørende objekt vises først ved hover eller tastaturfokus ude til højre under den eksisterende runde hover-streg. Der er ingen procesbilleder, billedrammer eller ekstra layout.
+
 ## Beslutningslog
 
 | Dato | Forsøg | Resultat | Beslutning |
