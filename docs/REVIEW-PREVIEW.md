@@ -20,7 +20,7 @@ Build og HTML-smoke er verificeret. Browserkontroller omfatter desktop/mobile br
 
 https://patrick-project-journey.patrickbennett.chatgpt.site
 
-Sites version14 blev udgivet30. oktober2026 fra source362c18ba4bfbae8d32bf064e8a490fa8946a0f46. Den kræver ikke lokal server, tunnel eller en tændt Mac. Modtagere bruger en normal internetforbindelse. Den tidligere trycloudflare-tunnel er stoppet.
+Sites version15 blev udgivet30. oktober2026 fra source8ee27cecc703b1db38b71b04fd4b6077e42b0370. Den kræver ikke lokal server, tunnel eller en tændt Mac. Modtagere bruger en normal internetforbindelse. Den tidligere trycloudflare-tunnel er stoppet.
 
 Efter stop af både lokal server og tunnel returnerede en frisk browser200 ved1440/390px, med fungerende menu, fire projekter og12 værktøjer. Ingen browserfejl. Se HOSTED-QA-2026-10-30.json. Den separate Workers-side og GitHub main er uændrede.
 

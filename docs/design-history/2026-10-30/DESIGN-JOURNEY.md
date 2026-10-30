@@ -133,3 +133,7 @@ Build/HTML-smoke og browserkontroller omfatter desktop/mobil, menu, sprog, pause
 ## Klar til Obsidian
 
 Kopiér hele denne mappe samlet, inklusive `assets/`, ind under projektets dokumentation i det korrekte vault. Relative Markdown-billedlinks virker uden ændringer. `gallery.html` er en ekstra side-om-side-visning i browseren. Bevar eksisterende noter, noter projektgrænsen til den sorte portfolio, og brug versionerne til at beskrive designbeslutninger frem for at kalde alle forsøg godkendte.
+
+## Sidste farverettelse efter dagens handoff
+
+Processektionen blev efterfølgende dæmpet yderligere: baggrund #b4a38b, illustrationsfelt #a18f7f og lysere papir i tegningerne #d6c6ad. Mørk brødtekst #382534 har kontrast5,77:1 mod baggrunden; hovedtekst6,8:1. Udgivet som Sites version15. [Se den mørkere udgave](assets/after-darker-cream.png).

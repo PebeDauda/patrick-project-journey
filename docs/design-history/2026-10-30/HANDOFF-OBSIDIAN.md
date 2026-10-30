@@ -4,7 +4,7 @@ Patrick har bedt om at få denne dokumentation over i sin Obsidian-arbejdsgang. 
 
 ## Start her
 
-Læs [DESIGN-JOURNEY.md](DESIGN-JOURNEY.md). Den samler ændringer, designbeslutninger, statusgrænser og alle inspirationskilder. De28 originale PNG-filer ligger i `assets/`. `gallery.html` viser udvalgte tilstande side om side. `capture-manifest.json` indeholder filnavne, oprindelse og SHA-256. `finale-qa.json` og `hosted-finale-qa.json` dokumenterer tekniske browserkontroller.
+Læs [DESIGN-JOURNEY.md](DESIGN-JOURNEY.md). Den samler ændringer, designbeslutninger, statusgrænser og alle inspirationskilder. De29 originale PNG-filer ligger i `assets/`. `gallery.html` viser udvalgte tilstande side om side. `capture-manifest.json` indeholder filnavne, oprindelse og SHA-256. `finale-qa.json` og `hosted-finale-qa.json` dokumenterer tekniske browserkontroller.
 
 Der findes faktiske screenshots fra flere trin i dagens forløb, men ikke et nøjagtigt før/efter-par for hver mikroændring. Historiske versionsfilnavne er bevaret. Nye `before-final-*` er optaget fra den hostede version13; `after-*` fra den sidste byggede version. Ingen falske før-billeder er rekonstrueret. Animationers bevægelse skal ses på hjemmesiden; stillbilleder er tilstandsdokumentation.
 

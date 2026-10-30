@@ -420,13 +420,13 @@ html{scroll-padding-top:100px;scrollbar-color:#d1808a #1d1020}
 @media(prefers-reduced-motion:reduce){.v4 .preview-gradient::before,.v4 .preview-gradient::after{animation:none!important}}
 
 /* V11: warmer, dimmer cream for the process chapter. */
-.v4 .process-experience{background:#d8cbb6!important;color:#2b162e!important}
-.v4 .process-object{background:#cbbba9;border-color:#b39b91}
-.v4 .process-heading p,.v4 .process-description p,.v4 .process-count{color:#503b4d}
+.v4 .process-experience{background:#b4a38b!important;color:#2b162e!important}
+.v4 .process-object{background:#a18f7f;border-color:#826574}
+.v4 .process-heading p,.v4 .process-description p,.v4 .process-count{color:#382534}
 .v4 .process-selector{border-color:#826574}
-.v4 .process-selector button{color:#503b4d}
+.v4 .process-selector button{color:#382534}
 .v4 .process-selector button[aria-selected="true"]{color:#2b162e}
-.v4 .process-heading .playful-word{--binary-ink:#733852}
+.v4 .process-heading .playful-word{--binary-ink:#642e48}
 
 /* V12: shape complete words together so normal font kerning stays intact. */
 .v4 .playful-word{color:var(--binary-ink);letter-spacing:-.02em;font-kerning:normal}

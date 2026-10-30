@@ -169,6 +169,12 @@
       "sha256": "058ec809fc316f4eec09d2e7150e9416a0b7b8a31f9e6a8d8aaa52bb25f0111f",
       "bytes": 123190,
       "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/after-darker-cream.png",
+      "sha256": "a428e3b838bd9e120a850e020ca6a9167471c3b7f676137c468d4ad1d4d8f463",
+      "bytes": 94797,
+      "origin": "hosted Sites version15; final darker cream correction"
     }
   ]
 }
