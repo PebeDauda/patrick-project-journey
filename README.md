@@ -1,5 +1,31 @@
 # Patrick’s Project Journey
 
+## Aktuel preview · 30. oktober 2026
+
+Denne gren (`preview/project-journey-redesign`) gemmer den nye Project Journey-version. Produktionsgrenen `main` er ikke ændret.
+
+### Projektstatus
+
+NEURO og WOBS står først; derefter Portfolio og PatrickOS. WOBS-paletten, interaktiv hjernescene, kinetic-menu, web/app-forhåndsvisninger, gradientrammer, procesillustrationer, værktøjsrækker og portrætkort er implementeret. Processektionen bruger en dæmpet cremefarve.
+
+### Færdigt
+
+- Binære 0/1-tal bliver til ord med naturlig, tæt tegnsætning og stabil ordplads.
+- Større brødtekst og labels, dansk/engelsk, bevægelsespause og reduceret bevægelse.
+- Projektstatus beskrives som stadier, ikke udokumenterede procenter.
+- Creative Studio og Career Discovery er fjernet fra den aktive side.
+
+### I gang
+
+Visuel gennemgang af preview-versionen. Den er ikke frigivet som produktion. Fysisk Safari/iPhone/VoiceOver-test mangler. De kendte Sanity/Cloudflare/studio-typefejl er ikke løst; fuldt TypeScript-pass påstås ikke.
+
+### Næste session
+
+Gennemgå previewet og fortsæt på denne gren. Production deploy kræver en særskilt anmodning om at erstatte live-versionen. Den ældre projektstatus nedenfor er historik; dette afsnit gælder for preview-grenen.
+
+Se [preview-noter](docs/REVIEW-PREVIEW.md) for drift og kilder.
+
+
 Et levende projektkort over Patricks vigtigste spor: hvor de står nu, hvad næste bevægelse er, og hvad de på sigt skal blive til.
 
 **Live hjemmeside (Cloudflare, primær produktion):** <https://patrick-project-journey.ppbb94.workers.dev>

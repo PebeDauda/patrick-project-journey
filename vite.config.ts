@@ -44,9 +44,19 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    cacheDir: ".vite-review",
+    // `next-sanity/live/client-components` indlæses dovent via `next/dynamic`
+    // inde i <SanityLive />, så Vites cold-start-scanner finder den ikke. Uden
+    // dette optimeres den først midt i den første render ("new dependencies
+    // optimized … reloading"), hvor den nye modulgeneration møder den React-DOM
+    // siden allerede har indlæst. Resultatet er ét "Invalid hook call" pr. kold
+    // start. Ved at navngive den her indgår den i den første optimering.
+    optimizeDeps: {
+      include: ["next-sanity/live/client-components"],
+    },
     server: {
       host: "0.0.0.0",
-      allowedHosts: ["terminal.local"],
+      allowedHosts: ["terminal.local", ".trycloudflare.com"],
       ...(isCodexSeatbeltSandbox
         ? { watch: { useFsEvents: false, usePolling: true } }
         : {}),

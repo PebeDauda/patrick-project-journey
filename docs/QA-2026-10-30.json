@@ -1,0 +1,109 @@
+{
+  "v9-results.json": {
+    "results": [
+      {
+        "width": 1440,
+        "rows": 4,
+        "tools": 12,
+        "logosLoaded": true,
+        "oppositeDirections": true,
+        "pause": true,
+        "globalPause": true,
+        "english": true,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "rows": 4,
+        "tools": 12,
+        "logosLoaded": true,
+        "oppositeDirections": true,
+        "pause": true,
+        "globalPause": true,
+        "english": true,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "rows": 4,
+        "tools": 12,
+        "logosLoaded": true,
+        "oppositeDirections": true,
+        "pause": true,
+        "globalPause": true,
+        "english": true,
+        "overflow": false
+      }
+    ],
+    "reduced": true,
+    "errors": []
+  },
+  "v10-results.json": {
+    "results": [
+      {
+        "width": 1440,
+        "gradientFrames": 4,
+        "appViews": true,
+        "zoom": true,
+        "pause": true,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "gradientFrames": 4,
+        "appViews": true,
+        "zoom": true,
+        "pause": true,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "gradientFrames": 4,
+        "appViews": true,
+        "zoom": true,
+        "pause": true,
+        "overflow": false
+      }
+    ],
+    "reduced": true,
+    "errors": []
+  },
+  "v12-results.json": {
+    "results": [
+      {
+        "width": 1440,
+        "publicStatus": 200,
+        "wholeWord": true,
+        "naturalKerning": true,
+        "binary": true,
+        "widthStable": true,
+        "menu": true,
+        "language": true,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "publicStatus": 200,
+        "wholeWord": true,
+        "naturalKerning": true,
+        "binary": true,
+        "widthStable": true,
+        "menu": true,
+        "language": true,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "publicStatus": 200,
+        "wholeWord": true,
+        "naturalKerning": true,
+        "binary": true,
+        "widthStable": true,
+        "menu": true,
+        "language": true,
+        "overflow": false
+      }
+    ],
+    "errors": []
+  }
+}

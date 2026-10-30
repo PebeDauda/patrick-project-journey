@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+  include: card;
+  logs: false;
+}
 :root {
   /* Kernefarver */
   --ink: #2c0d32;
@@ -231,7 +236,7 @@ a {
 .project:last-child {
   border-bottom: 1px solid var(--line);
 }
-.project button {
+.project > button {
   width: 100%;
   background: none;
   border: 0;
@@ -287,9 +292,13 @@ a {
   text-align: right;
 }
 .project-detail {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 60px;
+  /* Én kolonne: fanerne står over deres eget indhold i stedet for at ligge
+     i en tom sidekolonne. Den gamle 1fr/2fr-opdeling stammer fra tiden før
+     sub-fanerne og efterlod et dødt halvt lærred til venstre. */
+  display: block;
+  /* Flugter med titelkolonnen i hovedknappen (70px indeks + 20px gab), så
+     titel, faner og tekst læses som ét kort frem for to løsrevne blokke. */
+  padding-left: 90px;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
@@ -299,15 +308,28 @@ a {
     padding 0.6s ease;
 }
 .project.open .project-detail {
-  max-height: 700px;
+  max-height: 860px;
   opacity: 1;
-  padding: 18px 0 50px;
+  padding: 18px 0 50px 90px;
+}
+/* Panelernes indhold fordeles over kortets bredde i stedet for at efterlade
+   en tom halvdel. Fremdriftspanelets egne gitre spænder fuld bredde. */
+.project-detail > [role="tabpanel"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: start;
+}
+.project-detail > [role="tabpanel"] > .detail-grid--two {
+  grid-column: 1 / -1;
 }
 .project-intro {
   font-family: var(--font-serif);
-  font-size: 25px;
-  line-height: 1.25;
-  padding-left: var(--space-gap-lg);
+  /* Kontrolleret læsebredde frem for at strække sig over hele kortet. */
+  font-size: clamp(1.5rem, 1.8vw, 2.1rem);
+  line-height: 1.38;
+  max-width: 34ch;
+  margin: 0;
 }
 .detail-grid {
   display: grid;
@@ -323,6 +345,10 @@ a {
 .detail-tabs {
   display: flex;
   gap: 8px;
+  /* Faneknapperne må ikke strækkes til grid-rækkens højde — de skal have
+     deres egen, kompakte pilleform. */
+  align-items: flex-start;
+  align-content: flex-start;
   margin-bottom: 20px;
 }
 .detail-tabs button {
@@ -342,25 +368,36 @@ a {
     border-color 0.25s ease,
     background-color 0.25s ease,
     box-shadow 0.25s ease,
-    color 0.25s ease,
-    transform 0.15s ease-out;
+    color 0.25s ease;
 }
 .detail-tabs button.active {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
 }
+/* Ingen `transform` på faneknapperne. `.project` har `transform-style:
+   preserve-3d` under `.project-list { perspective: 1300px }`, og en transform
+   her løfter knappen ind i et 3D-plan, hvor Chrome hit-tester den bag sin egen
+   forælder: hover mistes i samme øjeblik den anvendes, og `mouseup` lander på
+   `.detail-tabs`, så `click` aldrig når knappen. Feedbacken er derfor ren
+   farve og kant — tydelig, men uden layoutændring. */
 @media (hover: hover) and (pointer: fine) {
   .detail-tabs button:not(.active):hover {
-    border-color: color-mix(in srgb, var(--ink) 55%, var(--line));
-    background: color-mix(in srgb, var(--glow) 12%, transparent);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow) 22%, transparent);
-    transform: translateY(-1px) scale(1.02);
+    border-color: color-mix(in srgb, var(--ink) 62%, var(--line));
+    background: color-mix(in srgb, var(--glow) 16%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glow) 34%, transparent);
+  }
+  .detail-tabs button.active:hover {
+    background: color-mix(in srgb, var(--ink) 86%, var(--glow));
+    border-color: color-mix(in srgb, var(--ink) 86%, var(--glow));
   }
 }
-.detail-tabs button:active {
-  transform: scale(0.96);
-  transition: transform 0.08s ease-out;
+.detail-tabs button:not(.active):active {
+  background: color-mix(in srgb, var(--glow) 30%, transparent);
+  border-color: color-mix(in srgb, var(--ink) 72%, var(--line));
+}
+.detail-tabs button.active:active {
+  background: color-mix(in srgb, var(--ink) 74%, var(--glow));
 }
 .detail-tabs button:focus-visible {
   outline: 3px solid var(--focus-ring);
@@ -368,14 +405,7 @@ a {
 }
 @media (prefers-reduced-motion: reduce) {
   .detail-tabs button {
-    transition:
-      border-color 0.25s ease,
-      background-color 0.25s ease,
-      color 0.25s ease;
-  }
-  .detail-tabs button:not(.active):hover,
-  .detail-tabs button:active {
-    transform: none;
+    transition: none;
   }
 }
 .detail-grid label {
@@ -385,12 +415,13 @@ a {
   color: #67645c;
 }
 .detail-grid p {
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
+  /* Destination og de øvrige felter er almindelig brødtekst med målt bredde. */
+  max-width: 62ch;
 }
 .milestones {
   grid-column: 1/-1;
-  margin-left: var(--space-gap-lg);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   position: relative;
@@ -670,39 +701,25 @@ footer p:last-child {
   transform: translateY(-12px) translateZ(35px);
   background: #1c1c19;
 }
-.process-flow > div:after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  width: 140px;
-  height: 70px;
-  border: 1px solid #d8ff4f44;
-  border-radius: 50%;
-  right: 10px;
-  top: 107px;
-  transform: rotateX(68deg) rotateZ(-18deg);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s;
-}
-.process-flow > div:hover:after {
-  opacity: 1;
-  animation: process-orbit 6s linear infinite;
-}
 @keyframes process-orbit {
-  from { transform: rotateX(68deg) rotateZ(-18deg); }
-  to { transform: rotateX(68deg) rotateZ(342deg); }
+  from { transform: translateZ(-1px) rotateX(68deg) rotateZ(-18deg); }
+  to { transform: translateZ(-1px) rotateX(68deg) rotateZ(342deg); }
 }
 .process-step {
   outline: none;
 }
+/* Oval, centrum og satellitter deler ét koordinatsystem: ovalen er et
+   pseudo-element inde i denne boks og måles i procent af den. Tidligere var
+   ovalen fast 140x70px, mens objektet var 68% af kolonnebredden — de skalerede
+   uafhængigt og gled fra hinanden, når layoutet skiftede bredde. */
 .process-visual {
   position: absolute;
   z-index: 2;
-  top: 88px;
-  right: 26px;
-  width: min(108px, 68%);
+  top: 48px;
+  right: 24px;
+  width: min(104px, 34%);
   aspect-ratio: 1;
+  transform-style: preserve-3d;
   opacity: 0;
   pointer-events: none;
   transform: translate3d(18px, 12px, 30px) scale(0.72) rotateX(8deg) rotateY(-10deg) rotateZ(-4deg);
@@ -713,30 +730,37 @@ footer p:last-child {
   width: 100%;
   height: 100%;
 }
+/* Banen: koncentrisk med boksen pr. konstruktion, og skubbet 1px bagud i
+   3D-rummet, så den altid ligger bag kuglerne. */
+.process-visual:before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  top: 24%;
+  width: 124%;
+  height: 52%;
+  border: 1px solid #d8ff4f44;
+  border-radius: 50%;
+  transform: translateZ(-1px) rotateX(68deg) rotateZ(-18deg);
+  pointer-events: none;
+}
 .process-step:hover .process-visual,
 .process-step:focus-visible .process-visual {
   opacity: 1;
   transform: translate3d(0, 0, 45px) scale(1) rotateX(6deg) rotateY(-8deg) rotateZ(0deg);
 }
-.process-step:focus-visible:after {
-  opacity: 1;
+.process-step:hover .process-visual:before,
+.process-step:focus-visible .process-visual:before {
   animation: process-orbit 6s linear infinite;
 }
 .process-step:focus-visible {
   box-shadow: inset 0 0 0 1px var(--acid);
 }
-@media (max-width: 700px) {
-  .process-visual {
-    top: 52px;
-    right: 22px;
-    width: 100px;
-  }
-}
+
 @media (prefers-reduced-motion: reduce) {
-  .process-flow > div:hover:after,
-  .process-step:focus-visible:after {
+  .process-step:hover .process-visual:before,
+  .process-step:focus-visible .process-visual:before {
     animation: none;
-    transform: rotateX(68deg) rotateZ(-18deg);
   }
   .process-visual {
     transition: opacity 0.2s ease;
@@ -785,7 +809,7 @@ footer p:last-child {
 }
 .nav a:focus-visible,
 .circle-link:focus-visible,
-.project button:focus-visible {
+.project > button:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 5px;
 }
@@ -1231,7 +1255,7 @@ footer p:last-child {
   .section-head p {
     margin-top: 25px;
   }
-  .project button {
+  .project > button {
     grid-template-columns: 36px 1fr 55px;
   }
   .project-state,
@@ -1253,8 +1277,16 @@ footer p:last-child {
   .project.open .project-detail {
     max-height: 1100px;
   }
-  .project-intro {
+  .project-detail,
+  .project.open .project-detail {
     padding-left: 0;
+  }
+  .project.open .project-detail {
+    padding: 18px 0 40px;
+  }
+  .project-detail > [role="tabpanel"] {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
   .detail-grid {
     grid-template-columns: 1fr;
@@ -1272,7 +1304,13 @@ footer p:last-child {
   .process-flow > div {
     min-height: auto;
     border-left: 1px solid #444;
-    padding: 24px;
+    /* Reserveret rende til illustrationen, så teksten aldrig løber ind i den. */
+    padding: 24px 132px 24px 24px;
+  }
+  .process-visual {
+    top: 26px;
+    right: 22px;
+    width: min(92px, 26%);
   }
   .process-flow > div:hover {
     transform: none;
@@ -1843,3 +1881,338 @@ main[data-locale="en"] .hero h1 {
     display: none;
   }
 }
+
+/* ── Projektkonstellation ─────────────────────────────────────────────────
+   3D-laget over projektlisten. Højden er låst via aspect-ratio, så canvas
+   aldrig flytter indholdet under sig. */
+.constellation {
+  position: relative;
+  /* Fuldbred systemportal: bryder ud af sektionens indrykning, så overgangen
+     fra hero til projektkort fylder hele skærmen. */
+  margin: 0 calc(var(--space-inline) * -1) var(--space-gap-lg);
+  aspect-ratio: 21 / 9;
+  min-height: 440px;
+  max-height: 82vh;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(
+      100% 74% at 50% 46%,
+      color-mix(in srgb, var(--acid) 13%, transparent),
+      transparent 68%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent,
+      color-mix(in srgb, var(--accent-3) 5%, transparent) 50%,
+      transparent
+    );
+  overflow: hidden;
+  isolation: isolate;
+}
+.constellation-canvas {
+  position: absolute;
+  inset: 0;
+  /* Feltet tones ud mod kanterne, så portalen møder siden i stedet for at
+     stoppe i en hård kant. */
+  mask-image: radial-gradient(115% 96% at 50% 50%, #000 58%, transparent 100%);
+  -webkit-mask-image: radial-gradient(115% 96% at 50% 50%, #000 58%, transparent 100%);
+}
+.constellation-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.constellation-nodes {
+  position: absolute;
+  inset: 0;
+}
+.constellation-node {
+  --node-depth: 0.5;
+  --node-lit: 0.35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-auto-rows: min-content;
+  gap: 0 8px;
+  align-items: baseline;
+  padding: 7px 11px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter: blur(3px);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  opacity: calc(0.5 + var(--node-lit) * 0.5);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    opacity 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.constellation-node .constellation-index {
+  grid-row: 1 / span 2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.constellation-node .constellation-name {
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.constellation-node .constellation-value {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.constellation-node:hover,
+.constellation-node:focus-visible,
+.constellation-node.current {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+  opacity: 1;
+}
+.constellation-node:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+.constellation-hint {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  max-width: 300px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  pointer-events: none;
+}
+html[data-theme="dark"] .constellation {
+  border-color: color-mix(in srgb, var(--line) 55%, transparent);
+  background:
+    radial-gradient(120% 80% at 50% 45%, color-mix(in srgb, var(--acid) 14%, transparent), transparent 72%);
+}
+html[data-theme="dark"] .constellation-node {
+  background: color-mix(in srgb, var(--ink) 62%, transparent);
+  color: var(--paper);
+}
+html[data-theme="dark"] .constellation-node:hover,
+html[data-theme="dark"] .constellation-node:focus-visible,
+html[data-theme="dark"] .constellation-node.current {
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+@media (max-width: 700px) {
+  .constellation {
+    aspect-ratio: 4 / 3.6;
+    min-height: 340px;
+    max-height: none;
+  }
+  .constellation-node {
+    padding: 5px 8px 6px;
+  }
+  .constellation-node .constellation-name {
+    font-size: 12px;
+  }
+  .constellation-hint {
+    left: 12px;
+    bottom: 10px;
+    max-width: 220px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .constellation-node {
+    transition: none;
+  }
+}
+
+/* ── Brain Boot Portal (isoleret prototype bag ?intro=1) ─────────────────
+   Fuldskærms startflade i den aktive palet. Overlayet er dekorativt: det
+   fanger ikke fokus og skjuler ikke sidens semantiske indhold. */
+.brain-boot {
+  --boot-x: 0px;
+  --boot-y: 0px;
+  --boot-scale: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--paper);
+  transform-origin: center center;
+  transition:
+    opacity 0.42s ease,
+    transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brain-boot.leaving {
+  opacity: 0;
+  /* Kernen skaleres og flyttes direkte ind i heroens hjerneposition. */
+  transform: translate(var(--boot-x), var(--boot-y)) scale(var(--boot-scale));
+  pointer-events: none;
+}
+/* En meget svag blækdis i dybden. Den er næsten usynlig gennem fase 1, så
+   fladen står ren, og løftes først i takt med at formen bygges. */
+.brain-boot:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    46% 42% at 50% 50%,
+    color-mix(in srgb, var(--accent-2) 16%, transparent),
+    color-mix(in srgb, var(--glow) 7%, transparent) 46%,
+    transparent 72%
+  );
+  opacity: 0;
+  animation: brain-boot-haze 4.15s cubic-bezier(0.33, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+@keyframes brain-boot-haze {
+  0% { opacity: 0; transform: scale(1.22); }
+  14% { opacity: 0.18; }
+  42% { opacity: 0.62; }
+  78% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.72; transform: scale(0.95); }
+}
+.brain-boot-canvas {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.brain-boot-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.brain-boot-still {
+  width: min(38vh, 320px);
+  height: auto;
+  opacity: 0;
+  animation: brain-boot-in 0.5s ease forwards;
+}
+@keyframes brain-boot-in {
+  to {
+    opacity: 1;
+  }
+}
+.brain-boot-skip {
+  position: absolute;
+  right: var(--space-inline);
+  bottom: 34px;
+  padding: 9px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .brain-boot-skip:hover {
+    border-color: var(--ink);
+    background: color-mix(in srgb, var(--glow) 16%, transparent);
+  }
+}
+.brain-boot-skip:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brain-boot,
+  .brain-boot-skip {
+    transition: none;
+  }
+  .brain-boot:after {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* Journey review, 30 October 2026. Keep the existing palette and artwork. */
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 5px; }
+.hero h1 { letter-spacing: -.04em; line-height: .94; font-size: clamp(3.5rem, 8vw, 7rem); max-width: 12ch; }
+.circle-link { flex: 0 0 64px; width: 64px; height: 64px; aspect-ratio: 1; }
+.section-head { grid-template-columns: 1.6fr 1fr; gap: 40px; align-items: end; }
+.section-head h2 { font-size: clamp(2.5rem, 5.5vw, 5.5rem); letter-spacing: -.04em; line-height: 1.05; text-wrap: balance; }
+.section-head p { max-width: 36ch; font-size: 15px; line-height: 1.6; }
+.project-atlas { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; background: var(--line); border-block: 1px solid var(--line); margin: 0 0 64px; }
+.atlas-item { --art-paper: #f9eedc; --art-ink: #68374f; appearance: none; border: 0; color: var(--art-ink); background: var(--art-paper); text-align: left; padding: 22px 28px 28px; cursor: pointer; overflow: hidden; }
+.atlas-portfolio { --art-paper: #eadbda; --art-ink: #553146; }
+.atlas-wobs { --art-paper: #f6e6d6; --art-ink: #98432f; }
+.atlas-neuro { --art-paper: #e3e9df; --art-ink: #3b6458; }
+.atlas-patrickos { --art-paper: #e9dfed; --art-ink: #67486f; }
+.atlas-creative { --art-paper: #f0d5d9; --art-ink: #8e3c60; }
+.atlas-career { --art-paper: #e7e4d2; --art-ink: #656035; }
+.project-artwork { width: 100%; height: auto; display: block; transition: transform .25s ease-out; }
+.atlas-item:hover .project-artwork { transform: translateY(-4px); }
+.atlas-item[aria-pressed="true"] { box-shadow: inset 0 -3px 0 currentColor; }
+.atlas-caption { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.atlas-caption strong { font-size: clamp(18px,1.6vw,25px); letter-spacing: -.03em; }
+.atlas-caption > span { font-size: 12px; }
+.project-list { perspective: none; }
+.project { transform-style: flat; }
+.project > button { grid-template-columns: 42px minmax(0,1fr) 170px 30px; }
+.project.open, .project:hover { transform: none; background: transparent; }
+.project-state i { display: none; }
+.project-state { font-family: var(--font-body); font-size: 13px; }
+.project-title small { color: var(--ink); opacity: .75; font-family: var(--font-body); font-size: 11px; letter-spacing: .04em; }
+.project-detail, .project.open .project-detail { display: block; max-height: none; opacity: 1; overflow: visible; padding: 0 0 36px 62px; transition: none; }
+.project-detail[hidden], .project-detail > [role="tabpanel"][hidden] { display: none; }
+.project-detail > [role="tabpanel"] { grid-template-columns: 1fr 1fr; gap: 48px; }
+.project-intro { font-size: clamp(21px,2vw,29px); max-width: 34ch; }
+.detail-tabs { display: flex; width: fit-content; height: auto; gap: 8px; margin: 0 0 28px; }
+.detail-tabs button { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: auto; min-width: 100px; height: 44px; min-height: 44px; padding: 0 18px; font: 500 12px var(--font-body); letter-spacing: .02em; border: 1px solid var(--ink); color: var(--ink); background: transparent; border-radius: 24px; transform: none; }
+.detail-tabs button.active { background: var(--ink); color: var(--paper); }
+.detail-grid label { font-size: 12px; color: var(--ink); opacity: .75; }
+.detail-grid p { font-size: 15px; line-height: 1.65; max-width: 65ch; }
+.estimate { color: var(--ink); opacity: .75; font-size: 12px; line-height: 1.6; }
+.vision h2 { font-size: clamp(2.25rem,5vw,5rem); line-height: 1.1; letter-spacing: -.04em; max-width: 20ch; }
+footer, [data-theme="dark"] footer { background: var(--ink); color: var(--paper); }
+footer .brand span, footer p { color: inherit; opacity: 1; }
+@media(max-width:800px) {
+ .section-head { grid-template-columns: 1fr; gap: 16px; }
+ .section-head p { margin: 0; }
+ .project-atlas { grid-template-columns: repeat(2,minmax(0,1fr)); margin-bottom: 36px; }
+ .atlas-item { padding: 12px 16px 20px; }
+ .atlas-caption { align-items: flex-start; flex-direction: column; gap: 5px; }
+ .project > button { grid-template-columns: 28px minmax(0,1fr) 24px; column-gap: 12px; }
+ .project-title { font-size: 28px; }
+ .project-state { display: none; }
+ .project-detail, .project.open .project-detail { padding: 0 0 28px 40px; }
+ .project-detail > [role="tabpanel"], .detail-grid--two { grid-template-columns: 1fr; gap: 24px; }
+ .hero h1 { font-size: clamp(3.2rem,10vw,5rem); max-width: 12ch; }
+ .hero-bottom { align-items: flex-end; }
+ .circle-link { flex-basis: 48px; width: 48px; height: 48px; }
+ .signal-strip { grid-template-columns: repeat(3,minmax(0,1fr)); }
+ .signal-strip strong { font-size: 25px; }
+ .signal-strip span { font-size: 9px; }
+}
+@media(max-width:360px) { .atlas-caption strong { font-size: 17px; } .atlas-item { padding-inline: 12px; } .project-detail, .project.open .project-detail { padding-left: 0; } }
+@media(prefers-reduced-motion:reduce) { .project-artwork { transition: none; } .atlas-item:hover .project-artwork { transform: none; } }
+
+.project::before { content: none; pointer-events: none; }
+
+.project { isolation: isolate; }
+.project-detail, .project > button { position: relative; z-index: 1; }
+.process .section-head h2 { grid-column: 1 / -1; max-width: 15ch; }
+.signal-strip > div { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.signal-strip > div strong { width: auto; }
+.signal-strip > div span { max-width: none; }
+
+html[data-theme="dark"] footer { color: var(--ink); }
+html[data-theme="dark"] footer .brand span, html[data-theme="dark"] footer p { color: var(--ink); opacity: 1; }
+@media(max-width:800px) { .project > button { row-gap: 8px; } .project-state { display: block; grid-column: 2; grid-row: 2; } .toggle { grid-column: 3; grid-row: 1; } }

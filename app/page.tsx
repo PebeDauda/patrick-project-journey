@@ -1,5 +1,6 @@
 import projectsContent from "../content/projects.json";
-import ProjectJourney, {
+import ProjectJourney from "./journey-v4";
+import {
   fallbackCopy,
   type Copy,
   type Locale,
@@ -15,14 +16,18 @@ const byLocale = (projects: Project[]): Record<Locale, Project[]> => ({
 
 // Delvise data er værre end ingen data: så hellere falde tilbage til det
 // indbyggede indhold end vise en oversigt med huller i.
+const visibleProjectIds = ["neuro", "wobs", "portfolio", "patrickos"];
 const isComplete = (data: Record<Locale, Project[]>) =>
-  Boolean(data.da.length && data.en.length);
+  (["da", "en"] as Locale[]).every(locale =>
+    visibleProjectIds.every(id => data[locale].some(project => project.id === id)),
+  );
 
 async function loadProjects(): Promise<Record<Locale, Project[]>> {
+  if (process.env.JOURNEY_REVIEW === "1") return byLocale(projectsContent as Project[]);
   try {
     const {data} = await sanityFetch({query: projectsQuery});
     if (Array.isArray(data)) {
-      const fromSanity = byLocale(data as Project[]);
+      const fromSanity = byLocale((data as Project[]).filter(project => visibleProjectIds.includes(project.id)));
       if (isComplete(fromSanity)) return fromSanity;
     }
   } catch {
