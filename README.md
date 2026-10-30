@@ -10,6 +10,8 @@ NEURO og WOBS står først; derefter Portfolio og PatrickOS. WOBS-paletten, inte
 
 ### Færdigt
 
+- Portfolio-forhåndsvisningen har nu en klikbar 3D Pin med tilt, lysende pin og direkte link til den rigtige hjemmeside. Mobil/tastatur og reduceret bevægelse understøttes.
+
 - Binære 0/1-tal bliver til ord med naturlig, tæt tegnsætning og stabil ordplads.
 - Større brødtekst og labels, dansk/engelsk, bevægelsespause og reduceret bevægelse.
 - Projektstatus beskrives som stadier, ikke udokumenterede procenter.

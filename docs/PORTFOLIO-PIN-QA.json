@@ -1,0 +1,48 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "hover": true,
+      "link": true,
+      "keyboard": true,
+      "zoom": true,
+      "pause": true,
+      "english": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "touch": true,
+      "hover": true,
+      "link": true,
+      "keyboard": true,
+      "zoom": true,
+      "pause": true,
+      "english": true,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "touch": true,
+      "hover": true,
+      "link": true,
+      "keyboard": true,
+      "zoom": true,
+      "pause": true,
+      "english": true,
+      "overflow": false
+    },
+    {
+      "width": 1440,
+      "reduced": true,
+      "hover": true,
+      "link": true,
+      "keyboard": true,
+      "zoom": true,
+      "pause": true,
+      "english": true,
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

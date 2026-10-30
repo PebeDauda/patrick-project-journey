@@ -3,7 +3,7 @@
 import {lazy, Suspense, useEffect, useRef, useState} from "react";
 import ProcessVisual from "./process-visual";
 import {PlayfulWord} from "./playful-type";
-import {PortraitCard,MagneticLink,spotlightMove,spotlightReset,pointerEffectsAllowed} from "./lively-details";
+import {PortfolioPin,PortraitCard,MagneticLink,spotlightMove,spotlightReset,pointerEffectsAllowed} from "./lively-details";
 import {ProjectContext} from "./journey-storyboard";
 import type {Locale, Project} from "./project-journey";
 
@@ -34,6 +34,7 @@ export function ProjectPreview({project,locale,onSelect}:{project:Project;locale
     <div className="showcase-copy"><div className="showcase-title"><h3>{project.title}</h3><span className="stage-label">{project.status}</span></div><p>{project.summary}</p><ProjectContext id={project.id} locale={locale}/>{project.id==="portfolio"&&<MagneticLink className="portfolio-launch" href="https://patrick-bennett-portfolio.ppbb94.workers.dev/">{da?"Åbn min portfolio":"Open my portfolio"}<Arrow/></MagneticLink>}<button className={`project-read atlas-${project.id}`} onClick={onSelect}>{da?"Se status og næste skridt":"See status and next steps"}<Arrow/></button></div>
     <div className="preview-gradient" data-visible={visible}><div className="showcase-scene" ref={ref} data-visible={visible} data-view={view} onPointerMove={move} onPointerLeave={event=>{event.currentTarget.style.setProperty("--tilt-x","0deg");event.currentTarget.style.setProperty("--tilt-y","0deg")}}>
       {isOS?<div className="workspace-preview"><div className="workspace-heading"><img src="/assets/patrickos-brain-clean.webp" width="90" height="90" alt=""/><strong>PatrickOS</strong><span>{da?"Fra mission til handling":"From mission to action"}</span></div><div className="workspace-lead">Chief of Staff</div><div className="workspace-lines" aria-hidden="true"/><div className="workspace-roles">{["Research Analyst","Business Strategist","Creative Director","AI Engineer","Project Manager"].map(role=><span key={role}>{role}</span>)}</div><p>{da?"Illustration af rollerne i det eksisterende arbejdsrum":"Diagram of roles in the existing workspace"}</p></div>:
+      project.id==="portfolio"?<PortfolioPin locale={locale}/>:
       <div className={`device-composition ${project.id==="neuro"?"has-phone":""}`}>
         <div className={`browser-frame ${view==="app"&&project.id==="wobs"?"app-active":""}`}><div className="browser-toolbar"><span/><span/><span/><small>{project.id==="portfolio"?"patrick-bennett-portfolio":project.title.toLowerCase()}</small></div><div className="browser-screen"><img src={`/assets/projects/${project.id}-${view==="app"&&project.id==="wobs"?"app":"web"}.jpg`} alt={da?`${project.title}: faktisk ${view==="app"&&project.id==="wobs"?"demo":"hjemmeside"}`:`${project.title}: actual ${view==="app"&&project.id==="wobs"?"demo":"website"}`} width="1440" height="1000" loading="lazy"/></div></div>
         {project.id==="neuro"&&<div className="phone-frame"><div className="phone-camera"/><img src="/assets/projects/neuro-app.jpg" alt={da?"NEUROs app-prototype på en mobilskærm":"NEURO app prototype on a phone screen"} width="390" height="844" loading="lazy"/></div>}

@@ -433,3 +433,29 @@ html{scroll-padding-top:100px;scrollbar-color:#d1808a #1d1020}
 .v4 .playful-token{position:relative;vertical-align:baseline}
 .decode-word-size{visibility:hidden}
 .decode-word-output{position:absolute;inset:0 auto 0 0;white-space:pre;text-align:left;letter-spacing:inherit;font-kerning:normal}
+
+/* Portfolio: a clickable floating screen with a 3D pin in the existing palette. */
+.portfolio-pin{display:block;position:relative;perspective:1100px;padding:70px 10px 44px;outline-offset:7px;isolation:isolate}
+.pin-surface{display:block;position:relative;z-index:2;background:#1d1020;border:1px solid #edb2ba99;border-radius:12px;overflow:hidden;box-shadow:0 18px 32px #10081266;transform:rotateX(0) rotateZ(0);transform-origin:50% 68%;transition:transform .55s cubic-bezier(.2,0,0,1),box-shadow .3s}
+.pin-surface>img{display:block;width:100%;height:auto;aspect-ratio:1.44;object-fit:cover;object-position:top;outline:1px solid #ffffff1a;outline-offset:-1px}
+.pin-browser-bar{display:flex;align-items:center;gap:6px;padding:10px 12px;color:#c1aec1;font-size:.875rem;line-height:1.4}
+.pin-browser-bar>i{display:block;width:5px;height:5px;background:#d1808a;border-radius:50%}.pin-browser-bar>span{margin:auto}
+.pin-label{display:flex;justify-content:center;align-items:center;gap:14px;position:absolute;z-index:4;top:10px;left:50%;transform:translateX(-50%);min-height:44px;padding:10px 18px;border:1px solid #d1808a88;border-radius:26px;background:#29162f;color:#f9f3ec;font-size:1rem;white-space:nowrap;transition:border-color .15s,box-shadow .3s}
+.pin-label>span,.pin-hint>span{font-size:1.25rem;color:#edb2ba}
+.pin-hint{display:flex;align-items:center;justify-content:center;gap:12px;position:absolute;bottom:4px;left:0;right:0;font-size:.9375rem;line-height:1.5;color:#eddfeb}
+.pin-beacon{position:absolute;inset:54px 0 28%;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s}
+.pin-beacon>b{position:absolute;top:0;bottom:4%;left:50%;width:2px;background:linear-gradient(#edb2ba,#d1808a55,transparent);box-shadow:0 0 14px #edb2ba99}
+.pin-beacon>i{position:absolute;left:50%;top:45%;width:100px;height:100px;margin-left:-50px;border-radius:50%;border:1px solid #edb2ba99;background:#d1808a16;transform:rotateX(65deg);box-shadow:0 0 20px #d1808a22}
+.portfolio-pin:focus-visible .pin-label{border-color:#f9f3ec;box-shadow:0 0 24px #d1808a44}
+@media(hover:hover){.portfolio-pin:hover .pin-label{border-color:#f9f3ec;box-shadow:0 0 24px #d1808a55}}
+@media(prefers-reduced-motion:no-preference) and (hover:hover) and (pointer:fine){
+ .portfolio-pin:is(:hover,:focus-visible) .pin-surface{transform:translateY(12px) rotateX(42deg) rotateZ(-10deg) scale(.92);box-shadow:24px 40px 42px #10081277}
+ .portfolio-pin:is(:hover,:focus-visible) .pin-beacon{opacity:1}
+ .portfolio-pin:is(:hover,:focus-visible) .pin-beacon>i{animation:portfolio-pin-ripple 2.8s ease-out infinite}
+ .portfolio-pin .pin-beacon>i:nth-child(2){animation-delay:-.93s}.portfolio-pin .pin-beacon>i:nth-child(3){animation-delay:-1.86s}
+ @keyframes portfolio-pin-ripple{from{transform:rotateX(65deg) scale(.5);opacity:.8}to{transform:rotateX(65deg) scale(2.5);opacity:0}}
+}
+.v4[data-motion="paused"] .portfolio-pin .pin-surface{transform:none!important;transition:none!important}
+.v4[data-motion="paused"] .portfolio-pin .pin-beacon{opacity:0!important}
+@media(max-width:760px){.portfolio-pin{padding:66px 4px 42px}.pin-label{font-size:.9375rem;padding:9px 16px}.pin-browser-bar{font-size:.875rem;padding:8px}.pin-hint{font-size:.875rem}}
+@media(prefers-reduced-motion:reduce){.portfolio-pin .pin-surface{transform:none!important;transition:none}.portfolio-pin .pin-beacon{display:none}}

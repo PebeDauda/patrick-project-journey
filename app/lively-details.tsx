@@ -19,3 +19,12 @@ export function MagneticLink({children,className="",href}:{children:ReactNode;cl
  function reset(event:{currentTarget:HTMLElement}){event.currentTarget.style.setProperty("--magnetic-x","0px");event.currentTarget.style.setProperty("--magnetic-y","0px")}
  return <a className={`magnetic-link ${className}`} href={href} target="_blank" rel="noreferrer" onPointerMove={move} onPointerLeave={reset} onPointerCancel={reset} onBlur={reset}><span className="magnetic-content">{children}</span></a>
 }
+
+export function PortfolioPin({locale}:{locale:Locale}){
+ const da=locale==="da";
+ return <a className="portfolio-pin" href="https://patrick-bennett-portfolio.ppbb94.workers.dev/" target="_blank" rel="noopener noreferrer" aria-label={da?"Åbn Patrick Bennetts portfolio i en ny fane":"Open Patrick Bennett’s portfolio in a new tab"}>
+ <span className="pin-label">{da?"Åbn portfolio":"Open portfolio"}<span aria-hidden="true">↗</span></span>
+ <span className="pin-beacon" aria-hidden="true"><i/><i/><i/><b/></span>
+ <span className="pin-surface"><span className="pin-browser-bar" aria-hidden="true"><i/><i/><i/><span>Patrick Bennett</span></span><img src="/assets/projects/portfolio-web.jpg" alt={da?"Forhåndsvisning af Patrick Bennetts portfolio":"Preview of Patrick Bennett’s portfolio"} width="1440" height="1000" loading="lazy"/></span>
+ <span className="pin-hint">{da?"Udforsk hjemmesiden":"Explore the website"}<span aria-hidden="true">↗</span></span></a>
+}
