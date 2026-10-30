@@ -1,3 +1,3 @@
-# Aktuelt · 30. oktober 2026
+# Aktuelt ·30. oktober2026
 
-Aktiv gren: preview/project-journey-redesign. Ny Project Journey-version gemt til gennemgang; main/produktion er ikke ændret. Seneste rettelse samler binær-animationen som hele ord med tættere tegnsætning. Se README's aktuelle preview-afsnit og docs/REVIEW-PREVIEW.md. Næste handling: Patrick gennemgår det delbare preview. Ingen automatisk merge eller produktionsudgivelse.
+Aktiv gren: preview/project-journey-redesign. Offentligt hostet udgave: https://patrick-project-journey.patrickbennett.chatgpt.site . Sites version12, publicering verificeret og browser-testet efter lokal server/tunnel blev stoppet. Den virker, når Mac er slukket. GitHub main og den separate Workers-side er ikke ændret. Næste handling: Patrick gennemgår og deler den hostede adresse. Se docs/REVIEW-PREVIEW.md.

@@ -16,9 +16,6 @@ import { designSettingsQuery } from "./sanity/queries";
 export const metadata: Metadata = {
   title: "Patrick's Project Journey",
   description: "Et levende overblik over Patricks projekter, processen og den langsigtede retning.",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

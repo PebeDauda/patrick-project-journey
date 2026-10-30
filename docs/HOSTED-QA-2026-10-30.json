@@ -1,0 +1,21 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "status": 200,
+      "menu": true,
+      "projects": 4,
+      "tools": 12
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "menu": true,
+      "projects": 4,
+      "tools": 12
+    }
+  ],
+  "errors": [],
+  "localTunnelStopped": true,
+  "localServerStopped": true
+}

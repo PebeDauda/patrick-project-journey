@@ -16,11 +16,13 @@ Original implementering inspireret af offentlige previews fra Sterling Gate på2
 
 Build og HTML-smoke er verificeret. Browserkontroller omfatter desktop/mobile bredder, dansk/engelsk, menu, projektvisninger, zoom, pause og reduceret bevægelse. Fysisk iPhone/VoiceOver-performance er ikke verificeret. Eksisterende miljø-/typefejl ved Sanity/Cloudflare/studio er fortsat kendte.
 
-## Midlertidigt delbart link
+## Offentligt hostet link
 
-Denne gennemgang deles gennem en midlertidig Cloudflare Tunnel til den lokale, byggede app. Linket kræver, at preview-serveren, tunnelen og computeren er i gang og online. Når tunnelen stopper, bortfalder linket; en ny tunnel får typisk en ny adresse. Ingen automatisk udløbsdato er lovet. Selve kildekoden er permanent gemt på denne GitHub-gren.
+https://patrick-project-journey.patrickbennett.chatgpt.site
 
-Produktionssiden er ikke erstattet. GitHub-grenen må ikke auto-merges eller auto-deployes som del af denne preview-opgave.
+Sites version12 blev udgivet30. oktober2026 fra source6f374812b40ae9a7c733d5a13d7cb373c59e2ddc. Den kræver ikke lokal server, tunnel eller en tændt Mac. Modtagere bruger en normal internetforbindelse. Den tidligere trycloudflare-tunnel er stoppet.
+
+Efter stop af både lokal server og tunnel returnerede en frisk browser200 ved1440/390px, med fungerende menu, fire projekter og12 værktøjer. Ingen browserfejl. Se HOSTED-QA-2026-10-30.json. Den separate Workers-side og GitHub main er uændrede.
 
 ## Verificeret før GitHub-gemning
 

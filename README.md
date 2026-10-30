@@ -2,7 +2,7 @@
 
 ## Aktuel preview · 30. oktober 2026
 
-Denne gren (`preview/project-journey-redesign`) gemmer den nye Project Journey-version. Produktionsgrenen `main` er ikke ændret.
+Denne gren (`preview/project-journey-redesign`) gemmer den nye Project Journey-version. Den er offentligt hostet på [Project Journey](https://patrick-project-journey.patrickbennett.chatgpt.site), uafhængigt af en lokal computer. GitHub-grenen `main` og den separate Workers-adresse er ikke ændret.
 
 ### Projektstatus
 
@@ -17,7 +17,7 @@ NEURO og WOBS står først; derefter Portfolio og PatrickOS. WOBS-paletten, inte
 
 ### I gang
 
-Visuel gennemgang af preview-versionen. Den er ikke frigivet som produktion. Fysisk Safari/iPhone/VoiceOver-test mangler. De kendte Sanity/Cloudflare/studio-typefejl er ikke løst; fuldt TypeScript-pass påstås ikke.
+Visuel gennemgang af den offentligt hostede version. Sites-udgivelsen er verificeret; den separate Workers-adresse er ikke opdateret. Fysisk Safari/iPhone/VoiceOver-test mangler. De kendte Sanity/Cloudflare/studio-typefejl er ikke løst; fuldt TypeScript-pass påstås ikke.
 
 ### Næste session
 
