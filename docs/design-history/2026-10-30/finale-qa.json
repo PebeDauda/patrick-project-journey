@@ -1,0 +1,48 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "intro": true,
+      "autoFinish": true,
+      "noSkipButton": true,
+      "replay": true,
+      "pause": true,
+      "slides": 4,
+      "brainField": true,
+      "once": true,
+      "menu": true,
+      "english": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "intro": true,
+      "autoFinish": true,
+      "noSkipButton": true,
+      "replay": true,
+      "pause": true,
+      "slides": 4,
+      "brainField": true,
+      "once": true,
+      "menu": true,
+      "english": true,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "intro": true,
+      "autoFinish": true,
+      "noSkipButton": true,
+      "replay": true,
+      "pause": true,
+      "slides": 4,
+      "brainField": true,
+      "once": true,
+      "menu": true,
+      "english": true,
+      "overflow": false
+    }
+  ],
+  "reduced": true,
+  "errors": []
+}

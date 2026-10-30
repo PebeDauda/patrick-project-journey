@@ -10,6 +10,10 @@ NEURO og WOBS står først; derefter Portfolio og PatrickOS. WOBS-paletten, inte
 
 ### Færdigt
 
+- MacBook-inspireret projektintro med terminalovergange, automatisk afslutning og ingen spring-over-knap.
+- Hjerne med elektriske forbindelser og et åbent/samlet fragmentfelt.
+- [Designrejse med28 screenshots og inspirationskilder](docs/design-history/2026-10-30/DESIGN-JOURNEY.md).
+
 - Portfolio-forhåndsvisningen har nu en klikbar 3D Pin med tilt, lysende pin og direkte link til den rigtige hjemmeside. Mobil/tastatur og reduceret bevægelse understøttes.
 
 - Binære 0/1-tal bliver til ord med naturlig, tæt tegnsætning og stabil ordplads.

@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "intro": true,
+  "autoFinish": true,
+  "brainField": true,
+  "menu": true,
+  "portfolioPin": true,
+  "localServerStopped": true,
+  "errors": []
+}

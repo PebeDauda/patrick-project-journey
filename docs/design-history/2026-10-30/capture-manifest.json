@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-30",
+  "unmodified_images": true,
+  "screenshots": [
+    {
+      "file": "assets/after-brain-field-1440.png",
+      "sha256": "67275d36d528293d15f54ab12dbd68dc8bd518cf4ddce59d913cc95f8eaf7b5b",
+      "bytes": 570506,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-brain-field-320.png",
+      "sha256": "5e1ee8060fc219df58697286051813b70ad2603da01a6f2a5ca3f3d90f8cff66",
+      "bytes": 144517,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-brain-field-390.png",
+      "sha256": "5b51ffcc0c9254d441a039395bf96eec953034ed9b151601f70d023ce0c05979",
+      "bytes": 173323,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-final-hero-1440.png",
+      "sha256": "a249e275085b8435ef07aa4530a0d3d2b9b8e5589908f5bb34934e0b6c22ecf6",
+      "bytes": 704268,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-final-hero-320.png",
+      "sha256": "b3dde24b68df15ec045939d2b8df6fa62fabfc690ab7306c2a8449e251c70ed1",
+      "bytes": 178643,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-final-hero-390.png",
+      "sha256": "c7e0b94f27dbd3f5db4c8d743db1beef1f037b1cef29e030f70e0cc1ef61ef43",
+      "bytes": 217934,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-intro-1440.png",
+      "sha256": "f973cfa4f92cce008fd45a1df6b5c160037cb2ee62ecad543385037166e3e9a3",
+      "bytes": 609409,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-intro-320.png",
+      "sha256": "e02bded3f9aec178a0b60e8a2abbac6991f11eec1342515effe0f78804f386b9",
+      "bytes": 179691,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-intro-390.png",
+      "sha256": "be339d111755c962ac843b9719e6f8c46854ef605462ee857d654ba35400a483",
+      "bytes": 203566,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-wobs-1440.png",
+      "sha256": "f887f4bfce78ae3584c4f6413c1c5aef82ac3121aa818692fcecc6c9f51256f1",
+      "bytes": 570114,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-wobs-320.png",
+      "sha256": "406a1479c67d00802e1b8f01f0fc8e17b198b5dce7920e73f245639cbaf82c21",
+      "bytes": 177032,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/after-mac-wobs-390.png",
+      "sha256": "b81d92ca85204ed87fb8150eaae402f132345ddb8febdaa9f81d14e49682015f",
+      "bytes": 199229,
+      "origin": "final build capture"
+    },
+    {
+      "file": "assets/before-final-hero-1440.png",
+      "sha256": "6e1cf744dbcee5f2e1aaa16fb600af43ea84703a9c86edb382c22a8dc329b5e2",
+      "bytes": 632269,
+      "origin": "hosted Sites version13 before final change"
+    },
+    {
+      "file": "assets/before-final-hero-390.png",
+      "sha256": "44fb0e3d969a8f4938bcc718d967002189182b85fee63f14c6ac17b6eae6413f",
+      "bytes": 244070,
+      "origin": "hosted Sites version13 before final change"
+    },
+    {
+      "file": "assets/before-final-process-1440.png",
+      "sha256": "86dea0a8f14475ac136c4499882d47a0015f4287694dafc11157e58ec644494e",
+      "bytes": 99575,
+      "origin": "hosted Sites version13 before final change"
+    },
+    {
+      "file": "assets/before-final-process-390.png",
+      "sha256": "74c1d5b5dbed03c4eff554fbc3d1fb88ebf378e4d810e4f6a4bba2198a2a63ad",
+      "bytes": 59661,
+      "origin": "hosted Sites version13 before final change"
+    },
+    {
+      "file": "assets/pin-1440.png",
+      "sha256": "3d46150fbd33bd886938b6b52cacebc14be56d5bbc99e99c51ee6b20365c20ba",
+      "bytes": 258798,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/pin-390.png",
+      "sha256": "71e2021bda5aa3100060278a84e42c6aa3528215bb5b95b4cec2c1a7f2e6e0ca",
+      "bytes": 129367,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v10-gradient-1440.png",
+      "sha256": "37d0fa3b820b659b49f8734ce5ff57f67b2823bfe4bc0aabc8e504c275d75790",
+      "bytes": 176489,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v11-warm-cream.png",
+      "sha256": "cdffb4f1fd47d5f4e0ead16229d6a277ef955dbf7b003e2ddb7cb3609a6a0dcc",
+      "bytes": 99870,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v4-hero-1440.png",
+      "sha256": "5910299903f2abc0169c35a9715199f44e54875381a4326a586c7ce1c05f931b",
+      "bytes": 725249,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v5-hero-1440.png",
+      "sha256": "3d909443a6d9f5605769483216e84e452e38cb740c7ccf047af0478946692408",
+      "bytes": 588723,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v6-about-1440.png",
+      "sha256": "51102e2ae1a43b3650b7076e22980732ac0cc1984637e31c8e6ee130694517ed",
+      "bytes": 340421,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v6-project-spotlight.png",
+      "sha256": "635ec4ac23fed130cdb92c59823db62362a32fdc19b0ce810cb0e6580f6af728",
+      "bytes": 316553,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v7-hero-1440.png",
+      "sha256": "99de492a3a3d7a793e6304aeec9496e84d4cad88237e31e5aa7468feda2a74c7",
+      "bytes": 634519,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v7-project-1440.png",
+      "sha256": "d28607ea8fa24ad474b25ff2a75b50a59dbfa1a4d369341d18c839705aca771e",
+      "bytes": 152249,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v8-rest-1440.png",
+      "sha256": "20eba4e34f09a53cbee93812599385a61a4cf562a69ce1263333f298b19e805c",
+      "bytes": 632563,
+      "origin": "preserved historical screenshot; original versioned filename"
+    },
+    {
+      "file": "assets/v9-tools-1440.png",
+      "sha256": "058ec809fc316f4eec09d2e7150e9416a0b7b8a31f9e6a8d8aaa52bb25f0111f",
+      "bytes": 123190,
+      "origin": "preserved historical screenshot; original versioned filename"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: false;
-  include: card;
+  include: card, modal;
   logs: false;
 }
 :root {

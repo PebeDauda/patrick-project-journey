@@ -20,7 +20,7 @@ Build og HTML-smoke er verificeret. Browserkontroller omfatter desktop/mobile br
 
 https://patrick-project-journey.patrickbennett.chatgpt.site
 
-Sites version13 blev udgivet30. oktober2026 fra source958af55544f8bb194761626dc72617f5e77f3e98. Den kræver ikke lokal server, tunnel eller en tændt Mac. Modtagere bruger en normal internetforbindelse. Den tidligere trycloudflare-tunnel er stoppet.
+Sites version14 blev udgivet30. oktober2026 fra source362c18ba4bfbae8d32bf064e8a490fa8946a0f46. Den kræver ikke lokal server, tunnel eller en tændt Mac. Modtagere bruger en normal internetforbindelse. Den tidligere trycloudflare-tunnel er stoppet.
 
 Efter stop af både lokal server og tunnel returnerede en frisk browser200 ved1440/390px, med fungerende menu, fire projekter og12 værktøjer. Ingen browserfejl. Se HOSTED-QA-2026-10-30.json. Den separate Workers-side og GitHub main er uændrede.
 
@@ -33,3 +33,7 @@ Efter stop af både lokal server og tunnel returnerede en frisk browser200 ved14
 Portfolio-forhåndsvisningen er et direkte link med tilt, lysende pin, ringe og en vedvarende åbne-label, inspireret af https://ui.aceternity.com/components/3d-pin . Original implementering i den eksisterende palette; ingen nye afhængigheder. Linket har ingen indlejrede knapper. Forstørrelse forbliver udenfor linket. Mobil åbner med ét tryk; tastatur bruger det normale link. Pause/reduceret bevægelse deaktiverer tilt/ringe. Den sorte portfolios egen kode er uændret.
 
 Build/HTML-smoke og browserkontroller ved1440/390/320 samt reduceret bevægelse bestået: hover, første mobiltryk, tastatur, korrekt eksternt link, zoom, pause, engelsk og intet overløb.
+
+## Dagens afslutning
+
+MacBook-inspireret intro (fire projekter, terminalglimt, automatisk afslutning, genafspilning; ingen spring-over-knap) og ny elektrisk/fragmenteret hjerne. Tidsstyret præsentation, ikke en falsk netværks-progressbar. Reduceret bevægelse har en rolig indgang. Hele dokumentationspakken ligger under design-history/2026-10-30 med Markdown, galleri, manifest og QA.
