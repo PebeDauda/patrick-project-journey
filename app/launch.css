@@ -13,3 +13,9 @@
 @keyframes project-reel{to{transform:translateX(calc(-50% - 11px))}}
 @media(max-width:760px){.launch-replay{margin:8px 0 0}.v4 .launch-shell{padding:24px 6vw}.launch-top{font-size:.75rem}.launch-top>span:last-child{display:none}.launch-heading{top:16%;right:6vw}.v4 .launch-heading h2{font-size:clamp(2.8rem,10vw,5rem)}.launch-grid-field{top:43%;left:-95%;width:280%;transform:rotateX(34deg) rotateY(-10deg) rotateZ(-16deg)}.launch-tile{width:290px;height:210px}.launch-bottom{font-size:.75rem;line-height:1.5}.launch-bottom>span{max-width:50%}}
 @media(prefers-reduced-motion:reduce){.launch-grid-row{animation:none}.launch-grid-field{transform:rotateZ(-8deg)}.launch-dialog,.launch-grid-space,.launch-heading{transition:none!important}.launch-heading{top:13%}.launch-bottom{visibility:hidden}}
+
+/* The supplied logo is shown intact before its own pixels become dust. */
+.logo-dust{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .45s ease}.logo-dust canvas{position:absolute;inset:0;width:100%;height:100%}.logo-dust-fallback{position:absolute;left:6%;top:50%;width:88%;height:auto;transform:translateY(-50%);object-fit:contain}.logo-dust[data-ready=true] .logo-dust-fallback{display:none}
+.launch-dialog[data-phase=logo] .logo-dust,.launch-dialog[data-phase=leaving] .logo-dust{opacity:1}.launch-dialog[data-phase=logo] .launch-grid-space{opacity:0;filter:blur(12px);transform:scale(1.06);transition-duration:.65s}.launch-dialog[data-phase=logo] .launch-heading{opacity:0;transform:translateY(-16px);transition-duration:.45s}
+.launch-dialog[data-reduced=true] .logo-dust{opacity:1}.launch-dialog[data-reduced=true] .launch-grid-space,.launch-dialog[data-reduced=true] .launch-heading{display:none}
+@media(prefers-reduced-motion:reduce){.logo-dust{transition:none}}
