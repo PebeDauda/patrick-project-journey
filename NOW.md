@@ -4,4 +4,6 @@ Branch: preview/project-journey-redesign. Det originale NEURODEVERGENTS-logo er 
 
 Browser1440/390px, replay, Escape, touch-menu og reduceret bevægelse består. Visuelle trin og kildehash: docs/design-history/2026-10-31/v18-*. Build/artifact/HTML-smoke består.8 kendte TypeScript-projektfejl uden for ændrede komponenter består.
 
-Den sorte portfolio, main og Dropbox-originalen er uændret. Klar til publicering i eksisterende offentlige Sites-projekt appgprj_6a83885d21d4819184f107018f46a8b2. URL: https://patrick-project-journey.patrickbennett.chatgpt.site . Seneste native publiceringsbevis gemmes som v18-publication.json.
+Den sorte portfolio, main og Dropbox-originalen er uændret. Publiceret som version18 med status succeeded i eksisterende offentlige Sites-projekt appgprj_6a83885d21d4819184f107018f46a8b2. URL: https://patrick-project-journey.patrickbennett.chatgpt.site . Seneste native publiceringsbevis gemmes som v18-publication.json.
+
+Afslutning: Patrick bad om at publicere først og derefter gemme alt. Det er udført. De tre seneste logoændringer er dokumenteret i docs/NEXT-SESSION-2026-10-31.md. Ingen yderligere designarbejde nu.
