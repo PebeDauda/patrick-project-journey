@@ -88,5 +88,17 @@
     "sha256": "7541dff9de293009d43382bbf885080dbdd1b75be787d59770674b0e0f08a8d9",
     "kind": "before",
     "captured": "2026-10-31"
+  },
+  {
+    "file": "v17-logo-ribbon.png",
+    "sha256": "bf69141a9ae27c1d1aaacbca95efb80527df7b2f00bc78221241ea025fc606bc",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v17-shorter-intro.png",
+    "sha256": "9a431a2a1e0e85a02d45eeeef0e1bf0d9ab32f76273e3abb94f1f84c7be95abf",
+    "kind": "after",
+    "captured": "2026-10-31"
   }
 ]
