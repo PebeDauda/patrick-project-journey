@@ -476,3 +476,6 @@ html{scroll-padding-top:100px;scrollbar-color:#d1808a #1d1020}
 
 /* Barlow Condensed Ø has advance 597 with ink ending at 440 (O: 467). Remove its extra 130-unit sidebearing without spacing every glyph. */
 .v4 .playful-word .kern-oe{display:inline;margin-right:-.13em}
+
+/* A shared story-card scale; real mobile screens remain fully visible. */
+.storyboard-scenes .storyboard-visual{height:320px}.storyboard-scenes .storyboard-scene{min-height:430px}.storyboard-real{background:radial-gradient(ellipse at center,#63344eaa,#26132c)}

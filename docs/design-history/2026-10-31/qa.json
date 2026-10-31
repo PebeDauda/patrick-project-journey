@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-31",
+  "result": "PASS",
+  "checks": [
+    "intro grid to whole-brain fade to page",
+    "no laptop model or word-play button",
+    "hover desktop menu and click mobile menu",
+    "unfolded brain at energy 100",
+    "three actual NEURO screens loaded",
+    "Discover need selection changes insight",
+    "process keyboard arrows",
+    "automatic about phrases",
+    "project logos load",
+    "no tool pause button",
+    "desktop and mobile width",
+    "English locale and meaningful ending",
+    "reduced-motion entry and static grid",
+    "keyboard menu and Escape",
+    "no browser page errors"
+  ],
+  "screenshots": [
+    "after-about.png",
+    "after-brain-unfolded.png",
+    "after-discover-detail.png",
+    "after-discover.png",
+    "after-hero.png",
+    "after-intro-brain.png",
+    "after-intro-grid.png",
+    "after-menu.png",
+    "after-mobile-discover.png",
+    "after-mobile-hero.png",
+    "after-mobile-intro.png",
+    "after-neuro-storyboard.png",
+    "after-word-spacing.png",
+    "before-hero.png",
+    "before-intro.png"
+  ],
+  "finalChecks": [
+    "shared story-card height 320px",
+    "natural word spacing plus Ø sidebearing correction",
+    "PatrickOS workspace included in all three intro rows",
+    "all intro images loaded"
+  ]
+}

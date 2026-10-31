@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useRef,useState} from "react";
 import type {Locale} from "./project-journey";
-const slides=[{id:"neuro",name:"NEURO",src:"/assets/projects/neuro-web.jpg"},{id:"wobs",name:"WOBS",src:"/assets/projects/wobs-web.jpg"},{id:"portfolio",name:"PORTFOLIO",src:"/assets/projects/portfolio-web.jpg"},{id:"neuro-app",name:"NEURO / APP",src:"/assets/projects/neuro-app.jpg"},{id:"wobs-app",name:"WOBS / APP",src:"/assets/projects/wobs-app.jpg"}];
+const slides=[{id:"neuro",name:"NEURO",src:"/assets/projects/neuro-web.jpg"},{id:"wobs",name:"WOBS",src:"/assets/projects/wobs-web.jpg"},{id:"portfolio",name:"PORTFOLIO",src:"/assets/projects/portfolio-web.jpg"},{id:"patrickos",name:"PATRICKOS / WORKSPACE",src:"/assets/projects/patrickos-workspace.jpg"},{id:"neuro-app",name:"NEURO / APP",src:"/assets/projects/neuro-app.jpg"},{id:"wobs-app",name:"WOBS / APP",src:"/assets/projects/wobs-app.jpg"}];
 export default function LaunchSequence({locale}:{locale:Locale}){
  const dialog=useRef<HTMLDialogElement>(null),replay=useRef<HTMLButtonElement>(null),[open,setOpen]=useState(false),[phase,setPhase]=useState("gallery"),[reduced,setReduced]=useState(true),time=useRef(0);const da=locale==="da";
  function start(){time.current=0;setPhase("gallery");setOpen(true)}
