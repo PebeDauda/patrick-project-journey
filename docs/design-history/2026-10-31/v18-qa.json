@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "version": 18,
+  "introDurationMs": 6441,
+  "desktopParticles": 23951,
+  "originalSource": "NEURODEVERGENTS.png copied byte-for-byte",
+  "checks": [
+    "logo readable before disintegration",
+    "organic dissolve and dust phase",
+    "header original logo replaces former arrow and text",
+    "desktop/mobile width",
+    "touch menu and Escape",
+    "intro replay and Escape",
+    "reduced motion displays static original logo",
+    "no browser page errors"
+  ]
+}

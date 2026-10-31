@@ -100,5 +100,53 @@
     "sha256": "9a431a2a1e0e85a02d45eeeef0e1bf0d9ab32f76273e3abb94f1f84c7be95abf",
     "kind": "after",
     "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-before-header.png",
+    "sha256": "42930d08d9a3239942e449032cde5aae42e6fd386941effdbdcc48de27228fbd",
+    "kind": "before",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-header.png",
+    "sha256": "d150d18082731bdb2fa139cf069610a1b00a23403242fcfd113292d7298c65d8",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-intact-logo.png",
+    "sha256": "e8833572320be64b612f83cef04c05408683cef6cc58796394474b2a8a7714e4",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-logo-dissolving.png",
+    "sha256": "62c11c08f22bb22c0e47a31b3c085ecd1b194656084bc03b06d093149830bfdc",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-logo-dust.png",
+    "sha256": "d07a7f3fcea82a5f866c016ce051e959d81d392ad36028ed798e4baca3d3c989",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-mobile-header.png",
+    "sha256": "b19e781ef959694f934cc47b5913e6c181246eb9acdbc91ebda0f79bd150fb4d",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-mobile-logo.png",
+    "sha256": "2104cdccacefd323d740e86e17366eb1721946c1b18051888d4fceba4faa6ae2",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "v18-reduced-motion.png",
+    "sha256": "01c8e6203938aa88d41e7acab945d9466651fe9e449914eb437b4e3f7c63dc48",
+    "kind": "after",
+    "captured": "2026-10-31"
   }
 ]
