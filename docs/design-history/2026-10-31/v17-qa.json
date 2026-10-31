@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "version": 17,
+  "introDurationMs": 6049,
+  "noFinalBrain": true,
+  "mobileWidth": true,
+  "palette": {
+    "background": [
+      107,
+      88,
+      116
+    ],
+    "dominantLogoColors": [
+      {
+        "rgb": "249,244,236",
+        "pixels": 7013,
+        "contrast": 5.859468118651755
+      },
+      {
+        "rgb": "210,128,140",
+        "pixels": 1358,
+        "contrast": 2.2016979222735884
+      },
+      {
+        "rgb": "248,244,236",
+        "pixels": 1235,
+        "contrast": 5.8482695281024455
+      }
+    ]
+  }
+}

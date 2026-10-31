@@ -482,3 +482,7 @@ html{scroll-padding-top:100px;scrollbar-color:#d1808a #1d1020}
 
 /* Pausing motion must never hide a newly selected insight. */
 .v4[data-motion=paused] .discovery-result{animation:none!important;opacity:1;transform:none}
+
+/* A muted mid-tone ribbon keeps the original light WOBS wordmark legible. */
+.v4{--project-ribbon-surface:#6b5874;--project-ribbon-ink:#f9f3ec}
+.v4 .kinetic-ribbon{background:var(--project-ribbon-surface);color:var(--project-ribbon-ink);border-color:#a78baf66}.v4 .kinetic-ribbon i{background:#d8c4d6}

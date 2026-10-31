@@ -28,3 +28,6 @@ Efter: ![Ny projektgrid-intro](after-intro-grid.png)
 ![Interaktiv behovsundersøgelse](after-discover-detail.png)
 
 Dagens dokumentation indeholder 15 faktiske screenshots med SHA-256 i capture-manifest.json. Sidste pakkede kilde: ec773c822258f839c0909c90dca0311494d6b5eb, Sites version16. Pause-kanttilstanden er også testet i denne pakke.
+
+## Opfølgning · kortere intro og tydeligere WOBS
+Efter Patricks gennemgang: intro reduceret fra9 til6sekunder (målt6049ms i browseren), sidste hjerne fjernet, blødt fade direkte fra billedgrid til siden. Nyt afslutningslogo afventes fra Patrick; ingen erstatning er opfundet. Projektbånd er ændret til mellemlilla #6b5874, og den eksisterende lyse WOBS-logovariant bruges. Faktisk målt logokontrast: cremefarvede bogstaver5,86:1, rosa O2,20:1. Logoet er visuelt kontrolleret på det nye bånd. Fotos: v17-shorter-intro.png og v17-logo-ribbon.png. Kontrol: v17-qa.json.
