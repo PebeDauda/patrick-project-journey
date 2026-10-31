@@ -17,3 +17,21 @@ Disse ønsker er udført, testet og publiceret. De gemmes her som næste session
 - Pakket livekilde:7e60645730f982302d944ff200f49399aa2d65d7. Genopbyg eller genudgiv ikke, blot fordi en ny chat åbnes. Start med dette gemmepunkt og Patricks næste ønsker.
 
 Seneste rettelse: Patrick har bedt om at fjerne “Se projekt-introen”. Den synlige genafspilningsknap er fjernet. Automatisk førstegangsintro og direkte ?intro=1 bevares. Introens dialog bruger browserens normale fokusretur. Rettelsen er publiceret som version19 med status succeeded.
+
+# NYE RETTELSER TIL NÆSTE GANG · gemt efter “Gem nu”
+
+Patrick bad om at gemme og fortsætte næste gang. Nedenstående er IKKE implementeret eller publiceret. Den live hjemmeside forbliver version19. Tidligere udførte logoændringer ovenfor er historik, ikke disse nye ønskers status.
+
+- [ ] Find og genbrug de tidligere aftalte WOBS-logoeffekter i alle relevante logoanimationer. Det nuværende projektbånd viser en statisk lys WOBS-wordmark, som mangler effekterne. Afklar den korrekte effekt fra eksisterende WOBS-designkilde/chat før implementering; opfind ikke en erstatning og kald den den oprindelige effekt.
+- [ ] Undersøg og ret animationsfejlen: nogle logoanimationer stopper og kommer tilbage lidt efter. Patrick rapporterer dette på den live side. Ikke reproduceret eller årsagsbestemt endnu. Undersøg hover-pause, synligheds-/IntersectionObserver-logik, global bevægelsestilstand samt timing og løkkeovergange; disse er hypoteser, ikke fund. Bevar animationsfarver og læsbarhed.
+- [ ] Gør NEURODEVERGENTS-logoet øverst mindre. Bevar originalt format og farver; vælg et harmonisk desktop-/mobilformat ved visuel kontrol.
+- [ ] Forkort introen yderligere1–2sekunder fra nuværende ca6,4sekunder, dvs mål ca4,4–5,4sekunder. Bevar et læsbart logoøjeblik før partikelstøvet og en blød overgang.
+- [ ] Tilføj Adobe Photoshop til “Fra idé til handling / Med de rigtige værktøjer” sammen med eksisterende værktøjer. Vis et passende Ps-symbol og en faktuel kategori, fx Billedbehandling & design. Bevar alle eksisterende værktøjer og sikr at Photoshop ikke tabes af rækkernes nuværende gruppering med12værktøjer/4rækker.
+
+## Kilder og undersøgelse ved stop
+- Aktuel hjemmeside: https://patrick-project-journey.patrickbennett.chatgpt.site/ , publiceret version19. Seneste bevis: design-history/2026-10-31/v19-publication.json.
+- WOBS prototype læst uden ændringer: /Users/patrickbennett/.codex/visualizations/2026/10/24/01a16e48-61a3-7803-8443-42e04dfb31e4/wobs-website-prototype . index.html refererer statiske wobs-wordmark-light.webp. app.js/intro.js/experience.js og relaterede CSS-filer kan undersøges videre.
+- Den relaterede chat hedder præcist “🧑🏽‍🎨Design WOBS-hjemmeside”, id01a16e48-61a3-7803-8443-42e04dfb31e4, host local. Den er fundet via chatoversigten, men dens beskedhistorik er ikke læst i denne sidste undersøgelse.
+- Originale WOBS-brandfiler: /Users/patrickbennett/Library/CloudStorage/Dropbox/Design/Photoshop/ChatGPT projekts/WOBS - Career Agent/WOBS Brand Identity . Her findes originale PNG-/PSD-wordmarks; ingen separat ny animeret WOBS-fil er identificeret endnu. Kildemappen er ikke ændret.
+- Kodeejerskab: kun Project Journey. WOBS/Career-Agent, NEURO-kilder, den sorte portfolio og main er ikke ændret.
+- Start næste gang med de fem åbne punkter, ikke med at gentage de allerede publicerede ændringer. Ingen nye produktændringer i dette gemmepunkt.

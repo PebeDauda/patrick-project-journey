@@ -1,11 +1,7 @@
-# Project Journey · logoopdatering ·31. oktober2026
+# Gemt til næste gang ·31. oktober2026
 
-Branch: preview/project-journey-redesign. Det originale NEURODEVERGENTS-logo er leveret og kopieret uændret fra Dropbox. Det erstatter pil/Project Journey-tekst i headeren og afslutter den korte intro med farvebevarende partikelstøv. Billedgrid→intakt logo→støv→side, ca6,4sekunder. Headeren har to rækker på mobil for at bevare logoets bredde. WOBS-båndets mellemlilla og lyse originalvariant bevares.
+Patrick sagde “Gem nu”. Ingen nye produktændringer eller publicering efter denne instruks. Live: version19 på https://patrick-project-journey.patrickbennett.chatgpt.site/ . Kode og publiceringsbevis er gemt på GitHub.
 
-Browser1440/390px, replay, Escape, touch-menu og reduceret bevægelse består. Visuelle trin og kildehash: docs/design-history/2026-10-31/v18-*. Build/artifact/HTML-smoke består.8 kendte TypeScript-projektfejl uden for ændrede komponenter består.
+Næste opgaver i docs/NEXT-SESSION-2026-10-31.md: genskab de aftalte WOBS-logoeffekter, ret rapporterede animationsstop, gør toplogoet mindre, forkort introen1–2sekunder og tilføj Photoshop til værktøjerne. Alle fem er åbne og ikke implementeret. Screenshots er bevaret i docs/design-history/2026-10-31/pending/.
 
-Den sorte portfolio, main og Dropbox-originalen er uændret. Publiceret som version18 med status succeeded i eksisterende offentlige Sites-projekt appgprj_6a83885d21d4819184f107018f46a8b2. URL: https://patrick-project-journey.patrickbennett.chatgpt.site . Seneste native publiceringsbevis gemmes som v18-publication.json.
-
-Afslutning: Patrick bad om at publicere først og derefter gemme alt. Det er udført. De tre seneste logoændringer er dokumenteret i docs/NEXT-SESSION-2026-10-31.md. Ingen yderligere designarbejde nu.
-
-Seneste rettelse publiceret som version19 med status succeeded: “Se projekt-introen” er fjernet i begge sprog. Automatisk førstegangsintro bevares. Se v19-publication.json.
+Branch: preview/project-journey-redesign. Main, den sorte portfolio og øvrige projekter er bevaret.
