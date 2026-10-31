@@ -16,4 +16,4 @@ Disse ønsker er udført, testet og publiceret. De gemmes her som næste session
 - GitHub: PebeDauda/patrick-project-journey, preview/project-journey-redesign. Main og den sorte portfolio er bevaret.
 - Pakket livekilde:7e60645730f982302d944ff200f49399aa2d65d7. Genopbyg eller genudgiv ikke, blot fordi en ny chat åbnes. Start med dette gemmepunkt og Patricks næste ønsker.
 
-Seneste rettelse: Patrick har bedt om at fjerne “Se projekt-introen”. Den synlige genafspilningsknap er fjernet. Automatisk førstegangsintro og direkte ?intro=1 bevares. Introens dialog bruger browserens normale fokusretur. Rettelsen udgives som næste version.
+Seneste rettelse: Patrick har bedt om at fjerne “Se projekt-introen”. Den synlige genafspilningsknap er fjernet. Automatisk førstegangsintro og direkte ?intro=1 bevares. Introens dialog bruger browserens normale fokusretur. Rettelsen er publiceret som version19 med status succeeded.

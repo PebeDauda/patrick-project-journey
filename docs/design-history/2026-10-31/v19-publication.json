@@ -1,0 +1,8 @@
+{
+  "version": 19,
+  "status": "succeeded",
+  "url": "https://patrick-project-journey.patrickbennett.chatgpt.site",
+  "source_commit": "4b34ea1b4e20c226ccd7d93ea3e4429c8486a473",
+  "deployment_id": "appgdep_6ae5f3f9fb6081919b6a0cdeba33de2b",
+  "change": "Visible intro replay link removed; automatic first-session intro retained"
+}
