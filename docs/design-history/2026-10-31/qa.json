@@ -39,6 +39,7 @@
     "shared story-card height 320px",
     "natural word spacing plus Ø sidebearing correction",
     "PatrickOS workspace included in all three intro rows",
-    "all intro images loaded"
+    "all intro images loaded",
+    "paused motion never hides a newly selected Discover result"
   ]
 }

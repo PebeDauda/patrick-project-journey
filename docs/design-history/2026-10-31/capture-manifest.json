@@ -1,0 +1,92 @@
+[
+  {
+    "file": "after-about.png",
+    "sha256": "9be53c2fb479f6c8c3697fffa3b0fc927496bba85907fd0ebbce305688963b56",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-brain-unfolded.png",
+    "sha256": "26c5f6506c0a495548702bf908b47d3ec7e695d4d3d2f506057b307a1c88453b",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-discover-detail.png",
+    "sha256": "e3f981edc909e44c2ef7b925678ea6ea38aeecf2772815a2dfa208d3d1728776",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-discover.png",
+    "sha256": "2fcb86b421d24528cefefd246c0785e7ce79b0ff717517ff6e18b4efa30d89eb",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-hero.png",
+    "sha256": "d616406181e166282d45f4067d2d165b6ff315eb202afcfc3b278dc8a36a45ae",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-intro-brain.png",
+    "sha256": "43184f4b1156e7d3609524cc5c592ffb5c31a40e23e45062225f67bfda039891",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-intro-grid.png",
+    "sha256": "d46a8b00d47d6e6017a67ff79f2ed9994c1909a7ecc70865fdc437175c144b7b",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-menu.png",
+    "sha256": "d8421809e272ae0b438fe93f80b4d70b22b047a6fbeae5de55a67d94cdff721f",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-mobile-discover.png",
+    "sha256": "f580cfce31a9b669821d076e08eac346a0696fb03b1b0d5cded1b0a2046fdeb7",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-mobile-hero.png",
+    "sha256": "4db91ce490fd91391986af0858cfdbd41bc3f41ca1309b97332f596e313ca6fd",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-mobile-intro.png",
+    "sha256": "b5c5d02b8e5b309762bc1fe90c2a4a1d452cdc0ae61255af23517e8a5248bff0",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-neuro-storyboard.png",
+    "sha256": "4373992d37f177d61c833ff3490a07be8d0bc7d20f71d36f0ea1dc855b818e0e",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "after-word-spacing.png",
+    "sha256": "217cfe64dbfed0c10e19d616bf95064f6fe9cffc703f48171d0eadd721e93335",
+    "kind": "after",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "before-hero.png",
+    "sha256": "ab853fbf33ac6be0dfefcab794e18d461249d768a364ea1fe53e7a966dd20b51",
+    "kind": "before",
+    "captured": "2026-10-31"
+  },
+  {
+    "file": "before-intro.png",
+    "sha256": "7541dff9de293009d43382bbf885080dbdd1b75be787d59770674b0e0f08a8d9",
+    "kind": "before",
+    "captured": "2026-10-31"
+  }
+]

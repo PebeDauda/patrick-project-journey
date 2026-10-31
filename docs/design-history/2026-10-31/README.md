@@ -14,3 +14,17 @@ Før-billederne er faktiske optagelser af den publicerede version15 den31. oktob
 Krav: ../../MUST-HAVE-2026-10-31.md. Ø-undersøgelse: ../../FONT-SPACING-2026-10-31.md. Browserkontrol: qa.json. Konto-usage kan ikke aflæses af agenten; seneste brugerangivelse var22% ved bestilling. Alt arbejde gemmes i projektet og på preview-branchen.
 
 NEURO community-billedet er taget fra den eksisterende testprototype på /prototype/#s2-1 (syntetiske eksempelopslag). NEURO/WOBS-logoer er kopieret fra egne projekters eksisterende assets. Øvrige inspirationer og tidligere29 screenshots bevares i ../2026-10-30/DESIGN-JOURNEY.md.
+
+## Visuel dokumentation
+
+Før: ![MacBook-intro før ændring](before-intro.png)
+
+Efter: ![Ny projektgrid-intro](after-intro-grid.png)
+
+![Naturlig ordafstand efter Ø-rettelsen](after-word-spacing.png)
+
+![Faktiske NEURO-skærme i ens kort](after-neuro-storyboard.png)
+
+![Interaktiv behovsundersøgelse](after-discover-detail.png)
+
+Dagens dokumentation indeholder 15 faktiske screenshots med SHA-256 i capture-manifest.json. Sidste pakkede kilde: ec773c822258f839c0909c90dca0311494d6b5eb, Sites version16. Pause-kanttilstanden er også testet i denne pakke.
